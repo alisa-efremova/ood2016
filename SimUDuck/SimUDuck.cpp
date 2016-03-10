@@ -18,6 +18,7 @@ void PlayWithDuck(Duck & duck)
 	duck.Quack();
 	duck.Dance();
 	duck.Fly();
+	duck.Fly();
 	DrawDuck(duck);
 }
 

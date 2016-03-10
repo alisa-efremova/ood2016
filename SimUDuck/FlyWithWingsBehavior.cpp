@@ -1,11 +1,10 @@
 #include "stdafx.h"
 #include "FlyWithWingsBehavior.h"
 
-
 FlyWithWingsBehavior::FlyWithWingsBehavior()
+	: m_flightCount(0)
 {
 }
-
 
 FlyWithWingsBehavior::~FlyWithWingsBehavior()
 {
@@ -13,5 +12,6 @@ FlyWithWingsBehavior::~FlyWithWingsBehavior()
 
 void FlyWithWingsBehavior::Fly()
 {
-	cout << "I'm flying with wings!!" << endl;
+	m_flightCount++;
+	cout << "I'm flying with wings! #" << m_flightCount << endl;
 }
