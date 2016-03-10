@@ -79,10 +79,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DanceMinuetBehavior.h" />
+    <ClInclude Include="DanceNoWayBehavior.h" />
+    <ClInclude Include="DanceWaltzBehavior.h" />
     <ClInclude Include="DeckoyDuck.h" />
     <ClInclude Include="Duck.h" />
     <ClInclude Include="FlyNoWayBehavior.h" />
     <ClInclude Include="FlyWithWingsBehavior.h" />
+    <ClInclude Include="IDanceBehavior.h" />
     <ClInclude Include="IFlyBehavior.h" />
     <ClInclude Include="IQuackBehavior.h" />
     <ClInclude Include="MallardDuck.h" />
@@ -96,6 +100,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DanceMinuetBehavior.cpp" />
+    <ClCompile Include="DanceNoWayBehavior.cpp" />
+    <ClCompile Include="DanceWaltzBehavior.cpp" />
     <ClCompile Include="DeckoyDuck.cpp" />
     <ClCompile Include="Duck.cpp" />
     <ClCompile Include="FlyNoWayBehavior.cpp" />

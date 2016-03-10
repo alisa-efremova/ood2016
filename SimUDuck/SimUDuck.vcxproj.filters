@@ -31,6 +31,12 @@
     <Filter Include="Header Files\QuackBehavior">
       <UniqueIdentifier>{db1925a4-3454-47d2-b6e4-20e186c847ca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\DanceBehavior">
+      <UniqueIdentifier>{f9871afd-0f87-463c-9612-b72fafbdef2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DanceBehavior">
+      <UniqueIdentifier>{6df72f80-6ca2-4390-8693-ce479a758f62}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -81,6 +87,18 @@
     <ClInclude Include="RubberDuck.h">
       <Filter>Header Files\Duck</Filter>
     </ClInclude>
+    <ClInclude Include="IDanceBehavior.h">
+      <Filter>Header Files\DanceBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="DanceMinuetBehavior.h">
+      <Filter>Header Files\DanceBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="DanceNoWayBehavior.h">
+      <Filter>Header Files\DanceBehavior</Filter>
+    </ClInclude>
+    <ClInclude Include="DanceWaltzBehavior.h">
+      <Filter>Header Files\DanceBehavior</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -121,6 +139,15 @@
     </ClCompile>
     <ClCompile Include="RubberDuck.cpp">
       <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+    <ClCompile Include="DanceMinuetBehavior.cpp">
+      <Filter>Source Files\DanceBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="DanceNoWayBehavior.cpp">
+      <Filter>Source Files\DanceBehavior</Filter>
+    </ClCompile>
+    <ClCompile Include="DanceWaltzBehavior.cpp">
+      <Filter>Source Files\DanceBehavior</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
