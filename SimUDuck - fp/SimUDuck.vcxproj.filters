@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Duck">
+      <UniqueIdentifier>{045b314f-2e49-4f80-982d-2676fe28977b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Duck">
+      <UniqueIdentifier>{285f5900-e524-45bb-96a4-b058310a2d31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Behavior">
+      <UniqueIdentifier>{f9871afd-0f87-463c-9612-b72fafbdef2f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Duck.h">
+      <Filter>Header Files\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="MallardDuck.h">
+      <Filter>Header Files\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="RedheadDuck.h">
+      <Filter>Header Files\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="DeckoyDuck.h">
+      <Filter>Header Files\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelDuck.h">
+      <Filter>Header Files\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="RubberDuck.h">
+      <Filter>Header Files\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="DanceBehavior.h">
+      <Filter>Header Files\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="FlyBehavior.h">
+      <Filter>Header Files\Behavior</Filter>
+    </ClInclude>
+    <ClInclude Include="QuackBehavior.h">
+      <Filter>Header Files\Behavior</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SimUDuck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Duck.cpp">
+      <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+    <ClCompile Include="MallardDuck.cpp">
+      <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+    <ClCompile Include="RedheadDuck.cpp">
+      <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckoyDuck.cpp">
+      <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelDuck.cpp">
+      <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+    <ClCompile Include="RubberDuck.cpp">
+      <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
