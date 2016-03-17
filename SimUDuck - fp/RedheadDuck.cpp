@@ -3,7 +3,7 @@
 #include <memory>
 
 RedheadDuck::RedheadDuck()
-	: Duck(&FlyBehavior::FlyWithWings, &QuackBehavior::Quack, &DanceBehavior::DanceMinuet)
+	: Duck(FlyBehavior::FlyWithWings(), QuackBehavior::Quack, DanceBehavior::DanceMinuet)
 {
 }
 

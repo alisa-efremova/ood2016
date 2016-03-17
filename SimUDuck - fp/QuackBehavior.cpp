@@ -1,15 +1,21 @@
 #include "stdafx.h"
 #include "QuackBehavior.h"
 
-QuackBehavior::QuackBehavior()
-{
-}
+using namespace std;
 
-QuackBehavior::~QuackBehavior()
+namespace QuackBehavior 
 {
-}
+	void Quack()
+	{
+		cout << "Quack quack!" << endl;
+	}
 
-void QuackBehavior::Quack()
-{
-	cout << "Quack Quack!!!" << endl;
+	void Squeak()
+	{
+		cout << "Squeak!" << endl;
+	}
+
+	void MuteQuack()
+	{
+	}
 }

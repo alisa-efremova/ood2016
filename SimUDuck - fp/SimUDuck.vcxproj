@@ -93,10 +93,13 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DanceBehavior.cpp" />
     <ClCompile Include="DeckoyDuck.cpp" />
     <ClCompile Include="Duck.cpp" />
+    <ClCompile Include="FlyBehavior.cpp" />
     <ClCompile Include="MallardDuck.cpp" />
     <ClCompile Include="ModelDuck.cpp" />
+    <ClCompile Include="QuackBehavior.cpp" />
     <ClCompile Include="RedheadDuck.cpp" />
     <ClCompile Include="RubberDuck.cpp" />
     <ClCompile Include="SimUDuck.cpp" />

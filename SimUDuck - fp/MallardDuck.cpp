@@ -3,7 +3,7 @@
 #include <memory>
 
 MallardDuck::MallardDuck()
-	: Duck(&FlyBehavior::FlyWithWings, &QuackBehavior::Quack, &DanceBehavior::DanceWaltz)
+	: Duck(FlyBehavior::FlyWithWings(), QuackBehavior::Quack, DanceBehavior::DanceWaltz)
 {
 }
 

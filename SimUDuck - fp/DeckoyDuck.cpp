@@ -3,7 +3,7 @@
 #include <memory>
 
 DeckoyDuck::DeckoyDuck()
-	: Duck(&FlyBehavior::FlyNoWay, &QuackBehavior::MuteQuack, &DanceBehavior::DanceNoWay)
+	: Duck(FlyBehavior::FlyNoWay, QuackBehavior::MuteQuack, DanceBehavior::DanceNoWay)
 {
 }
 

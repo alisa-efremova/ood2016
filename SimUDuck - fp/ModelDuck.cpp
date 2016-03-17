@@ -3,7 +3,7 @@
 #include <memory>
 
 ModelDuck::ModelDuck()
-	: Duck(&FlyBehavior::FlyNoWay, &QuackBehavior::Quack, &DanceBehavior::DanceNoWay)
+	: Duck(FlyBehavior::FlyNoWay, QuackBehavior::Quack, DanceBehavior::DanceNoWay)
 {
 }
 

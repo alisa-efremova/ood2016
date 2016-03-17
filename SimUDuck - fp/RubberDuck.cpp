@@ -3,7 +3,7 @@
 #include <memory>
 
 RubberDuck::RubberDuck()
-	: Duck(&FlyBehavior::FlyNoWay, &QuackBehavior::Squeak, &DanceBehavior::DanceNoWay)
+	: Duck(FlyBehavior::FlyNoWay, QuackBehavior::Squeak, DanceBehavior::DanceNoWay)
 {
 }
 

@@ -2,15 +2,15 @@
 #include "Duck.h"
 #include <cassert>
 
+using namespace std;
+
 Duck::Duck(function<void()> fly, function<void()> quack, function<void()> dance)
 	: m_quack(quack)
-	, m_fly(fly)
 	, m_dance(dance)
 {
 	assert(m_quack);
 	assert(m_dance);
-	assert(m_fly);
-	//SetFlyBehavior(move(flyBehavior));
+	SetFlyBehavior(fly);
 }
 
 Duck::~Duck()

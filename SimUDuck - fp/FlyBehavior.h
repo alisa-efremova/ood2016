@@ -1,17 +1,16 @@
 #pragma once
-#include "stdafx.h"
 
 using namespace std;
 
-class FlyBehavior
+namespace FlyBehavior
 {
-public:
-	static void FlyNoWay()
+	class FlyWithWings
 	{
-	}
+	public:
+		void operator () ();
+	private:
+		unsigned m_flightCount = 0;
+	};
 
-	static void FlyWithWings()
-	{
-		cout << "I'm flying with wings" << endl;
-	}
+	void FlyNoWay();
 };

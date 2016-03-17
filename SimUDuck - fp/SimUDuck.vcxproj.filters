@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Behavior">
       <UniqueIdentifier>{f9871afd-0f87-463c-9612-b72fafbdef2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Behavior">
+      <UniqueIdentifier>{36c7b777-9400-4f2d-a27f-d41030d41726}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -85,6 +88,15 @@
     </ClCompile>
     <ClCompile Include="RubberDuck.cpp">
       <Filter>Source Files\Duck</Filter>
+    </ClCompile>
+    <ClCompile Include="DanceBehavior.cpp">
+      <Filter>Source Files\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="FlyBehavior.cpp">
+      <Filter>Source Files\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="QuackBehavior.cpp">
+      <Filter>Source Files\Behavior</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

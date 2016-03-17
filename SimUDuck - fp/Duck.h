@@ -7,8 +7,6 @@
 #include "QuackBehavior.h"
 #include "DanceBehavior.h"
 
-using namespace std;
-
 class Duck
 {
 public:
