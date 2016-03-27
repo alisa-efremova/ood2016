@@ -5,12 +5,10 @@
 #include "SqueakBehavior.h"
 #include "DanceNoWayBehavior.h"
 
+using namespace std;
+
 RubberDuck::RubberDuck()
 	: Duck(make_unique<FlyNoWayBehavior>(), make_unique<SqueakBehavior>(), make_unique<DanceNoWayBehavior>())
-{
-}
-
-RubberDuck::~RubberDuck()
 {
 }
 

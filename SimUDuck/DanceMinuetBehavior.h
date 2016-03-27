@@ -5,6 +5,5 @@ class DanceMinuetBehavior : public IDanceBehavior
 {
 public:
 	DanceMinuetBehavior();
-	virtual ~DanceMinuetBehavior();
 	virtual void Dance() override;
 };

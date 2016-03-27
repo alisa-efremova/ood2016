@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "SqueakBehavior.h"
 
-SqueakBehavior::SqueakBehavior()
-{
-}
+using namespace std;
 
-SqueakBehavior::~SqueakBehavior()
+SqueakBehavior::SqueakBehavior()
 {
 }
 

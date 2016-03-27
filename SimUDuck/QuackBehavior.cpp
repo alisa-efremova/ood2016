@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "QuackBehavior.h"
 
-QuackBehavior::QuackBehavior()
-{
-}
+using namespace std;
 
-QuackBehavior::~QuackBehavior()
+QuackBehavior::QuackBehavior()
 {
 }
 

@@ -5,6 +5,5 @@ class MuteQuackBehavior : public IQuackBehavior
 {
 public:
 	MuteQuackBehavior();
-	virtual ~MuteQuackBehavior();
 	virtual void Quack() override;
 };

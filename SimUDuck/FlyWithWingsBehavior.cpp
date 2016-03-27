@@ -1,12 +1,10 @@
 #include "stdafx.h"
 #include "FlyWithWingsBehavior.h"
 
+using namespace std;
+
 FlyWithWingsBehavior::FlyWithWingsBehavior()
 	: m_flightCount(0)
-{
-}
-
-FlyWithWingsBehavior::~FlyWithWingsBehavior()
 {
 }
 

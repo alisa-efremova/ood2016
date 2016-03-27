@@ -5,10 +5,6 @@ FlyNoWayBehavior::FlyNoWayBehavior()
 {
 }
 
-FlyNoWayBehavior::~FlyNoWayBehavior()
-{
-}
-
 void FlyNoWayBehavior::Fly()
 {
 }

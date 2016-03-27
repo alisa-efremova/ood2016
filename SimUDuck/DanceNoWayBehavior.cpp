@@ -5,10 +5,6 @@ DanceNoWayBehavior::DanceNoWayBehavior()
 {
 }
 
-DanceNoWayBehavior::~DanceNoWayBehavior()
-{
-}
-
 void DanceNoWayBehavior::Dance()
 {
 }

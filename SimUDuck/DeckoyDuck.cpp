@@ -5,12 +5,10 @@
 #include "MuteQuackBehavior.h"
 #include "DanceNoWayBehavior.h"
 
+using namespace std;
+
 DeckoyDuck::DeckoyDuck()
 	: Duck(make_unique<FlyNoWayBehavior>(), make_unique<MuteQuackBehavior>(), make_unique<DanceNoWayBehavior>())
-{
-}
-
-DeckoyDuck::~DeckoyDuck()
 {
 }
 

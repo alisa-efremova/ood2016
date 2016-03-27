@@ -5,12 +5,10 @@
 #include "QuackBehavior.h"
 #include "DanceWaltzBehavior.h"
 
+using namespace std;
+
 MallardDuck::MallardDuck()
 	: Duck(make_unique<FlyWithWingsBehavior>(), make_unique<QuackBehavior>(), make_unique<DanceWaltzBehavior>())
-{
-}
-
-MallardDuck::~MallardDuck()
 {
 }
 

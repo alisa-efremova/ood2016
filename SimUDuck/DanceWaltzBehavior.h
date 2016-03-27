@@ -5,6 +5,5 @@ class DanceWaltzBehavior : public IDanceBehavior
 {
 public:
 	DanceWaltzBehavior();
-	virtual ~DanceWaltzBehavior();
 	virtual void Dance() override;
 };

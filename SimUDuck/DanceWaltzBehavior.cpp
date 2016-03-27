@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "DanceWaltzBehavior.h"
 
-DanceWaltzBehavior::DanceWaltzBehavior()
-{
-}
+using namespace std;
 
-DanceWaltzBehavior::~DanceWaltzBehavior()
+DanceWaltzBehavior::DanceWaltzBehavior()
 {
 }
 

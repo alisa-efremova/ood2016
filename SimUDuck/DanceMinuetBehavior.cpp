@@ -1,11 +1,9 @@
 #include "stdafx.h"
 #include "DanceMinuetBehavior.h"
 
-DanceMinuetBehavior::DanceMinuetBehavior()
-{
-}
+using namespace std;
 
-DanceMinuetBehavior::~DanceMinuetBehavior()
+DanceMinuetBehavior::DanceMinuetBehavior()
 {
 }
 

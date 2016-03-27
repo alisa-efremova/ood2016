@@ -2,6 +2,8 @@
 #include "Duck.h"
 #include <cassert>
 
+using namespace std;
+
 Duck::Duck(unique_ptr<IFlyBehavior> && flyBehavior, unique_ptr<IQuackBehavior> && quackBehavior, unique_ptr<IDanceBehavior> && danceBehavior)
 	: m_quackBehavior(move(quackBehavior))
 	, m_danceBehavior(move(danceBehavior))
