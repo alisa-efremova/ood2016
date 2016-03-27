@@ -5,6 +5,5 @@ class RedheadDuck : public Duck
 {
 public:
 	RedheadDuck();
-	virtual ~RedheadDuck();
 	void Display() const override;
 };

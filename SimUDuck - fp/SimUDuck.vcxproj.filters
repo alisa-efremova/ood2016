@@ -16,12 +16,6 @@
     <Filter Include="Source Files\Duck">
       <UniqueIdentifier>{045b314f-2e49-4f80-982d-2676fe28977b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Duck">
-      <UniqueIdentifier>{285f5900-e524-45bb-96a4-b058310a2d31}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Behavior">
-      <UniqueIdentifier>{f9871afd-0f87-463c-9612-b72fafbdef2f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Behavior">
       <UniqueIdentifier>{36c7b777-9400-4f2d-a27f-d41030d41726}</UniqueIdentifier>
     </Filter>
@@ -36,32 +30,32 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DeckoyDuck.h">
+      <Filter>Source Files\Duck</Filter>
+    </ClInclude>
     <ClInclude Include="Duck.h">
-      <Filter>Header Files\Duck</Filter>
+      <Filter>Source Files\Duck</Filter>
     </ClInclude>
     <ClInclude Include="MallardDuck.h">
-      <Filter>Header Files\Duck</Filter>
-    </ClInclude>
-    <ClInclude Include="RedheadDuck.h">
-      <Filter>Header Files\Duck</Filter>
-    </ClInclude>
-    <ClInclude Include="DeckoyDuck.h">
-      <Filter>Header Files\Duck</Filter>
+      <Filter>Source Files\Duck</Filter>
     </ClInclude>
     <ClInclude Include="ModelDuck.h">
-      <Filter>Header Files\Duck</Filter>
+      <Filter>Source Files\Duck</Filter>
+    </ClInclude>
+    <ClInclude Include="RedheadDuck.h">
+      <Filter>Source Files\Duck</Filter>
     </ClInclude>
     <ClInclude Include="RubberDuck.h">
-      <Filter>Header Files\Duck</Filter>
+      <Filter>Source Files\Duck</Filter>
     </ClInclude>
     <ClInclude Include="DanceBehavior.h">
-      <Filter>Header Files\Behavior</Filter>
+      <Filter>Source Files\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="FlyBehavior.h">
-      <Filter>Header Files\Behavior</Filter>
+      <Filter>Source Files\Behavior</Filter>
     </ClInclude>
     <ClInclude Include="QuackBehavior.h">
-      <Filter>Header Files\Behavior</Filter>
+      <Filter>Source Files\Behavior</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +74,6 @@
     <ClCompile Include="RedheadDuck.cpp">
       <Filter>Source Files\Duck</Filter>
     </ClCompile>
-    <ClCompile Include="DeckoyDuck.cpp">
-      <Filter>Source Files\Duck</Filter>
-    </ClCompile>
     <ClCompile Include="ModelDuck.cpp">
       <Filter>Source Files\Duck</Filter>
     </ClCompile>
@@ -97,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="QuackBehavior.cpp">
       <Filter>Source Files\Behavior</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckoyDuck.cpp">
+      <Filter>Source Files\Duck</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

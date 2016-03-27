@@ -5,6 +5,5 @@ class DeckoyDuck : public Duck
 {
 public:
 	DeckoyDuck();
-	virtual ~DeckoyDuck();
 	void Display() const override;
 };

@@ -8,6 +8,8 @@
 #include <memory>
 #include "FlyBehavior.h"
 
+using namespace std;
+
 void DrawDuck(Duck const& duck)
 {
 	duck.Display();
@@ -20,7 +22,6 @@ void PlayWithDuck(Duck & duck)
 	duck.Dance();
 	duck.Fly();
 	duck.Fly();
-
 	cout << "----------" << endl;
 }
 

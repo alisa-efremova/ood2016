@@ -10,16 +10,16 @@
 class Duck
 {
 public:
-	Duck(function<void()> fly, function<void()> quack, function<void()> dance);
+	Duck(std::function<void()> fly, std::function<void()> quack, std::function<void()> dance);
 	virtual ~Duck();
 	void Quack() const;
 	void Swim();
 	void Fly();
 	void Dance();
-	void SetFlyBehavior(function<void()> fly);
+	void SetFlyBehavior(std::function<void()> fly);
 	virtual void Display() const = 0;
 private:
-	function<void()> m_quack;
-	function<void()> m_fly;
-	function<void()> m_dance;
+	std::function<void()> m_quack;
+	std::function<void()> m_fly;
+	std::function<void()> m_dance;
 };

@@ -5,6 +5,5 @@ class ModelDuck : public Duck
 {
 public:
 	ModelDuck();
-	virtual ~ModelDuck();
 	void Display() const override;
 };

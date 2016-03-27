@@ -2,12 +2,10 @@
 #include "MallardDuck.h"
 #include <memory>
 
+using namespace std;
+
 MallardDuck::MallardDuck()
 	: Duck(FlyBehavior::FlyWithWings(), QuackBehavior::Quack, DanceBehavior::DanceWaltz)
-{
-}
-
-MallardDuck::~MallardDuck()
 {
 }
 

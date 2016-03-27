@@ -2,12 +2,10 @@
 #include "DeckoyDuck.h"
 #include <memory>
 
+using namespace std;
+
 DeckoyDuck::DeckoyDuck()
 	: Duck(FlyBehavior::FlyNoWay, QuackBehavior::MuteQuack, DanceBehavior::DanceNoWay)
-{
-}
-
-DeckoyDuck::~DeckoyDuck()
 {
 }
 
