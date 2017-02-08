@@ -1,14 +1,8 @@
 #pragma once
+#include <functional>
 
 namespace FlyBehavior
 {
-	class FlyWithWings
-	{
-	public:
-		void operator () ();
-	private:
-		unsigned m_flightCount = 0;
-	};
-
+    std::function<void()> MakeFlyWithWings();
 	void FlyNoWay();
 };

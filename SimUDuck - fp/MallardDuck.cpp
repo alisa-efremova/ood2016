@@ -5,7 +5,7 @@
 using namespace std;
 
 MallardDuck::MallardDuck()
-	: Duck(FlyBehavior::FlyWithWings(), QuackBehavior::Quack, DanceBehavior::DanceWaltz)
+	: Duck(FlyBehavior::MakeFlyWithWings(), QuackBehavior::Quack, DanceBehavior::DanceWaltz)
 {
 }
 

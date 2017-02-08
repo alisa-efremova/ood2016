@@ -37,6 +37,6 @@ void main()
 	PlayWithDuck(deckoyDuck);
 	ModelDuck modelDuck;
 	PlayWithDuck(modelDuck);
-	modelDuck.SetFlyBehavior(FlyBehavior::FlyWithWings());
+	modelDuck.SetFlyBehavior(FlyBehavior::MakeFlyWithWings());
 	PlayWithDuck(modelDuck);
 }

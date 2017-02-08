@@ -5,7 +5,7 @@
 using namespace std;
 
 RedheadDuck::RedheadDuck()
-	: Duck(FlyBehavior::FlyWithWings(), QuackBehavior::Quack, DanceBehavior::DanceMinuet)
+	: Duck(FlyBehavior::MakeFlyWithWings(), QuackBehavior::Quack, DanceBehavior::DanceMinuet)
 {
 }
 
