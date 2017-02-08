@@ -12,7 +12,7 @@ namespace FlyBehavior
     function<void()> MakeFlyWithWings() 
 	{
 		int flightCount = 0;
-		return[flightCount]()mutable{
+		return [flightCount] () mutable {
 			++flightCount;
 			std::cout << "I'm flying with wings " << flightCount << " time" << endl;
 		};
