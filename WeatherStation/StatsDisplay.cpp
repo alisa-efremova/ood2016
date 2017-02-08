@@ -16,8 +16,9 @@ void CStatsDisplay::Update(SWeatherInfo const& data)
 	m_accTemperature += data.temperature;
 	++m_countAcc;
 
-	cout << "Max Temp " << m_maxTemperature << endl;
-	cout << "Min Temp " << m_minTemperature << endl;
-	cout << "Average Temp " << (m_accTemperature / m_countAcc) << endl;
+	cout << "* Temperature stats *" << endl;
+	cout << "Max: " << m_maxTemperature << endl;
+	cout << "Min: " << m_minTemperature << endl;
+	cout << "Average: " << (m_accTemperature / m_countAcc) << endl;
 	cout << "----------------" << endl;
 }

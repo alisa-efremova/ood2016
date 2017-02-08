@@ -5,8 +5,8 @@ using namespace std;
 
 void CDisplay::Update(SWeatherInfo const& data)
 {
-	cout << "Current Temp " << data.temperature << endl;
-	cout << "Current Hum " << data.humidity << endl;
-	cout << "Current Pressure " << data.pressure << endl;
+	cout << "Current Temperature: " << data.temperature << endl;
+	cout << "Current Humidity: " << data.humidity << endl;
+	cout << "Current Pressure: " << data.pressure << endl;
 	cout << "----------------" << endl;
 }
