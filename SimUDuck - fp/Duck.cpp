@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Duck::Duck(function<void()> fly, function<void()> quack, function<void()> dance)
+Duck::Duck(const function<void()>& fly, const function<void()>& quack, const function<void()>& dance)
 	: m_quack(quack)
 	, m_dance(dance)
 {

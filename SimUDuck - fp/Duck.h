@@ -10,7 +10,7 @@
 class Duck
 {
 public:
-	Duck(std::function<void()> fly, std::function<void()> quack, std::function<void()> dance);
+	Duck(const std::function<void()>& fly, const std::function<void()>& quack, const std::function<void()>& dance);
 	virtual ~Duck();
 	void Quack() const;
 	void Swim();
