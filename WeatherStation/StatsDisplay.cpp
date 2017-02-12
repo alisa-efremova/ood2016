@@ -3,22 +3,20 @@
 
 using namespace std;
 
-void CStatsDisplay::Update(SWeatherInfo const& data)
+CStatsDisplay::CStatsDisplay()
+	:m_temperatureStats("TEMPERATURE")
+	,m_humidityStats("HUMIDITY")
+	,m_pressureStats("PRESSURE")
 {
-	if (m_minTemperature > data.temperature)
-	{
-		m_minTemperature = data.temperature;
-	}
-	if (m_maxTemperature < data.temperature)
-	{
-		m_maxTemperature = data.temperature;
-	}
-	m_accTemperature += data.temperature;
-	++m_countAcc;
+}
 
-	cout << "* Temperature stats *" << endl;
-	cout << "Max: " << m_maxTemperature << endl;
-	cout << "Min: " << m_minTemperature << endl;
-	cout << "Average: " << (m_accTemperature / m_countAcc) << endl;
-	cout << "----------------" << endl;
+void CStatsDisplay::Update(SWeatherInfo const & data)
+{
+	m_temperatureStats.update(data.temperature);
+	m_humidityStats.update(data.humidity);
+	m_pressureStats.update(data.pressure);
+
+	m_temperatureStats.print();
+	m_humidityStats.print();
+	m_pressureStats.print();
 }

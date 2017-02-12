@@ -1,16 +1,16 @@
 #pragma once
 #include "IObserver.h"
 #include "SWeatherInfo.h"
-#include <climits>
+#include "StatsCalc.h"
 
 class CStatsDisplay : public IObserver<SWeatherInfo>
 {
+public:
+	CStatsDisplay();
 private:
 	void Update(SWeatherInfo const& data) override;
-
-	double m_minTemperature = std::numeric_limits<double>::infinity();
-	double m_maxTemperature = -std::numeric_limits<double>::infinity();
-	double m_accTemperature = 0;
-	unsigned m_countAcc = 0;
+	CStatsCalc m_temperatureStats;
+	CStatsCalc m_humidityStats;
+	CStatsCalc m_pressureStats;
 };
 
