@@ -14,4 +14,3 @@ private:
 	double m_accVal = 0;
 	double m_count = 0;
 };
-

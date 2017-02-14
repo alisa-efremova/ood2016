@@ -5,16 +5,38 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeatherStation", "WeatherStation.vcxproj", "{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{63141EEF-9D71-4BA4-9245-EEA57A4BC414}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Debug|Win32.ActiveCfg = Debug|Win32
 		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Debug|Win32.Build.0 = Debug|Win32
+		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Release|Any CPU.ActiveCfg = Release|Win32
+		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Release|Win32.ActiveCfg = Release|Win32
 		{DFA4D723-1084-4FA0-AE58-DBC791AF46B4}.Release|Win32.Build.0 = Release|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Debug|Win32.ActiveCfg = Debug|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Debug|Win32.Build.0 = Debug|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Release|Any CPU.ActiveCfg = Release|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Release|Win32.ActiveCfg = Release|Win32
+		{63141EEF-9D71-4BA4-9245-EEA57A4BC414}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
