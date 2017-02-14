@@ -3,10 +3,10 @@
 #include "SWeatherInfo.h"
 #include <memory>
 
-class CMockDisplay : public IObserver<SWeatherInfo>
+class CMockUnsubscribingObserver : public IObserver<SWeatherInfo>
 {
 public:
-	CMockDisplay(CWeatherData & weatherData)
+	CMockUnsubscribingObserver(CWeatherData & weatherData)
 	: m_weatherData(weatherData)
 	{
 		m_weatherData.RegisterObserver(*this);

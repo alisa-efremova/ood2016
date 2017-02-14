@@ -54,7 +54,7 @@
     <ClInclude Include="..\WeatherData.h">
       <Filter>Header Files\WeatherStation</Filter>
     </ClInclude>
-    <ClInclude Include="MockDisplay.h">
+    <ClInclude Include="MockUnsubscribingObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
