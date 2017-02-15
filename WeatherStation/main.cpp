@@ -3,8 +3,22 @@
 #include "Display.h"
 #include "StatsDisplay.h"
 
+using namespace std;
+
+void weatherStation();
+void duoWeatherStation();
+
 int main()
 {
+	weatherStation();
+	cout << endl << endl;
+	duoWeatherStation();
+	return 0;
+}
+
+void weatherStation()
+{
+	cout << "-- Weather station --" << endl;
 	CWeatherData wd;
 
 	CDisplay display;
@@ -20,5 +34,19 @@ int main()
 
 	wd.SetMeasurements(10, 0.8, 761);
 	wd.SetMeasurements(-10, 0.8, 761);
-	return 0;
+}
+
+void duoWeatherStation()
+{
+	cout << "-- Duo weather station --" << endl;
+
+	CWeatherData wdIn(ObservableLocation::IN);
+	CWeatherData wdOut(ObservableLocation::OUT);
+
+	CDisplay display;
+	wdIn.RegisterObserver(display);
+	wdOut.RegisterObserver(display);
+
+	wdIn.SetMeasurements(3, 0.7, 760);
+	wdOut.SetMeasurements(10, 0.8, 761);
 }

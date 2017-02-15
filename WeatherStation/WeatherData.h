@@ -5,6 +5,9 @@
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
+	CWeatherData();
+	CWeatherData(ObservableLocation location);
+
 	// Температура в градусах Цельсия
 	double GetTemperature()const;
 

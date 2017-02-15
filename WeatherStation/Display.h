@@ -5,6 +5,6 @@
 class CDisplay : public IObserver<SWeatherInfo>
 {
 private:
-	void Update(SWeatherInfo const& data) override;
+	void Update(SWeatherInfo const& data, const IObservable<SWeatherInfo> & subject) override;
 };
 

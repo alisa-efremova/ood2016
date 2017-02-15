@@ -1,6 +1,16 @@
 #include "stdafx.h"
 #include "WeatherData.h"
 
+CWeatherData::CWeatherData()
+	: CObservable()
+{
+}
+
+CWeatherData::CWeatherData(ObservableLocation location)
+	: CObservable<SWeatherInfo>(location)
+{
+}
+
 double CWeatherData::GetTemperature()const
 {
 	return m_temperature;
