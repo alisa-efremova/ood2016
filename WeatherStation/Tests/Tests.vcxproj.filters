@@ -57,6 +57,9 @@
     <ClInclude Include="MockUnsubscribingObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MockPrioritizedObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
