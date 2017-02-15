@@ -2,6 +2,7 @@
 #include "IObserver.h"
 #include "WeatherData.h"
 #include "SWeatherInfo.h"
+#include <vector>
 
 class CMockPrioritizedObserver : public IObserver<SWeatherInfo>
 {
