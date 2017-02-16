@@ -7,15 +7,6 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	CObservable()
-	{
-	}
-
-	CObservable(ObservableLocation location)
-		: m_location(location)
-	{
-	}
-
 	void RegisterObserver(ObserverType & observer, int priority = 0) override
 	{
 		auto it = std::find_if(m_observers.begin(), m_observers.end(), [priority](const ObserverInfo& observerInfo) { 
@@ -31,7 +22,7 @@ public:
 		
 		for (auto it = observers.begin(); it != observers.end(); ++it)
 		{
-			it->second->Update(data, *this);
+			it->second->Update(data);
 		}
 	}
 
@@ -47,11 +38,6 @@ public:
 		}
 	}
 
-	ObservableLocation GetLocation() const override
-	{
-		return m_location;
-	}
-
 protected:
 	// Классы-наследники должны перегрузить данный метод, 
 	// в котором возвращать информацию об изменениях в объекте
@@ -60,5 +46,4 @@ protected:
 private:
 	typedef std::pair<int, ObserverType *> ObserverInfo;
 	std::list<ObserverInfo> m_observers;
-	ObservableLocation m_location = ObservableLocation::UNDEFINED;
 };

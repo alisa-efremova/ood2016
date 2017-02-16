@@ -60,7 +60,7 @@
     <ClInclude Include="StatsCalc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ObservableLocation.h">
+    <ClInclude Include="WeatherStationLocation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

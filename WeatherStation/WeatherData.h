@@ -1,13 +1,11 @@
 #pragma once
 #include "Observable.h"
 #include "SWeatherInfo.h"
+#include "WeatherStationLocation.h"
 
 class CWeatherData : public CObservable<SWeatherInfo>
 {
 public:
-	CWeatherData();
-	CWeatherData(ObservableLocation location);
-
 	// Температура в градусах Цельсия
 	double GetTemperature()const;
 

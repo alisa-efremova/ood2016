@@ -10,7 +10,7 @@ CStatsDisplay::CStatsDisplay()
 {
 }
 
-void CStatsDisplay::Update(SWeatherInfo const & data, const IObservable<SWeatherInfo> & subject)
+void CStatsDisplay::Update(SWeatherInfo const & data)
 {
 	m_temperatureStats.Update(data.temperature);
 	m_humidityStats.Update(data.humidity);

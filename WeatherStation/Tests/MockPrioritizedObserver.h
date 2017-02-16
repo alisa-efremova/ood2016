@@ -16,7 +16,7 @@ public:
 	}
 
 private:
-	void Update(SWeatherInfo const& data, const IObservable<SWeatherInfo> & subject) override
+	void Update(SWeatherInfo const& data) override
 	{
 		m_updateQueue.push_back(m_priority);
 	}

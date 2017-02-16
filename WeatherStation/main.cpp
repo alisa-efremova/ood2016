@@ -40,8 +40,8 @@ void duoWeatherStation()
 {
 	cout << "-- Duo weather station --" << endl;
 
-	CWeatherData wdIn(ObservableLocation::IN);
-	CWeatherData wdOut(ObservableLocation::OUT);
+	CWeatherData wdIn;
+	CWeatherData wdOut;
 
 	CDisplay display;
 	wdIn.RegisterObserver(display);
