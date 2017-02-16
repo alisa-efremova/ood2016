@@ -31,3 +31,54 @@ BOOST_AUTO_TEST_CASE(TestNotifyingObserversAccordingToPriority)
 	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
 	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
 }
+
+BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheEnd)
+{
+	CWeatherData wd;
+	vector<int> updateQueue;
+	BOOST_CHECK(updateQueue.empty());
+
+	CMockPrioritizedObserver observer1(wd, 10, updateQueue);
+	CMockPrioritizedObserver observer2(wd, 5, updateQueue);
+	CMockPrioritizedObserver observer3(wd, 4, updateQueue);
+	wd.RemoveObserver(observer1);
+
+	BOOST_CHECK_NO_THROW(wd.SetMeasurements(3, 0.7, 760));
+	std::vector<int> correctQueue = { 4, 5 };
+	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
+	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
+}
+
+BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheBegining)
+{
+	CWeatherData wd;
+	vector<int> updateQueue;
+	BOOST_CHECK(updateQueue.empty());
+
+	CMockPrioritizedObserver observer1(wd, 10, updateQueue);
+	CMockPrioritizedObserver observer2(wd, 5, updateQueue);
+	CMockPrioritizedObserver observer3(wd, 4, updateQueue);
+	wd.RemoveObserver(observer3);
+
+	BOOST_CHECK_NO_THROW(wd.SetMeasurements(3, 0.7, 760));
+	std::vector<int> correctQueue = { 5, 10 };
+	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
+	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
+}
+
+BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheMiddle)
+{
+	CWeatherData wd;
+	vector<int> updateQueue;
+	BOOST_CHECK(updateQueue.empty());
+
+	CMockPrioritizedObserver observer1(wd, 10, updateQueue);
+	CMockPrioritizedObserver observer2(wd, 5, updateQueue);
+	CMockPrioritizedObserver observer3(wd, 4, updateQueue);
+	wd.RemoveObserver(observer2);
+
+	BOOST_CHECK_NO_THROW(wd.SetMeasurements(3, 0.7, 760));
+	std::vector<int> correctQueue = { 4, 10 };
+	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
+	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
+}

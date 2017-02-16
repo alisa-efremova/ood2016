@@ -1,7 +1,5 @@
 #pragma once
 #include "IObservable.h"
-#include <list>
-#include <iterator>
 
 template <class T>
 class CObservable : public IObservable<T>
@@ -20,20 +18,10 @@ public:
 
 	void RegisterObserver(ObserverType & observer, int priority = 0) override
 	{
-		bool isObserverSaved = false;
-
-		for (auto it = m_observers.begin(); it != m_observers.end(); ++it)
-		{
-			if (it->first > priority)
-			{
-				m_observers.insert(it, std::make_pair(priority, &observer));
-				isObserverSaved = true;
-				break;
-			}
-		}
-		if (!isObserverSaved) {
-			m_observers.push_back(std::make_pair(priority, &observer));
-		}
+		auto it = std::find_if(m_observers.begin(), m_observers.end(), [priority](const ObserverInfo& observerInfo) { 
+			return observerInfo.first > priority;
+		});
+		m_observers.insert(it, std::make_pair(priority, &observer));
 	}
 
 	void NotifyObservers() override
@@ -49,11 +37,13 @@ public:
 
 	void RemoveObserver(ObserverType & observer) override
 	{
-		for (auto it = m_observers.begin(); it != m_observers.end(); ++it) {
-			if (it->second == &observer) {
-				m_observers.erase(it);
-				break;
-			}
+		auto it = std::find_if(m_observers.begin(), m_observers.end(), [&observer](const ObserverInfo& observerInfo) {
+			return observerInfo.second == &observer;
+		});
+
+		if (it != m_observers.end())
+		{
+			m_observers.erase(it);
 		}
 	}
 
@@ -68,6 +58,7 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-	std::list<std::pair<int, ObserverType *>> m_observers;
+	typedef std::pair<int, ObserverType *> ObserverInfo;
+	std::list<ObserverInfo> m_observers;
 	ObservableLocation m_location = ObservableLocation::UNDEFINED;
 };
