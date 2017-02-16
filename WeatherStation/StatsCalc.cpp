@@ -8,7 +8,7 @@ CStatsCalc::CStatsCalc(const std::string& title)
 {
 }
 
-void CStatsCalc::update(double newVal)
+void CStatsCalc::Update(double newVal)
 {
 	if (m_minVal > newVal)
 	{
@@ -22,7 +22,7 @@ void CStatsCalc::update(double newVal)
 	++m_count;
 }
 
-void CStatsCalc::print() const
+void CStatsCalc::Print() const
 {
 	cout << "* " << m_title << " stats *" << endl;
 	cout << "Max: " << m_maxVal << endl;

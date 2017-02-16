@@ -12,11 +12,11 @@ CStatsDisplay::CStatsDisplay()
 
 void CStatsDisplay::Update(SWeatherInfo const & data, const IObservable<SWeatherInfo> & subject)
 {
-	m_temperatureStats.update(data.temperature);
-	m_humidityStats.update(data.humidity);
-	m_pressureStats.update(data.pressure);
+	m_temperatureStats.Update(data.temperature);
+	m_humidityStats.Update(data.humidity);
+	m_pressureStats.Update(data.pressure);
 
-	m_temperatureStats.print();
-	m_humidityStats.print();
-	m_pressureStats.print();
+	m_temperatureStats.Print();
+	m_humidityStats.Print();
+	m_pressureStats.Print();
 }

@@ -5,8 +5,8 @@ class CStatsCalc
 {
 public:
 	CStatsCalc(const std::string & title);
-	void update(double newVal);
-	void print()const;
+	void Update(double newVal);
+	void Print()const;
 private:
 	std::string m_title;
 	double m_minVal = std::numeric_limits<double>::infinity();
