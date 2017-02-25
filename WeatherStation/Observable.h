@@ -28,6 +28,7 @@ public:
 
 	void RemoveObserver(ObserverType & observer) override
 	{
+
 		auto it = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [&observer](const SubscriptionPtr & subscription) {
 			return subscription->observer == &observer;
 		});

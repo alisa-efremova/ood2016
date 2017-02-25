@@ -2,6 +2,7 @@
 #include "WeatherData.h"
 #include "Display.h"
 #include "StatsDisplay.h"
+#include "WeatherStationLocation.h"
 
 using namespace std;
 
@@ -44,8 +45,12 @@ void duoWeatherStation()
 	CWeatherData wdOut;
 
 	CDisplay display;
+	//display.AddWeatherStation(wdIn, WeatherStationLocation::IN);
+	//display.AddWeatherStation(wdOut, WeatherStationLocation::OUT);
+#if 0
 	wdIn.RegisterObserver(display);
 	wdOut.RegisterObserver(display);
+#endif
 
 	wdIn.SetMeasurements(3, 0.7, 760);
 	wdOut.SetMeasurements(10, 0.8, 761);

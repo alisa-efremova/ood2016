@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
+    <ClInclude Include="WeatherInfoType.h" />
     <ClInclude Include="Subscription.h" />
     <ClInclude Include="IObservable.h" />
     <ClInclude Include="IObserver.h" />

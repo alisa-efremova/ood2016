@@ -66,6 +66,9 @@
     <ClInclude Include="Subscription.h">
       <Filter>Header Files\Observable</Filter>
     </ClInclude>
+    <ClInclude Include="WeatherInfoType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
