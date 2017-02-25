@@ -60,6 +60,9 @@
     <ClInclude Include="MockPrioritizedObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MockLoggingObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="..\WeatherData.cpp">
       <Filter>Source Files\WeatherStation</Filter>
+    </ClCompile>
+    <ClCompile Include="EventTests.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

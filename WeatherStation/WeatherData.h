@@ -20,10 +20,12 @@ public:
 
 protected:
 	SWeatherInfo GetChangedData()const override;
-
+	const std::set<size_t> & GetEventIds()const override;
+	
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
+	std::set<size_t> m_events; // set of WeatherInfoType
 };
 

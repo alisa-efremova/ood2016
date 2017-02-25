@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <string>
+#include <set>
 #include <list>
 #include <iterator>
 #include <algorithm>

@@ -1,6 +1,6 @@
 #pragma once
 
-enum class WeatherStationLocation 
+enum class WeatherInfoType 
 { 
 	ALL = 0,
 	TEMPERATURE = 1, 
