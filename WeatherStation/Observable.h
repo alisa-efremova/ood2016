@@ -1,5 +1,6 @@
 #pragma once
 #include "IObservable.h"
+#include "Subscription.h"
 
 template <class T>
 class CObservable : public IObservable<T>
@@ -7,34 +8,33 @@ class CObservable : public IObservable<T>
 public:
 	typedef IObserver<T> ObserverType;
 
-	void RegisterObserver(ObserverType & observer, int priority = 0) override
+	void RegisterObserver(ObserverType & observer, size_t priority = 0, size_t eventId = 0) override
 	{
-		auto it = std::find_if(m_observers.begin(), m_observers.end(), [priority](const ObserverInfo& observerInfo) { 
-			return observerInfo.first > priority;
+		auto it = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [priority](const SubscriptionPtr & subscription) {
+			return subscription->priority > priority;
 		});
-		m_observers.insert(it, std::make_pair(priority, &observer));
+		m_subscriptions.insert(it, std::make_shared<Subscription<T>>(&observer, priority));
 	}
 
-	void NotifyObservers() override
+	void NotifyObservers(size_t eventId = 0) override
 	{
 		T data = GetChangedData();
-		auto observers = m_observers;
-		
-		for (auto it = observers.begin(); it != observers.end(); ++it)
+		auto subscriptions = m_subscriptions;
+		for (auto subscription : subscriptions)
 		{
-			it->second->Update(data);
+			subscription->observer->Update(data);
 		}
 	}
 
 	void RemoveObserver(ObserverType & observer) override
 	{
-		auto it = std::find_if(m_observers.begin(), m_observers.end(), [&observer](const ObserverInfo& observerInfo) {
-			return observerInfo.second == &observer;
+		auto it = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [&observer](const SubscriptionPtr & subscription) {
+			return subscription->observer == &observer;
 		});
 
-		if (it != m_observers.end())
+		if (it != m_subscriptions.end())
 		{
-			m_observers.erase(it);
+			m_subscriptions.erase(it);
 		}
 	}
 
@@ -44,6 +44,6 @@ protected:
 	virtual T GetChangedData()const = 0;
 
 private:
-	typedef std::pair<int, ObserverType *> ObserverInfo;
-	std::list<ObserverInfo> m_observers;
+	typedef std::shared_ptr<Subscription<T>> SubscriptionPtr;
+	std::list<SubscriptionPtr> m_subscriptions;
 };

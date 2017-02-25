@@ -15,3 +15,4 @@
 #include <list>
 #include <iterator>
 #include <algorithm>
+#include <memory>
