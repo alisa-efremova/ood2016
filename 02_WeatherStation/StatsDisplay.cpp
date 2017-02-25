@@ -11,11 +11,11 @@ CStatsDisplay::CStatsDisplay()
 {
 }
 
-void CStatsDisplay::Update(SWeatherInfo const & data)
+void CStatsDisplay::Update(CWeatherData const & subject)
 {
-	m_temperatureStats.Update(data.weatherData->GetTemperature());
-	m_humidityStats.Update(data.weatherData->GetHumidity());
-	m_pressureStats.Update(data.weatherData->GetPressure());
+	m_temperatureStats.Update(subject.GetTemperature());
+	m_humidityStats.Update(subject.GetHumidity());
+	m_pressureStats.Update(subject.GetPressure());
 
 	m_temperatureStats.Print();
 	m_humidityStats.Print();

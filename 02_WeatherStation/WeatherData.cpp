@@ -45,11 +45,9 @@ void CWeatherData::SetMeasurements(double temp, double humidity, double pressure
 	MeasurementsChanged();
 }
 
-SWeatherInfo CWeatherData::GetChangedData()const
+const CWeatherData * CWeatherData::GetConcreteObservable()const
 {
-	SWeatherInfo info;
-	info.weatherData = this;
-	return info;
+	return this;
 }
 
 const std::set<size_t> & CWeatherData::GetEventIds()const

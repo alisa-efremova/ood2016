@@ -1,9 +1,8 @@
 #pragma once
 #include "IObserver.h"
 #include "WeatherData.h"
-#include "SWeatherInfo.h"
 
-class CMockUnsubscribingObserver : public IObserver<SWeatherInfo>
+class CMockUnsubscribingObserver : public IObserver<CWeatherData>
 {
 public:
 	CMockUnsubscribingObserver(CWeatherData & weatherData)
@@ -13,7 +12,7 @@ public:
 	}
 
 private:
-	void Update(SWeatherInfo const& data) override
+	void Update(CWeatherData const& data) override
 	{
 		m_weatherData.RemoveObserver(*this);
 	}

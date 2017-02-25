@@ -1,11 +1,11 @@
 #pragma once
 #include "IObserver.h"
-#include "SWeatherInfo.h"
+#include "WeatherData.h"
 #include <vector>
 
 typedef std::vector<const class CMockLoggingObserver *> ObserverVector;
 
-class CMockLoggingObserver : public IObserver<SWeatherInfo>
+class CMockLoggingObserver : public IObserver<CWeatherData>
 {
 public:
 	CMockLoggingObserver(ObserverVector & updateQueue) 
@@ -14,7 +14,7 @@ public:
 	}
 
 private:
-	void Update(SWeatherInfo const& data)
+	void Update(CWeatherData const& data)
 	{
 		m_updateQueue.push_back(this);
 	}

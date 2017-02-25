@@ -1,10 +1,9 @@
 #pragma once
 #include "IObserver.h"
 #include "WeatherData.h"
-#include "SWeatherInfo.h"
 #include <vector>
 
-class CMockPrioritizedObserver : public IObserver<SWeatherInfo>
+class CMockPrioritizedObserver : public IObserver<CWeatherData>
 {
 public:
 	CMockPrioritizedObserver(CWeatherData & weatherData, int priority, std::vector<int> & updateQueue)
@@ -16,7 +15,7 @@ public:
 	}
 
 private:
-	void Update(SWeatherInfo const& data) override
+	void Update(CWeatherData const& data) override
 	{
 		m_updateQueue.push_back(m_priority);
 	}

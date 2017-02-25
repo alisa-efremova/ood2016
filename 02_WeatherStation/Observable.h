@@ -36,14 +36,14 @@ public:
 			return;
 		}
 
-		T data = GetChangedData();
+		const T * subject = GetConcreteObservable();
 		auto subscriptions = m_subscriptions;
 
 		for (auto subscription : subscriptions)
 		{
 			if (NeedNotifyObserver(subscription->eventIds))
 			{
-				subscription->observer->Update(data);
+				subscription->observer->Update(*subject);
 			}
 		}
 	}
@@ -73,9 +73,7 @@ public:
 	}
 
 protected:
-	// Классы-наследники должны перегрузить данный метод, 
-	// в котором возвращать информацию об изменениях в объекте
-	virtual T GetChangedData()const = 0;
+	virtual const T * GetConcreteObservable()const = 0;
 	virtual const std::set<size_t> & GetEventIds()const = 0;
 
 private:

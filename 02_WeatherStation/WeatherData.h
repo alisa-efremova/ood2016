@@ -3,7 +3,7 @@
 #include "SWeatherInfo.h"
 #include "WeatherStationLocation.h"
 
-class CWeatherData : public CObservable<SWeatherInfo>
+class CWeatherData : public CObservable<CWeatherData>
 {
 public:
 	// Температура в градусах Цельсия
@@ -19,7 +19,7 @@ public:
 	void SetMeasurements(double temp, double humidity, double pressure);
 
 protected:
-	SWeatherInfo GetChangedData()const override;
+	const CWeatherData * GetConcreteObservable()const override;
 	const std::set<size_t> & GetEventIds()const override;
 	
 private:

@@ -1,10 +1,10 @@
 #pragma once
 #include "IObserver.h"
-#include "SWeatherInfo.h"
+#include "WeatherData.h"
 
-class CDisplay : public IObserver<SWeatherInfo>
+class CDisplay : public IObserver<CWeatherData>
 {
 private:
-	void Update(SWeatherInfo const& data) override;
+	void Update(CWeatherData const& subject) override;
 };
 
