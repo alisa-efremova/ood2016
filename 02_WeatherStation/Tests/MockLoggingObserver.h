@@ -14,7 +14,7 @@ public:
 	}
 
 private:
-	void Update(CWeatherData const& data)
+	void Update(CWeatherData const& subject)
 	{
 		m_updateQueue.push_back(this);
 	}

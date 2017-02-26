@@ -69,6 +69,12 @@
     <ClInclude Include="WeatherInfoType.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProWeatherData.h">
+      <Filter>Header Files\Observable</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsWeaherInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -86,8 +92,8 @@
     <ClCompile Include="WeatherData.cpp">
       <Filter>Source Files\Observable</Filter>
     </ClCompile>
-    <ClCompile Include="StatsCalc.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="ProWeatherData.cpp">
+      <Filter>Source Files\Observable</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

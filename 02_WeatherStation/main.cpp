@@ -1,57 +1,40 @@
 #include "stdafx.h"
 #include "WeatherData.h"
+#include "ProWeatherData.h"
 #include "Display.h"
 #include "StatsDisplay.h"
-#include "WeatherStationLocation.h"
 
 using namespace std;
 
-void weatherStation();
-void duoWeatherStation();
+void WeatherStation();
 
 int main()
 {
-	weatherStation();
-	cout << endl << endl;
-	duoWeatherStation();
+	WeatherStation();
 	return 0;
 }
 
-void weatherStation()
+void WeatherStation()
 {
-	cout << "-- Weather station --" << endl;
-	CWeatherData wd;
-
-	CDisplay display;
-	wd.RegisterObserver(display);
-
-	CStatsDisplay statsDisplay;
-	wd.RegisterObserver(statsDisplay, 1);
-
-	wd.SetMeasurements(3, 0.7, 760);
-	wd.SetMeasurements(4, 0.8, 761);
-
-	wd.RemoveObserver(statsDisplay);
-
-	wd.SetMeasurements(10, 0.8, 761);
-	wd.SetMeasurements(-10, 0.8, 761);
-}
-
-void duoWeatherStation()
-{
-	cout << "-- Duo weather station --" << endl;
-
 	CWeatherData wdIn;
-	CWeatherData wdOut;
+	CProWeatherData wdOut;
 
 	CDisplay display;
-	//display.AddWeatherStation(wdIn, WeatherStationLocation::IN);
-	//display.AddWeatherStation(wdOut, WeatherStationLocation::OUT);
-#if 0
 	wdIn.RegisterObserver(display);
 	wdOut.RegisterObserver(display);
-#endif
 
-	wdIn.SetMeasurements(3, 0.7, 760);
-	wdOut.SetMeasurements(10, 0.8, 761);
+	CStatsDisplay statsDisplay;
+	wdIn.RegisterObserver(statsDisplay);
+	wdOut.RegisterObserver(statsDisplay);
+
+	wdIn.SetMeasurements(3.5, 0.7, 760);
+	wdOut.SetMeasurements(4.5, 0.8, 761, 8.5, 90.6);
+	wdOut.SetMeasurements(4.5, 0.8, 761, 5.5, 350);
+
+	wdIn.RemoveObserver(statsDisplay);
+	wdOut.RemoveObserver(statsDisplay);
+	cout << "-- removed stats display --\n\n";
+
+	wdIn.SetMeasurements(10.0, 0.8, 761);
+	wdOut.SetMeasurements(-10.0, 0.8, 761, 2.5, 60);
 }

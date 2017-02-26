@@ -2,32 +2,31 @@
 #include "Observable.h"
 #include "WeatherStationLocation.h"
 
-class CWeatherData : public CObservable<CWeatherData>
+class CProWeatherData : public CObservable<CProWeatherData>
 {
 public:
-	// Температура в градусах Цельсия
 	double GetTemperature()const;
-
-	// Относительная влажность (0...100)
 	double GetHumidity()const;
-
-	// Атмосферное давление (в мм.рт.ст)
 	double GetPressure()const;
-
+	double GetWindSpeed()const;
+	double GetWindDirection()const;
 	WeatherStationLocation GetLocation()const;
 
 	void MeasurementsChanged();
-	void SetMeasurements(double temp, double humidity, double pressure);
+	void SetMeasurements(double temp, double humidity, double pressure, double windSpeed, double windDirection);
 
 protected:
-	const CWeatherData * GetConcreteObservable()const override;
+	const CProWeatherData * GetConcreteObservable()const override;
 	const std::set<size_t> & GetEventIds()const override;
-	
+
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
-	WeatherStationLocation m_location = WeatherStationLocation::IN;
+	double m_windSpeed = 0.0;
+	double m_windDirection = 0;
+	WeatherStationLocation m_location = WeatherStationLocation::OUT;
 	std::set<size_t> m_events; // set of WeatherInfoType
 };
+
 

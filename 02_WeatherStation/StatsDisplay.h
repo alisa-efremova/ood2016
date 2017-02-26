@@ -1,16 +1,19 @@
 #pragma once
 #include "IObserver.h"
-#include "StatsCalc.h"
-#include "WeatherData.h"
+#include "StatsWeaherInfo.h"
+class CWeatherData;
+class CProWeatherData;
 
-class CStatsDisplay : public IObserver<CWeatherData>
+class CStatsDisplay : public IObserver<CWeatherData>, public IObserver<CProWeatherData>
 {
 public:
 	CStatsDisplay();
 private:
 	void Update(CWeatherData const& subject) override;
-	CStatsCalc m_temperatureStats;
-	CStatsCalc m_humidityStats;
-	CStatsCalc m_pressureStats;
+	void Update(CProWeatherData const& subject) override;
+	void PrintWeatherData()const;
+
+	SStatsWeatherInfo m_inStats;
+	SProStatsWeatherInfo m_outStats;
 };
 

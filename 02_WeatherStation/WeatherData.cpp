@@ -17,6 +17,11 @@ double CWeatherData::GetPressure()const
 	return m_pressure;
 }
 
+WeatherStationLocation CWeatherData::GetLocation()const
+{
+	return m_location;
+}
+
 void CWeatherData::MeasurementsChanged()
 {
 	NotifyObservers();

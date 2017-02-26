@@ -63,6 +63,9 @@
     <ClInclude Include="MockLoggingObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\ProWeatherData.h">
+      <Filter>Header Files\WeatherStation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -70,9 +73,6 @@
     </ClCompile>
     <ClCompile Include="Tests.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\StatsCalc.cpp">
-      <Filter>Source Files\WeatherStation</Filter>
     </ClCompile>
     <ClCompile Include="..\StatsDisplay.cpp">
       <Filter>Source Files\WeatherStation</Filter>
@@ -84,6 +84,12 @@
       <Filter>Source Files\WeatherStation</Filter>
     </ClCompile>
     <ClCompile Include="EventTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ProWeatherData.cpp">
+      <Filter>Source Files\WeatherStation</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsCalcTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
