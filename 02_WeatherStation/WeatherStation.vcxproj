@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
+    <ClInclude Include="LightDisplay.h" />
     <ClInclude Include="ProWeatherData.h" />
     <ClInclude Include="StatsWeaherInfo.h" />
     <ClInclude Include="WeatherInfoType.h" />
@@ -97,6 +98,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Display.cpp" />
+    <ClCompile Include="LightDisplay.cpp" />
     <ClCompile Include="ProWeatherData.cpp" />
     <ClCompile Include="StatsDisplay.cpp" />
     <ClCompile Include="stdafx.cpp">
