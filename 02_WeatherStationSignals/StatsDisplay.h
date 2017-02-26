@@ -11,27 +11,42 @@ using namespace std;
 class CStatsDisplay : boost::noncopyable
 {
 public:
-	CStatsDisplay(IWeatherData & cr)
+	CStatsDisplay(CWeatherData & inWeatherData, CProWeatherData & outWeatherData)
 	{
-		m_changeConnection = cr.DoOnChange(bind(&CStatsDisplay::OnChange, this, placeholders::_1));
+		m_inWeatherDataConnection = inWeatherData.DoOnChange(bind(&CStatsDisplay::OnInWeatherDataChange, this, placeholders::_1));
+		m_outWeatherDataConnection = outWeatherData.DoOnChange(bind(&CStatsDisplay::OnOutWeatherDataChange, this, placeholders::_1));
 	}
 
 private:
-	void OnChange(const CWeatherData * subject)
+	void OnInWeatherDataChange(const CWeatherData * subject)
 	{
-		m_weatherInfo.temperatureStats.Update(subject->GetTemperature());
-		m_weatherInfo.pressureStats.Update(subject->GetPressure());
-		m_weatherInfo.humidityStats.Update(subject->GetHumidity());
+		m_inStats.temperatureStats.Update(subject->GetTemperature());
+		m_inStats.pressureStats.Update(subject->GetPressure());
+		m_inStats.humidityStats.Update(subject->GetHumidity());
 		Print();
 	}
 
-	SStatsWeatherInfo m_weatherInfo;
-	signals::scoped_connection m_changeConnection;
+	void OnOutWeatherDataChange(const CProWeatherData * subject)
+	{
+		m_outStats.temperatureStats.Update(subject->GetTemperature());
+		m_outStats.pressureStats.Update(subject->GetPressure());
+		m_outStats.humidityStats.Update(subject->GetHumidity());
+		m_outStats.windSpeedStats.Update(subject->GetWindSpeed());
+		m_outStats.windDirectionStats.Update(subject->GetWindDirection());
+		Print();
+	}
+
+	SStatsWeatherInfo m_inStats;
+	SProStatsWeatherInfo m_outStats;
+	signals::scoped_connection m_inWeatherDataConnection;
+	signals::scoped_connection m_outWeatherDataConnection;
 
 	void Print()
 	{
-		cout << "* STATS *" << endl;
-		m_weatherInfo.Print();
+		cout << "* STATS INSIDE *" << endl;
+		m_inStats.Print();
+		cout << endl << "* STATS OUTSIDE *" << endl;
+		m_outStats.Print();
 		cout << "----------------------------------------------------------------" << endl;
 	}
 };

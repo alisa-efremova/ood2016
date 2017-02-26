@@ -1,4 +1,7 @@
 #pragma once
+
+#define _USE_MATH_DEFINES
+#include "math.h"
 #include <iostream>
 
 class CStatsCalc
@@ -61,4 +64,36 @@ protected:
 	double m_maxVal = -std::numeric_limits<double>::infinity();
 	double m_accVal = 0;
 	double m_count = 0;
+};
+
+class CWindDirectionStatsCalc : public CStatsCalc
+{
+public:
+	CWindDirectionStatsCalc()
+		:CStatsCalc()
+	{
+	}
+
+	virtual double GetAverage()const override
+	{
+		double avg = atan2(m_accY, m_accX) * 180 / M_PI;
+		return avg >= 0 ? avg : 360 + avg;
+	}
+
+private:
+	void UpdateAverage(double newVal) override
+	{
+		m_accX += cos(newVal * M_PI / 180);
+		m_accY += sin(newVal * M_PI / 180);
+		double length = sqrt(m_accX * m_accX + m_accY * m_accY);
+		if (length != 0)
+		{
+			// normalize coordinates
+			m_accX /= length;
+			m_accY /= length;
+		}
+	}
+
+	double m_accX = 0;
+	double m_accY = 0;
 };

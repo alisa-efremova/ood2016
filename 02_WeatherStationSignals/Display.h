@@ -10,29 +10,44 @@ using namespace std;
 class CDisplay : boost::noncopyable
 {
 public:
-	CDisplay(IWeatherData & cr)
+	CDisplay(CWeatherData & inWeatherData, CProWeatherData & outWeatherData)
 	{
-		m_changeConnection = cr.DoOnChange(bind(&CDisplay::OnChange, this, placeholders::_1));
+		m_inWeatherDataConnection = inWeatherData.DoOnChange(bind(&CDisplay::OnInWeatherDataChange, this, placeholders::_1));
+		m_outWeatherDataConnection = outWeatherData.DoOnChange(bind(&CDisplay::OnOutWeatherDataChange, this, placeholders::_1));
 	}
 
 private:
-	void OnChange(const CWeatherData * subject)
+	void OnInWeatherDataChange(const CWeatherData * subject)
 	{
-		m_weatherInfo.temperature = subject->GetTemperature();
-		m_weatherInfo.pressure = subject->GetPressure();
-		m_weatherInfo.humidity = subject->GetHumidity();
+		m_inWeatherInfo.temperature = subject->GetTemperature();
+		m_inWeatherInfo.pressure = subject->GetPressure();
+		m_inWeatherInfo.humidity = subject->GetHumidity();
 		Print();
 	}
 
-	SWeatherInfo m_weatherInfo;
-	signals::scoped_connection m_changeConnection;
+	void OnOutWeatherDataChange(const CProWeatherData * subject)
+	{
+		m_outWeatherInfo.temperature = subject->GetTemperature();
+		m_outWeatherInfo.pressure = subject->GetPressure();
+		m_outWeatherInfo.humidity = subject->GetHumidity();
+		m_outWeatherInfo.windSpeed = subject->GetWindSpeed();
+		m_outWeatherInfo.windDirection = subject->GetWindDirection();
+		Print();
+	}
+
+	SWeatherInfo m_inWeatherInfo;
+	SProWeatherInfo m_outWeatherInfo;
+	signals::scoped_connection m_inWeatherDataConnection;
+	signals::scoped_connection m_outWeatherDataConnection;
 
 	void Print()
 	{
 		cout << "* CURRENT *" << endl;
-		cout << "Temperature:\t" << m_weatherInfo.temperature << endl;
-		cout << "Humidity:\t" << m_weatherInfo.humidity << endl;
-		cout << "Pressure:\t" << m_weatherInfo.pressure << endl;
+		cout << "Temperature\tinside: " << m_inWeatherInfo.temperature << "\toutside: " << m_outWeatherInfo.temperature << endl;
+		cout << "Humidity\tinside: " << m_inWeatherInfo.humidity << "\toutside: " << m_outWeatherInfo.humidity << endl;
+		cout << "Pressure\tinside: " << m_inWeatherInfo.pressure << "\toutside: " << m_outWeatherInfo.pressure << endl;
+		cout << "Wind speed: " << m_outWeatherInfo.windSpeed << endl;
+		cout << "Wind direction: " << m_outWeatherInfo.windDirection << endl;
 		cout << "----------------------------------------------------------------" << endl;
 	}
 };
