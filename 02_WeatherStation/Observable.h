@@ -80,7 +80,7 @@ private:
 	// Helper method
 	bool NeedNotifyObserver(const std::set<size_t> &eventIds)
 	{
-		// check if observer is subscribed to all events and if any data was changed
+		// check if observer is subscribed to all events
 		if (eventIds.find(0) != eventIds.end())
 		{
 			return true;
