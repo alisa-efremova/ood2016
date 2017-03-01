@@ -84,20 +84,26 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
+    <ClInclude Include="IWeatherData.h" />
+    <ClInclude Include="ProWeatherData.h" />
     <ClInclude Include="StatsCalc.h" />
     <ClInclude Include="StatsDisplay.h" />
     <ClInclude Include="StatsWeatherInfo.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="WeatherData.h" />
-    <ClInclude Include="WeatherInfo.h" />
+    <ClInclude Include="SWeatherInfo.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Display.cpp" />
+    <ClCompile Include="ProWeatherData.cpp" />
+    <ClCompile Include="StatsDisplay.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="WeatherData.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

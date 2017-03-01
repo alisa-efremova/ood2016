@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\WeatherData">
+      <UniqueIdentifier>{5cc85aa7-2dd9-447b-98de-73c6754e20e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Display">
+      <UniqueIdentifier>{10f85ef6-379d-40f8-bc98-71ffea04f932}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\WeatherData">
+      <UniqueIdentifier>{415c74d0-823e-4f2c-9c5c-4a97232f2dcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Display">
+      <UniqueIdentifier>{f314bf0b-45dc-409c-bc63-85e426d9c1c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -30,17 +42,23 @@
     <ClInclude Include="StatsWeatherInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StatsDisplay.h">
+    <ClInclude Include="SWeatherInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Display.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Display</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherInfo.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="IWeatherData.h">
+      <Filter>Header Files\WeatherData</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsDisplay.h">
+      <Filter>Header Files\Display</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherData.h">
+      <Filter>Header Files\WeatherData</Filter>
+    </ClInclude>
+    <ClInclude Include="ProWeatherData.h">
+      <Filter>Header Files\WeatherData</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -49,6 +67,18 @@
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ProWeatherData.cpp">
+      <Filter>Source Files\WeatherData</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsDisplay.cpp">
+      <Filter>Source Files\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="Display.cpp">
+      <Filter>Source Files\Display</Filter>
+    </ClCompile>
+    <ClCompile Include="WeatherData.cpp">
+      <Filter>Source Files\WeatherData</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

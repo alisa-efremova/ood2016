@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "WeatherData.h"
+#include "ProWeatherData.h"
 #include "StatsDisplay.h"
 #include "Display.h"
 
