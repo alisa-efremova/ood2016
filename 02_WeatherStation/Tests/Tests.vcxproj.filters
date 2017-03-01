@@ -66,6 +66,9 @@
     <ClInclude Include="..\ProWeatherData.h">
       <Filter>Header Files\WeatherStation</Filter>
     </ClInclude>
+    <ClInclude Include="MockDuoObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -89,7 +92,10 @@
     <ClCompile Include="..\ProWeatherData.cpp">
       <Filter>Source Files\WeatherStation</Filter>
     </ClCompile>
-    <ClCompile Include="StatsCalcTest.cpp">
+    <ClCompile Include="DuoStationTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsCalcTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

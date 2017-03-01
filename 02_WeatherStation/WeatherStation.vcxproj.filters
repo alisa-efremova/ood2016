@@ -60,9 +60,6 @@
     <ClInclude Include="StatsCalc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherStationLocation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Subscription.h">
       <Filter>Header Files\Observable</Filter>
     </ClInclude>
@@ -77,6 +74,9 @@
     </ClInclude>
     <ClInclude Include="LightDisplay.h">
       <Filter>Header Files\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherStationLocation.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
