@@ -1,8 +1,6 @@
 #include "stdafx.h"
-#include "WeatherData.h"
 #include "MockUnsubscribingObserver.h"
 #include "MockPrioritizedObserver.h"
-#include <vector>
 
 using namespace std;
 
@@ -18,8 +16,8 @@ BOOST_AUTO_TEST_CASE(TestObserverUnsubscribtionWhenNotified)
 BOOST_AUTO_TEST_CASE(TestNotifyingObserversAccordingToPriority)
 {
 	CWeatherData wd;
-	vector<int> updateQueue;
-	BOOST_CHECK(updateQueue.empty());
+	shared_ptr<vector<int>> updateQueue = make_shared<vector<int>>();
+	BOOST_CHECK(updateQueue->empty());
 
 	CMockPrioritizedObserver observer1(wd, 10, updateQueue);
 	CMockPrioritizedObserver observer2(wd, 5, updateQueue);
@@ -28,15 +26,15 @@ BOOST_AUTO_TEST_CASE(TestNotifyingObserversAccordingToPriority)
 	BOOST_CHECK_NO_THROW(wd.SetMeasurements(3, 0.7, 760));
 
 	std::vector<int> correctQueue = { 4, 5, 10 };
-	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
-	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
+	BOOST_CHECK_EQUAL(updateQueue->size(), correctQueue.size());
+	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue->begin(), updateQueue->end(), correctQueue.begin(), correctQueue.end());
 }
 
 BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheEnd)
 {
 	CWeatherData wd;
-	vector<int> updateQueue;
-	BOOST_CHECK(updateQueue.empty());
+	shared_ptr<vector<int>> updateQueue = make_shared<vector<int>>();
+	BOOST_CHECK(updateQueue->empty());
 
 	CMockPrioritizedObserver observer1(wd, 10, updateQueue);
 	CMockPrioritizedObserver observer2(wd, 5, updateQueue);
@@ -45,15 +43,15 @@ BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheEnd)
 
 	BOOST_CHECK_NO_THROW(wd.SetMeasurements(3, 0.7, 760));
 	std::vector<int> correctQueue = { 4, 5 };
-	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
-	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
+	BOOST_CHECK_EQUAL(updateQueue->size(), correctQueue.size());
+	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue->begin(), updateQueue->end(), correctQueue.begin(), correctQueue.end());
 }
 
 BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheBegining)
 {
 	CWeatherData wd;
-	vector<int> updateQueue;
-	BOOST_CHECK(updateQueue.empty());
+	shared_ptr<vector<int>> updateQueue = make_shared<vector<int>>();
+	BOOST_CHECK(updateQueue->empty());
 
 	CMockPrioritizedObserver observer1(wd, 10, updateQueue);
 	CMockPrioritizedObserver observer2(wd, 5, updateQueue);
@@ -62,15 +60,15 @@ BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheBegining)
 
 	BOOST_CHECK_NO_THROW(wd.SetMeasurements(3, 0.7, 760));
 	std::vector<int> correctQueue = { 5, 10 };
-	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
-	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
+	BOOST_CHECK_EQUAL(updateQueue->size(), correctQueue.size());
+	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue->begin(), updateQueue->end(), correctQueue.begin(), correctQueue.end());
 }
 
 BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheMiddle)
 {
 	CWeatherData wd;
-	vector<int> updateQueue;
-	BOOST_CHECK(updateQueue.empty());
+	shared_ptr<vector<int>> updateQueue = make_shared<vector<int>>();
+	BOOST_CHECK(updateQueue->empty());
 
 	CMockPrioritizedObserver observer1(wd, 10, updateQueue);
 	CMockPrioritizedObserver observer2(wd, 5, updateQueue);
@@ -79,6 +77,6 @@ BOOST_AUTO_TEST_CASE(TestRemoveObserverFromTheMiddle)
 
 	BOOST_CHECK_NO_THROW(wd.SetMeasurements(3, 0.7, 760));
 	std::vector<int> correctQueue = { 4, 10 };
-	BOOST_CHECK_EQUAL(updateQueue.size(), correctQueue.size());
-	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue.begin(), updateQueue.end(), correctQueue.begin(), correctQueue.end());
+	BOOST_CHECK_EQUAL(updateQueue->size(), correctQueue.size());
+	BOOST_CHECK_EQUAL_COLLECTIONS(updateQueue->begin(), updateQueue->end(), correctQueue.begin(), correctQueue.end());
 }

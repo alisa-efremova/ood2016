@@ -2,13 +2,14 @@
 #include "IObserver.h"
 #include "WeatherData.h"
 #include <vector>
+#include <memory>
 
 typedef std::vector<const class CMockLoggingObserver *> ObserverVector;
 
 class CMockLoggingObserver : public IObserver<CWeatherData>
 {
 public:
-	CMockLoggingObserver(ObserverVector & updateQueue) 
+	CMockLoggingObserver(std::shared_ptr<ObserverVector> updateQueue)
 		: m_updateQueue(updateQueue)
 	{
 	}
@@ -16,8 +17,8 @@ public:
 private:
 	void Update(CWeatherData const& subject)
 	{
-		m_updateQueue.push_back(this);
+		m_updateQueue->push_back(this);
 	}
 	
-	ObserverVector & m_updateQueue;
+	std::shared_ptr<ObserverVector> m_updateQueue;
 };

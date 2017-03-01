@@ -6,7 +6,7 @@
 class CMockPrioritizedObserver : public IObserver<CWeatherData>
 {
 public:
-	CMockPrioritizedObserver(CWeatherData & weatherData, int priority, std::vector<int> & updateQueue)
+	CMockPrioritizedObserver(CWeatherData & weatherData, int priority, std::shared_ptr<std::vector<int>> updateQueue)
 		: m_weatherData(weatherData)
 		, m_priority(priority)
 		, m_updateQueue(updateQueue)
@@ -17,10 +17,10 @@ public:
 private:
 	void Update(CWeatherData const& data) override
 	{
-		m_updateQueue.push_back(m_priority);
+		m_updateQueue->push_back(m_priority);
 	}
 
 	CWeatherData & m_weatherData;
-	std::vector<int> & m_updateQueue;
+	std::shared_ptr<std::vector<int>> m_updateQueue;
 	int m_priority;
 };
