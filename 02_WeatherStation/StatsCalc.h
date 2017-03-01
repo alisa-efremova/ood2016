@@ -2,7 +2,6 @@
 
 #define _USE_MATH_DEFINES
 #include "math.h"
-#include <iostream>
 
 class CStatsCalc
 {
@@ -17,22 +16,22 @@ public:
 		UpdateAverage(newVal);
 	}
 
-	void Print()const
+	void Print() const
 	{
 		std::cout << "max: " << m_maxVal << "\tmin: " << m_minVal << "\tavg: " << GetAverage() << std::endl;
 	}
 
-	double GetMin()const
+	double GetMin() const
 	{
 		return m_minVal;
 	}
 
-	double GetMax()const
+	double GetMax() const
 	{
 		return m_maxVal;
 	}
 
-	virtual double GetAverage()const
+	virtual double GetAverage() const
 	{
 		return m_count == 0 ? 0 : m_accVal / m_count;
 	}
@@ -74,7 +73,7 @@ public:
 	{
 	}
 
-	virtual double GetAverage()const override
+	virtual double GetAverage() const override
 	{
 		double avg = atan2(m_accY, m_accX) * 180 / M_PI;
 		return avg >= 0 ? avg : 360 + avg;

@@ -17,7 +17,7 @@ void CDisplay::Update(CProWeatherData const & subject) {
 	PrintWeatherData();
 }
 
-void CDisplay::PrintWeatherData()const
+void CDisplay::PrintWeatherData() const
 {
 	cout << "* CURRENT *" << endl;
 	cout << "Temperature\tinside: " << m_inWeatherInfo.temperature << "\toutside: " << m_outWeatherInfo.temperature << endl;

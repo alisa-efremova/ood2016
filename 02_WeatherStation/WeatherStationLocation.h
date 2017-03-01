@@ -1,5 +1,4 @@
 #pragma once
-#include "iostream"
 
 enum class WeatherStationLocation { IN = 1, OUT = 2 };
 

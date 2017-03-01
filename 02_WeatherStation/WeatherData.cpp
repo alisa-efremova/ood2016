@@ -2,22 +2,22 @@
 #include "WeatherData.h"
 #include "WeatherInfoType.h"
 
-double CWeatherData::GetTemperature()const
+double CWeatherData::GetTemperature() const
 {
 	return m_temperature;
 }
 
-double CWeatherData::GetHumidity()const
+double CWeatherData::GetHumidity() const
 {
 	return m_humidity;
 }
 
-double CWeatherData::GetPressure()const
+double CWeatherData::GetPressure() const
 {
 	return m_pressure;
 }
 
-WeatherStationLocation CWeatherData::GetLocation()const
+WeatherStationLocation CWeatherData::GetLocation() const
 {
 	return m_location;
 }
@@ -50,12 +50,12 @@ void CWeatherData::SetMeasurements(double temp, double humidity, double pressure
 	MeasurementsChanged();
 }
 
-const CWeatherData * CWeatherData::GetConcreteObservable()const
+const CWeatherData * CWeatherData::GetConcreteObservable() const
 {
 	return this;
 }
 
-const std::set<size_t> & CWeatherData::GetEventIds()const
+const std::set<size_t> & CWeatherData::GetEventIds() const
 {
 	return m_events;
 }

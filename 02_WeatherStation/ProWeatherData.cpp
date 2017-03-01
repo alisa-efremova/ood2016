@@ -2,32 +2,32 @@
 #include "ProWeatherData.h"
 #include "WeatherInfoType.h"
 
-double CProWeatherData::GetTemperature()const
+double CProWeatherData::GetTemperature() const
 {
 	return m_temperature;
 }
 
-double CProWeatherData::GetHumidity()const
+double CProWeatherData::GetHumidity() const
 {
 	return m_humidity;
 }
 
-double CProWeatherData::GetPressure()const
+double CProWeatherData::GetPressure() const
 {
 	return m_pressure;
 }
 
-double CProWeatherData::GetWindSpeed()const
+double CProWeatherData::GetWindSpeed() const
 {
 	return m_windSpeed;
 }
 
-double CProWeatherData::GetWindDirection()const
+double CProWeatherData::GetWindDirection() const
 {
 	return m_windDirection;
 }
 
-WeatherStationLocation CProWeatherData::GetLocation()const
+WeatherStationLocation CProWeatherData::GetLocation() const
 {
 	return m_location;
 }
@@ -70,12 +70,12 @@ void CProWeatherData::SetMeasurements(double temp, double humidity, double press
 	MeasurementsChanged();
 }
 
-const CProWeatherData * CProWeatherData::GetConcreteObservable()const
+const CProWeatherData * CProWeatherData::GetConcreteObservable() const
 {
 	return this;
 }
 
-const std::set<size_t> & CProWeatherData::GetEventIds()const
+const std::set<size_t> & CProWeatherData::GetEventIds() const
 {
 	return m_events;
 }

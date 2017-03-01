@@ -31,7 +31,7 @@ void CStatsDisplay::Update(CProWeatherData const& subject)
 	PrintWeatherData();
 }
 
-void CStatsDisplay::PrintWeatherData()const
+void CStatsDisplay::PrintWeatherData() const
 {
 	cout << "* STATS INSIDE *" << endl;
 	m_inStats.Print();
