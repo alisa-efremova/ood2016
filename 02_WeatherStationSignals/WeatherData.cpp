@@ -15,17 +15,22 @@ signals::connection CWeatherData::DoOnChange(const signals::signal<void(const CW
 	return m_changeSignal.connect(slot);
 }
 
-double CWeatherData::GetTemperature()const
+double CWeatherData::GetTemperature() const
 {
 	return m_temperature;
 }
 
-double CWeatherData::GetHumidity()const
+double CWeatherData::GetHumidity() const
 {
 	return m_humidity;
 }
 
-double CWeatherData::GetPressure()const
+double CWeatherData::GetPressure() const
 {
 	return m_pressure;
+}
+
+WeatherStationLocation CWeatherData::GetLocation()const
+{
+	return m_location;
 }

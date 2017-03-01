@@ -11,7 +11,7 @@ class CStatsDisplay : boost::noncopyable
 public:
 	CStatsDisplay(CWeatherData & inWeatherData, CProWeatherData & outWeatherData);
 
-private:
+protected:
 	void OnInWeatherDataChange(const CWeatherData * subject);
 	void OnOutWeatherDataChange(const CProWeatherData * subject);
 	void Print()const;

@@ -60,6 +60,9 @@
     <ClInclude Include="ProWeatherData.h">
       <Filter>Header Files\WeatherData</Filter>
     </ClInclude>
+    <ClInclude Include="WeatherStationLocation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

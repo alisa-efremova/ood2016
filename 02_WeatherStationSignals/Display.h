@@ -10,9 +10,9 @@ class CDisplay : boost::noncopyable
 public:
 	CDisplay(CWeatherData & inWeatherData, CProWeatherData & outWeatherData);
 
-private:
-	void OnInWeatherDataChange(const CWeatherData * subject);
-	void OnOutWeatherDataChange(const CProWeatherData * subject);
+protected:
+	virtual void OnInWeatherDataChange(const CWeatherData * subject);
+	virtual void OnOutWeatherDataChange(const CProWeatherData * subject);
 	void Print()const;
 
 	SWeatherInfo m_inWeatherInfo;

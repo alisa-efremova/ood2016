@@ -1,5 +1,6 @@
 #pragma once
 #include "IWeatherData.h"
+#include "WeatherStationLocation.h"
 
 class CProWeatherData : public IWeatherData<CProWeatherData>
 {
@@ -12,11 +13,14 @@ public:
 	double GetPressure()const;
 	double GetWindSpeed()const;
 	double GetWindDirection()const;
+	WeatherStationLocation GetLocation()const;
+
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 	double m_windSpeed = 0.0;
 	double m_windDirection = 0;
+	WeatherStationLocation m_location = WeatherStationLocation::OUT;
 	signals::signal<void(const CProWeatherData *)> m_changeSignal;
 };

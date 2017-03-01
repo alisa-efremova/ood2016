@@ -17,27 +17,32 @@ signals::connection CProWeatherData::DoOnChange(const signals::signal<void(const
 	return m_changeSignal.connect(slot);
 }
 
-double CProWeatherData::GetTemperature()const
+double CProWeatherData::GetTemperature() const
 {
 	return m_temperature;
 }
 
-double CProWeatherData::GetHumidity()const
+double CProWeatherData::GetHumidity() const
 {
 	return m_humidity;
 }
 
-double CProWeatherData::GetPressure()const
+double CProWeatherData::GetPressure() const
 {
 	return m_pressure;
 }
 
-double CProWeatherData::GetWindSpeed()const
+double CProWeatherData::GetWindSpeed() const
 {
 	return m_windSpeed;
 }
 
-double CProWeatherData::GetWindDirection()const
+double CProWeatherData::GetWindDirection() const
 {
 	return m_windDirection;
+}
+
+WeatherStationLocation CProWeatherData::GetLocation()const
+{
+	return m_location;
 }

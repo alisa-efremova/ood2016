@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeatherStationSignals", "WeatherStationSignals.vcxproj", "{EA34A2B1-1DD9-4C23-B15C-10233D1B2CAE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{30CE7822-0678-4C5A-8235-653A00E87B69}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{EA34A2B1-1DD9-4C23-B15C-10233D1B2CAE}.Debug|Win32.Build.0 = Debug|Win32
 		{EA34A2B1-1DD9-4C23-B15C-10233D1B2CAE}.Release|Win32.ActiveCfg = Release|Win32
 		{EA34A2B1-1DD9-4C23-B15C-10233D1B2CAE}.Release|Win32.Build.0 = Release|Win32
+		{30CE7822-0678-4C5A-8235-653A00E87B69}.Debug|Win32.ActiveCfg = Debug|Win32
+		{30CE7822-0678-4C5A-8235-653A00E87B69}.Debug|Win32.Build.0 = Debug|Win32
+		{30CE7822-0678-4C5A-8235-653A00E87B69}.Release|Win32.ActiveCfg = Release|Win32
+		{30CE7822-0678-4C5A-8235-653A00E87B69}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
