@@ -22,13 +22,13 @@ public:
 
 protected:
 	const CWeatherData * GetConcreteObservable()const override;
-	std::set<boost::optional<WeatherInfoType>> & GetEventTypes() override;
+	const std::set<OptionalEventType> & GetEventTypes()const override;
 	
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 	WeatherStationLocation m_location = WeatherStationLocation::IN;
-	std::set<boost::optional<WeatherInfoType>> m_events; // set of WeatherInfoType
+	std::set<OptionalEventType> m_events;
 };
 

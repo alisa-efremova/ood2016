@@ -7,10 +7,7 @@ template <class T, typename TEventType>
 class CObservable : public IObservable<T, TEventType>
 {
 public:
-	typedef IObserver<T> ObserverType;
-	using SubscriptionPtr = std::shared_ptr<Subscription<T, TEventType>>;
-
-	void RegisterObserver(ObserverType & observer, size_t priority = 0, boost::optional<TEventType> eventType = {}) override final
+	void RegisterObserver(ObserverType & observer, size_t priority = 0, OptionalEventType eventType = {}) override final
 	{
 		auto itObs = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [&observer](const SubscriptionPtr & subscription) {
 			return subscription->observer == &observer;
@@ -29,7 +26,7 @@ public:
 		}
 	}
 
-	void NotifyObservers(boost::optional<TEventType> eventType = {}) override final
+	void NotifyObservers(OptionalEventType eventType = {}) override final
 	{
 		if (GetEventTypes().empty())
 		{
@@ -49,7 +46,7 @@ public:
 		}
 	}
 
-	void RemoveObserver(ObserverType & observer, boost::optional<TEventType> eventType = {}) override final
+	void RemoveObserver(ObserverType & observer, OptionalEventType eventType = {}) override final
 	{
 		auto it = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [&observer](const SubscriptionPtr & subscription) {
 			return subscription->observer == &observer;
@@ -75,11 +72,11 @@ public:
 
 protected:
 	virtual const T * GetConcreteObservable()const = 0;
-	virtual std::set<boost::optional<TEventType>> & GetEventTypes() = 0;
+	virtual const std::set<OptionalEventType> & GetEventTypes()const = 0;
 
 private:
 	// Helper method
-	bool NeedNotifyObserver(std::set<boost::optional<TEventType>> & eventTypes)
+	bool NeedNotifyObserver(std::set<OptionalEventType> & eventTypes)
 	{
 		// check if observer is subscribed to all events
 		if (eventTypes.find(boost::optional<TEventType>()) != eventTypes.end())
@@ -89,9 +86,9 @@ private:
 		
 		auto occurredEventTypes = GetEventTypes();
 
-		for (boost::optional<TEventType> occurredEventTypes : occurredEventTypes)
+		for (auto occurredEventTypes : occurredEventTypes)
 		{
-			for (boost::optional<TEventType> eventType : eventTypes)
+			for (auto eventType : eventTypes)
 			{
 				if (occurredEventTypes == eventType)
 				{
@@ -102,6 +99,6 @@ private:
 		return false;
 	}
 	
-	//typedef std::shared_ptr<Subscription<T, TEventType>> SubscriptionPtr;
+	typedef std::shared_ptr<Subscription<T, TEventType>> SubscriptionPtr;
 	std::list<SubscriptionPtr> m_subscriptions;
 };

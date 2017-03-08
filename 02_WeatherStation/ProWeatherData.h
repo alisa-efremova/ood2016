@@ -18,7 +18,7 @@ public:
 
 protected:
 	const CProWeatherData * GetConcreteObservable()const override;
-	std::set<boost::optional<WeatherInfoType>> & GetEventTypes() override;
+	const std::set<OptionalEventType> & GetEventTypes()const override;
 
 private:
 	double m_temperature = 0.0;
@@ -27,7 +27,7 @@ private:
 	double m_windSpeed = 0.0;
 	double m_windDirection = 0;
 	WeatherStationLocation m_location = WeatherStationLocation::OUT;
-	std::set<boost::optional<WeatherInfoType>> m_events; // set of WeatherInfoType
+	std::set<OptionalEventType> m_events; // set of WeatherInfoType
 };
 
 

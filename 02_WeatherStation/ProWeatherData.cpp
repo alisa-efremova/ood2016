@@ -74,7 +74,7 @@ const CProWeatherData * CProWeatherData::GetConcreteObservable() const
 	return this;
 }
 
-std::set<boost::optional<WeatherInfoType>> & CProWeatherData::GetEventTypes()
+const std::set<CProWeatherData::OptionalEventType> & CProWeatherData::GetEventTypes() const
 {
 	return m_events;
 }
