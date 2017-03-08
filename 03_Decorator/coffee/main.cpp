@@ -22,7 +22,7 @@ auto MakeCondiment(const Args&...args)
 	// конструктору декоратора через make_unique
 	return [=](auto && b) {
 		// Функции make_unique передаем b вместе со списком аргументов внешней функции
-		return make_unique<Condiment>(forward<decltype(b)>(b), args...);
+		return make_unique<Condiment>(std::forward<decltype(b)>(b), args...);
 	};
 }
 
@@ -120,5 +120,13 @@ int main()
 
 		// Выписываем счет покупателю
 		cout << beverage->GetDescription() << " costs " << beverage->GetCost() << endl;
+	}
+
+	{
+		auto coffeeWithCondiments = make_unique<CCoffee>()
+			<< MakeCondiment<CLiquor>(LiquorType::Nut)
+			<< MakeCondiment<CChocolate>(3)
+			<< MakeCondiment<CCream>();
+		cout << coffeeWithCondiments->GetDescription() << " costs " << coffeeWithCondiments->GetCost() << endl;
 	}
 }

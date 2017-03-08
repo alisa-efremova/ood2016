@@ -5,6 +5,11 @@
 
 #pragma once
 
+#include <memory>
+#include <iostream>
+#include <string>
+#include <functional>
+
 ///=======================================
 #define BOOST_TEST_MODULE CoffeeShopTest
 #define BOOST_TEST_INCLUDED

@@ -3,8 +3,8 @@
 
 enum class CoffeePortionSize
 {
-	STANDARD,
-	DOUBLE
+	Standard,
+	Double
 };
 
 class CCoffee : public CBeverage
@@ -35,36 +35,36 @@ protected:
 private:
 	std::string GetCoffeePortionSizeDescription() const
 	{
-		return m_size == CoffeePortionSize::DOUBLE ? "Double " : "";
+		return m_size == CoffeePortionSize::Double ? "Double " : "";
 	}
 
-	CoffeePortionSize m_size = CoffeePortionSize::STANDARD;
+	CoffeePortionSize m_size = CoffeePortionSize::Standard;
 };
 
 class CCapuccino : public CCoffee
 {
 public:
-	CCapuccino(CoffeePortionSize size = CoffeePortionSize::STANDARD)
+	CCapuccino(CoffeePortionSize size = CoffeePortionSize::Standard)
 		:CCoffee("Capuccino", size)
 	{
 	}
 
 	double GetCost() const override
 	{
-		return GetPortionSize() == CoffeePortionSize::DOUBLE ? 120 : 80;
+		return GetPortionSize() == CoffeePortionSize::Double ? 120 : 80;
 	}
 };
 
 class CLatte : public CCoffee
 {
 public:
-	CLatte(CoffeePortionSize size = CoffeePortionSize::STANDARD)
+	CLatte(CoffeePortionSize size = CoffeePortionSize::Standard)
 		:CCoffee("Latte", size)
 	{
 	}
 
 	double GetCost() const override
 	{
-		return GetPortionSize() == CoffeePortionSize::DOUBLE ? 130 : 90;
+		return GetPortionSize() == CoffeePortionSize::Double ? 130 : 90;
 	}
 };

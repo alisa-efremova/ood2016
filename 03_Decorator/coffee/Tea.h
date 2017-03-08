@@ -2,16 +2,16 @@
 #include "Beverage.h"
 
 enum class TeaSort {
-	BLACK,
-	GREEN,
-	WHITE,
-	YELLOW
+	Black,
+	Green,
+	White,
+	Yellow
 };
 
 class CTea : public CBeverage
 {
 public:
-	CTea(TeaSort sort = TeaSort::BLACK)
+	CTea(TeaSort sort = TeaSort::Black)
 	{
 		SetDescription(GetTeaSortDescription(sort) + " Tea");
 	}
@@ -26,13 +26,13 @@ private:
 	{
 		switch (sort)
 		{
-		case TeaSort::BLACK:
+		case TeaSort::Black:
 			return "Black";
-		case TeaSort::GREEN:
+		case TeaSort::Green:
 			return "Green";
-		case TeaSort::WHITE:
+		case TeaSort::White:
 			return "White";
-		case TeaSort::YELLOW:
+		case TeaSort::Yellow:
 			return "Yellow";
 		default:
 			return "";

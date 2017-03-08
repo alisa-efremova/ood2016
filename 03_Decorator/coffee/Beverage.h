@@ -7,7 +7,7 @@ class CBeverage : public IBeverage
 public:
 	CBeverage() {}
 
-	std::string GetDescription()const override final
+	std::string GetDescription() const override final
 	{
 		return m_description;
 	}

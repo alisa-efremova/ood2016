@@ -3,15 +3,15 @@
 
 enum class MilkshakePortionSize
 {
-	SMALL,
-	STANDARD,
-	BIG
+	Small,
+	Standard,
+	Big
 };
 
 class CMilkshake : public CBeverage
 {
 public:
-	CMilkshake(MilkshakePortionSize size = MilkshakePortionSize::STANDARD)
+	CMilkshake(MilkshakePortionSize size = MilkshakePortionSize::Standard)
 		:m_size(size)
 	{
 		SetDescription(GetPortionSizeDescription() + "Milkshake");
@@ -21,9 +21,9 @@ public:
 	{
 		switch (m_size)
 		{
-		case MilkshakePortionSize::SMALL:
+		case MilkshakePortionSize::Small:
 			return 50;
-		case MilkshakePortionSize::BIG:
+		case MilkshakePortionSize::Big:
 			return 80;
 		default:
 			return 60;
@@ -34,9 +34,9 @@ private:
 	{
 		switch (m_size)
 		{
-		case MilkshakePortionSize::SMALL:
+		case MilkshakePortionSize::Small:
 			return "Small ";
-		case MilkshakePortionSize::BIG:
+		case MilkshakePortionSize::Big:
 			return "Big ";
 		default:
 			return "";
