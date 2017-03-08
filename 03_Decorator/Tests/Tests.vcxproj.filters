@@ -13,39 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Beverages">
-      <UniqueIdentifier>{9861214f-f1dd-4733-b75e-cff7c2a4c7f3}</UniqueIdentifier>
+    <Filter Include="Header Files\CoffeeShop">
+      <UniqueIdentifier>{984033a6-cf07-4707-83b9-ba5891f79c4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Condiments.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Coffee.h">
-      <Filter>Header Files\Beverages</Filter>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IBeverage.h">
-      <Filter>Header Files\Beverages</Filter>
+    <ClInclude Include="..\coffee\Beverages.h">
+      <Filter>Header Files\CoffeeShop</Filter>
     </ClInclude>
-    <ClInclude Include="Tea.h">
-      <Filter>Header Files\Beverages</Filter>
+    <ClInclude Include="..\coffee\Coffee.h">
+      <Filter>Header Files\CoffeeShop</Filter>
     </ClInclude>
-    <ClInclude Include="Milkshake.h">
-      <Filter>Header Files\Beverages</Filter>
+    <ClInclude Include="..\coffee\Condiments.h">
+      <Filter>Header Files\CoffeeShop</Filter>
     </ClInclude>
-    <ClInclude Include="Beverage.h">
-      <Filter>Header Files\Beverages</Filter>
+    <ClInclude Include="..\coffee\IBeverage.h">
+      <Filter>Header Files\CoffeeShop</Filter>
     </ClInclude>
+    <ClInclude Include="..\coffee\Milkshake.h">
+      <Filter>Header Files\CoffeeShop</Filter>
+    </ClInclude>
+    <ClInclude Include="..\coffee\Tea.h">
+      <Filter>Header Files\CoffeeShop</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

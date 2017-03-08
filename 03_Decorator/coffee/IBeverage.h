@@ -3,8 +3,6 @@
 #include <string>
 #include <memory>
 
-
-// Интерфейс "напиток"
 class IBeverage
 {
 public:

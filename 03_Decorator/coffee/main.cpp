@@ -1,6 +1,8 @@
 ﻿#include "stdafx.h"
-#include "Beverages.h"
 #include "Condiments.h"
+#include "Coffee.h"
+#include "Tea.h"
+#include "Milkshake.h"
 
 using namespace std;
 
