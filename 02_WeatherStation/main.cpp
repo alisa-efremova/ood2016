@@ -24,8 +24,8 @@ void LightWeatherStation()
 	CProWeatherData wdOut;
 
 	CLightDisplay display;
-	wdOut.RegisterObserver(display, 0, (size_t)WeatherInfoType::TEMPERATURE);
-	wdOut.RegisterObserver(display, 0, (size_t)WeatherInfoType::PRESSURE);
+	wdOut.RegisterObserver(display, 0, WeatherInfoType::TEMPERATURE);
+	wdOut.RegisterObserver(display, 0, WeatherInfoType::PRESSURE);
 
 	wdOut.SetMeasurements(4.5, 0.8, 761, 8.5, 90.6);
 
@@ -36,7 +36,7 @@ void LightWeatherStation()
 	wdOut.SetMeasurements(5.5, 1.2, 760, 5.5, 350);
 
 	cout << "-- unsubscribe from pressure and change it  --" << endl;
-	wdOut.RemoveObserver(display, (size_t)WeatherInfoType::PRESSURE);
+	wdOut.RemoveObserver(display, WeatherInfoType::PRESSURE);
 	wdOut.SetMeasurements(5.5, 1.2, 763, 5.5, 350);
 
 	cout << "-- change temperature -- display update expected --" << endl;

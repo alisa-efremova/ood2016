@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ProWeatherData.h"
-#include "WeatherInfoType.h"
 
 double CProWeatherData::GetTemperature() const
 {
@@ -42,23 +41,23 @@ void CProWeatherData::SetMeasurements(double temp, double humidity, double press
 	m_events.clear();
 	if (m_temperature != temp)
 	{
-		m_events.insert((size_t)WeatherInfoType::TEMPERATURE);
+		m_events.insert(WeatherInfoType::TEMPERATURE);
 	}
 	if (m_humidity != humidity)
 	{
-		m_events.insert((size_t)WeatherInfoType::HUMIDITY);
+		m_events.insert(WeatherInfoType::HUMIDITY);
 	}
 	if (m_pressure != pressure)
 	{
-		m_events.insert((size_t)WeatherInfoType::PRESSURE);
+		m_events.insert(WeatherInfoType::PRESSURE);
 	}
 	if (m_windSpeed != windSpeed)
 	{
-		m_events.insert((size_t)WeatherInfoType::WIND_SPEED);
+		m_events.insert(WeatherInfoType::WIND_SPEED);
 	}
 	if (m_windDirection != windDirection)
 	{
-		m_events.insert((size_t)WeatherInfoType::WIND_DIRECTION);
+		m_events.insert(WeatherInfoType::WIND_DIRECTION);
 	}
 
 	m_humidity = humidity;
@@ -75,7 +74,7 @@ const CProWeatherData * CProWeatherData::GetConcreteObservable() const
 	return this;
 }
 
-const std::set<size_t> & CProWeatherData::GetEventIds() const
+std::set<boost::optional<WeatherInfoType>> & CProWeatherData::GetEventTypes()
 {
 	return m_events;
 }

@@ -1,8 +1,9 @@
 #pragma once
 #include "Observable.h"
 #include "WeatherStationLocation.h"
+#include "WeatherInfoType.h"
 
-class CWeatherData : public CObservable<CWeatherData>
+class CWeatherData : public CObservable<CWeatherData, WeatherInfoType>
 {
 public:
 	// Температура в градусах Цельсия
@@ -21,13 +22,13 @@ public:
 
 protected:
 	const CWeatherData * GetConcreteObservable()const override;
-	const std::set<size_t> & GetEventIds()const override;
+	std::set<boost::optional<WeatherInfoType>> & GetEventTypes() override;
 	
 private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 	WeatherStationLocation m_location = WeatherStationLocation::IN;
-	std::set<size_t> m_events; // set of WeatherInfoType
+	std::set<boost::optional<WeatherInfoType>> m_events; // set of WeatherInfoType
 };
 

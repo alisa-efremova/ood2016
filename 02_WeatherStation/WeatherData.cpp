@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "WeatherData.h"
-#include "WeatherInfoType.h"
 
 double CWeatherData::GetTemperature() const
 {
@@ -32,15 +31,15 @@ void CWeatherData::SetMeasurements(double temp, double humidity, double pressure
 	m_events.clear();
 	if (m_temperature != temp)
 	{
-		m_events.insert((size_t)WeatherInfoType::TEMPERATURE);
+		m_events.insert(WeatherInfoType::TEMPERATURE);
 	}
 	if (m_humidity != humidity)
 	{
-		m_events.insert((size_t)WeatherInfoType::HUMIDITY);
+		m_events.insert(WeatherInfoType::HUMIDITY);
 	}
 	if (m_pressure != pressure)
 	{
-		m_events.insert((size_t)WeatherInfoType::PRESSURE);
+		m_events.insert(WeatherInfoType::PRESSURE);
 	}
 
 	m_humidity = humidity;
@@ -55,7 +54,7 @@ const CWeatherData * CWeatherData::GetConcreteObservable() const
 	return this;
 }
 
-const std::set<size_t> & CWeatherData::GetEventIds() const
+std::set<boost::optional<WeatherInfoType>> & CWeatherData::GetEventTypes()
 {
 	return m_events;
 }

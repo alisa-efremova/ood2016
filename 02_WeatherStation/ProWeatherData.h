@@ -1,8 +1,9 @@
 #pragma once
 #include "Observable.h"
 #include "WeatherStationLocation.h"
+#include "WeatherInfoType.h"
 
-class CProWeatherData : public CObservable<CProWeatherData>
+class CProWeatherData : public CObservable<CProWeatherData, WeatherInfoType>
 {
 public:
 	double GetTemperature()const;
@@ -17,7 +18,7 @@ public:
 
 protected:
 	const CProWeatherData * GetConcreteObservable()const override;
-	const std::set<size_t> & GetEventIds()const override;
+	std::set<boost::optional<WeatherInfoType>> & GetEventTypes() override;
 
 private:
 	double m_temperature = 0.0;
@@ -26,7 +27,7 @@ private:
 	double m_windSpeed = 0.0;
 	double m_windDirection = 0;
 	WeatherStationLocation m_location = WeatherStationLocation::OUT;
-	std::set<size_t> m_events; // set of WeatherInfoType
+	std::set<boost::optional<WeatherInfoType>> m_events; // set of WeatherInfoType
 };
 
 

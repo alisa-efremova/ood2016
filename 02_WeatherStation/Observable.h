@@ -3,13 +3,14 @@
 #include "Subscription.h"
 #include <set>
 
-template <class T>
-class CObservable : public IObservable<T>
+template <class T, typename TEventType>
+class CObservable : public IObservable<T, TEventType>
 {
 public:
 	typedef IObserver<T> ObserverType;
+	using SubscriptionPtr = std::shared_ptr<Subscription<T, TEventType>>;
 
-	void RegisterObserver(ObserverType & observer, size_t priority = 0, size_t eventId = 0) override
+	void RegisterObserver(ObserverType & observer, size_t priority = 0, boost::optional<TEventType> eventType = {}) override final
 	{
 		auto itObs = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [&observer](const SubscriptionPtr & subscription) {
 			return subscription->observer == &observer;
@@ -17,20 +18,20 @@ public:
 
 		if (itObs != m_subscriptions.end())
 		{
-			(*itObs)->eventIds.insert(eventId);
+			(*itObs)->eventTypes.insert(eventType);
 		}
 		else 
 		{
 			auto it = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [priority](const SubscriptionPtr & subscription) {
 				return subscription->priority > priority;
 			});
-			m_subscriptions.insert(it, std::make_shared<Subscription<T>>(&observer, priority, eventId));
+			m_subscriptions.insert(it, std::make_shared<Subscription<T, TEventType>>(&observer, priority, eventType));
 		}
 	}
 
-	void NotifyObservers(size_t eventId = 0) override
+	void NotifyObservers(boost::optional<TEventType> eventType = {}) override final
 	{
-		if (GetEventIds().empty())
+		if (GetEventTypes().empty())
 		{
 			// no updates
 			return;
@@ -41,14 +42,14 @@ public:
 
 		for (auto subscription : subscriptions)
 		{
-			if (NeedNotifyObserver(subscription->eventIds))
+			if (NeedNotifyObserver(subscription->eventTypes))
 			{
 				subscription->observer->Update(*subject);
 			}
 		}
 	}
 
-	void RemoveObserver(ObserverType & observer, size_t eventId = 0) override
+	void RemoveObserver(ObserverType & observer, boost::optional<TEventType> eventType = {}) override final
 	{
 		auto it = std::find_if(m_subscriptions.begin(), m_subscriptions.end(), [&observer](const SubscriptionPtr & subscription) {
 			return subscription->observer == &observer;
@@ -56,15 +57,15 @@ public:
 
 		if (it != m_subscriptions.end())
 		{
-			if (eventId == 0)
+			if (!eventType)
 			{
 				m_subscriptions.erase(it);
 			}
 			else
 			{
-				(*it)->eventIds.erase(eventId);
+				(*it)->eventTypes.erase(eventType);
 				// if there no more events then remove subscription
-				if ((*it)->eventIds.empty())
+				if ((*it)->eventTypes.empty())
 				{
 					m_subscriptions.erase(it);
 				}
@@ -74,25 +75,25 @@ public:
 
 protected:
 	virtual const T * GetConcreteObservable()const = 0;
-	virtual const std::set<size_t> & GetEventIds()const = 0;
+	virtual std::set<boost::optional<TEventType>> & GetEventTypes() = 0;
 
 private:
 	// Helper method
-	bool NeedNotifyObserver(const std::set<size_t> &eventIds)
+	bool NeedNotifyObserver(std::set<boost::optional<TEventType>> & eventTypes)
 	{
 		// check if observer is subscribed to all events
-		if (eventIds.find(0) != eventIds.end())
+		if (eventTypes.find(boost::optional<TEventType>()) != eventTypes.end())
 		{
 			return true;
 		}
+		
+		auto occurredEventTypes = GetEventTypes();
 
-		auto occurredEventIds = GetEventIds();
-
-		for (size_t occurredEventId : occurredEventIds)
+		for (boost::optional<TEventType> occurredEventTypes : occurredEventTypes)
 		{
-			for (size_t eventId : eventIds)
+			for (boost::optional<TEventType> eventType : eventTypes)
 			{
-				if (occurredEventId == eventId)
+				if (occurredEventTypes == eventType)
 				{
 					return true;
 				}
@@ -100,7 +101,7 @@ private:
 		}
 		return false;
 	}
-
-	typedef std::shared_ptr<Subscription<T>> SubscriptionPtr;
+	
+	//typedef std::shared_ptr<Subscription<T, TEventType>> SubscriptionPtr;
 	std::list<SubscriptionPtr> m_subscriptions;
 };
