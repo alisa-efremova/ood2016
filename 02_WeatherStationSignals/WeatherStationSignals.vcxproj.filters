@@ -48,9 +48,6 @@
     <ClInclude Include="Display.h">
       <Filter>Header Files\Display</Filter>
     </ClInclude>
-    <ClInclude Include="IWeatherData.h">
-      <Filter>Header Files\WeatherData</Filter>
-    </ClInclude>
     <ClInclude Include="StatsDisplay.h">
       <Filter>Header Files\Display</Filter>
     </ClInclude>

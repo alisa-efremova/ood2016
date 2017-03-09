@@ -19,7 +19,7 @@ public:
 
 	void Print()const
 	{
-		std::cout << "max: " << m_maxVal << "\tmin: " << m_minVal << "\tavg: " << GetAverage() << std::endl;
+		std::cout << "max: " << DoubleToString(m_maxVal) << "\tmin: " << DoubleToString(m_minVal) << "\tavg: " << GetAverage() << std::endl;
 	}
 
 	double GetMin()const
@@ -64,6 +64,12 @@ protected:
 	double m_maxVal = -std::numeric_limits<double>::infinity();
 	double m_accVal = 0;
 	double m_count = 0;
+
+private:
+	std::string DoubleToString(double val)const
+	{
+		return std::isinf(val) ? "\t" : std::to_string(val);
+	}
 };
 
 class CWindDirectionStatsCalc : public CStatsCalc

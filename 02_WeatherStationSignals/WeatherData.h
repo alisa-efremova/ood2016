@@ -1,12 +1,17 @@
 #pragma once
-#include "IWeatherData.h"
 #include "WeatherStationLocation.h"
 
-class CWeatherData : public IWeatherData<CWeatherData>
+namespace signals = boost::signals2;
+
+class CWeatherData
 {
 public:
+	using WeatherSignal = signals::signal<void(double)>;
+
 	void SetMeasurements(double temp, double humidity, double pressure);
-	virtual signals::connection DoOnChange(const signals::signal<void(const CWeatherData *)>::slot_type & slot) override;
+	signals::connection DoOnTemperatureChange(const WeatherSignal::slot_type & slot);
+	signals::connection DoOnHumidityChange(const WeatherSignal::slot_type & slot);
+	signals::connection DoOnPressureChange(const WeatherSignal::slot_type & slot);
 	double GetTemperature()const;
 	double GetHumidity()const;
 	double GetPressure()const;
@@ -17,5 +22,7 @@ private:
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
 	WeatherStationLocation m_location = WeatherStationLocation::IN;
-	signals::signal<void(const CWeatherData *)>	m_changeSignal;
+	WeatherSignal m_temperatureChangeSignal;
+	WeatherSignal m_humidityChangeSignal;
+	WeatherSignal m_pressureChangeSignal;
 };

@@ -3,18 +3,60 @@
 
 void CProWeatherData::SetMeasurements(double temp, double humidity, double pressure, double windSpeed, double windDirection)
 {
-	m_humidity = humidity;
-	m_temperature = temp;
-	m_pressure = pressure;
-	m_windSpeed = windSpeed;
-	m_windDirection = windDirection;
+	if (m_temperature != temp)
+	{
+		m_temperature = temp;
+		m_temperatureChangeSignal(m_temperature);
+	}
 
-	m_changeSignal(this);
+	if (m_humidity != humidity)
+	{
+		m_humidity = humidity;
+		m_humidityChangeSignal(m_humidity);
+	}
+
+	if (m_pressure != pressure)
+	{
+		m_pressure = pressure;
+		m_pressureChangeSignal(m_pressure);
+	}
+
+	if (m_windSpeed != windSpeed)
+	{
+		m_windSpeed = windSpeed;
+		m_windSpeedChangeSignal(m_windSpeed);
+	}
+
+	if (m_windDirection != windDirection)
+	{
+		m_windDirection = windDirection;
+		m_windDirectionChangeSignal(m_windDirection);
+	}
 }
 
-signals::connection CProWeatherData::DoOnChange(const signals::signal<void(const CProWeatherData *)>::slot_type & slot)
+signals::connection CProWeatherData::DoOnTemperatureChange(const WeatherSignal::slot_type & slot)
 {
-	return m_changeSignal.connect(slot);
+	return m_temperatureChangeSignal.connect(slot);
+}
+
+signals::connection CProWeatherData::DoOnHumidityChange(const WeatherSignal::slot_type & slot)
+{
+	return m_humidityChangeSignal.connect(slot);
+}
+
+signals::connection CProWeatherData::DoOnPressureChange(const WeatherSignal::slot_type & slot)
+{
+	return m_pressureChangeSignal.connect(slot);
+}
+
+signals::connection CProWeatherData::DoOnWindSpeedChange(const WeatherSignal::slot_type & slot)
+{
+	return m_windSpeedChangeSignal.connect(slot);
+}
+
+signals::connection CProWeatherData::DoOnWindDirectionChange(const WeatherSignal::slot_type & slot)
+{
+	return m_windDirectionChangeSignal.connect(slot);
 }
 
 double CProWeatherData::GetTemperature() const

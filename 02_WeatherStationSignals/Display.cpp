@@ -7,26 +7,22 @@ using namespace std;
 
 CDisplay::CDisplay(CWeatherData & inWeatherData, CProWeatherData & outWeatherData)
 {
-	m_inWeatherDataConnection = inWeatherData.DoOnChange(bind(&CDisplay::OnInWeatherDataChange, this, placeholders::_1));
-	m_outWeatherDataConnection = outWeatherData.DoOnChange(bind(&CDisplay::OnOutWeatherDataChange, this, placeholders::_1));
-}
+	auto makeHandler = [this](double & var)->std::function<void(double)>{
+		return[&, this](double value){
+			var = value;
+			Print();
+		};
+	};
 
-void CDisplay::OnInWeatherDataChange(const CWeatherData * subject)
-{
-	m_inWeatherInfo.temperature = subject->GetTemperature();
-	m_inWeatherInfo.pressure = subject->GetPressure();
-	m_inWeatherInfo.humidity = subject->GetHumidity();
-	Print();
-}
+	inWeatherData.DoOnTemperatureChange(makeHandler(m_inWeatherInfo.temperature));
+	inWeatherData.DoOnHumidityChange(makeHandler(m_inWeatherInfo.humidity));
+	inWeatherData.DoOnPressureChange(makeHandler(m_inWeatherInfo.pressure));
 
-void CDisplay::OnOutWeatherDataChange(const CProWeatherData * subject)
-{
-	m_outWeatherInfo.temperature = subject->GetTemperature();
-	m_outWeatherInfo.pressure = subject->GetPressure();
-	m_outWeatherInfo.humidity = subject->GetHumidity();
-	m_outWeatherInfo.windSpeed = subject->GetWindSpeed();
-	m_outWeatherInfo.windDirection = subject->GetWindDirection();
-	Print();
+	outWeatherData.DoOnTemperatureChange(makeHandler(m_outWeatherInfo.temperature));
+	outWeatherData.DoOnHumidityChange(makeHandler(m_outWeatherInfo.humidity));
+	outWeatherData.DoOnPressureChange(makeHandler(m_outWeatherInfo.pressure));
+	outWeatherData.DoOnWindSpeedChange(makeHandler(m_outWeatherInfo.windSpeed));
+	outWeatherData.DoOnWindDirectionChange(makeHandler(m_outWeatherInfo.windDirection));
 }
 
 void CDisplay::Print() const

@@ -84,7 +84,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
-    <ClInclude Include="IWeatherData.h" />
     <ClInclude Include="ProWeatherData.h" />
     <ClInclude Include="StatsCalc.h" />
     <ClInclude Include="StatsDisplay.h" />

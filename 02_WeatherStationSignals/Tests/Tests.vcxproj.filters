@@ -27,9 +27,6 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MockDuoObserver.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Display.h">
       <Filter>WeatherStation</Filter>
     </ClInclude>

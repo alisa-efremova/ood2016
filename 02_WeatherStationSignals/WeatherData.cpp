@@ -3,16 +3,38 @@
 
 void CWeatherData::SetMeasurements(double temp, double humidity, double pressure)
 {
-	m_humidity = humidity;
-	m_temperature = temp;
-	m_pressure = pressure;
+	if (m_temperature != temp)
+	{
+		m_temperature = temp;
+		m_temperatureChangeSignal(m_temperature);
+	}
 
-	m_changeSignal(this);
+	if (m_humidity != humidity)
+	{
+		m_humidity = humidity;
+		m_humidityChangeSignal(m_humidity);
+	}
+
+	if (m_pressure != pressure)
+	{
+		m_pressure = pressure;
+		m_pressureChangeSignal(m_pressure);
+	}
 }
 
-signals::connection CWeatherData::DoOnChange(const signals::signal<void(const CWeatherData *)>::slot_type & slot)
+signals::connection CWeatherData::DoOnTemperatureChange(const WeatherSignal::slot_type & slot)
 {
-	return m_changeSignal.connect(slot);
+	return m_temperatureChangeSignal.connect(slot);
+}
+
+signals::connection CWeatherData::DoOnHumidityChange(const WeatherSignal::slot_type & slot)
+{
+	return m_humidityChangeSignal.connect(slot);
+}
+
+signals::connection CWeatherData::DoOnPressureChange(const WeatherSignal::slot_type & slot)
+{
+	return m_pressureChangeSignal.connect(slot);
 }
 
 double CWeatherData::GetTemperature() const
@@ -28,9 +50,4 @@ double CWeatherData::GetHumidity() const
 double CWeatherData::GetPressure() const
 {
 	return m_pressure;
-}
-
-WeatherStationLocation CWeatherData::GetLocation()const
-{
-	return m_location;
 }
