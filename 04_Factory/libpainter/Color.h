@@ -5,7 +5,7 @@ enum class Color
 	Green,
 	Red,
 	Blue,
-	Yelllow,
+	Yellow,
 	Pink,
 	Black
 };

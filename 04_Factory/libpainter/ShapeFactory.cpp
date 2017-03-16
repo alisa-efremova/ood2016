@@ -6,48 +6,91 @@
 #include "Rectangle.h"
 #include "Triangle.h"
 #include "Ellipse.h"
-#include "SPoint.h"
+#include "RegularPolygon.h"
+
+using namespace std;
 
 CShapeFactory::CShapeFactory()
 {
 	m_shapeFactoryMap.emplace("rectangle", boost::bind(&CShapeFactory::CreateRectangle, *this, _1));
 	m_shapeFactoryMap.emplace("triangle", boost::bind(&CShapeFactory::CreateTriangle, *this, _1));
 	m_shapeFactoryMap.emplace("ellipse", boost::bind(&CShapeFactory::CreateEllipse, *this, _1));
+	m_shapeFactoryMap.emplace("regular_polygon", boost::bind(&CShapeFactory::CreateRegularPolygon, *this, _1));
 }
 
-std::unique_ptr<CShape> CShapeFactory::CreateShape(const std::string & description)
+unique_ptr<CShape> CShapeFactory::CreateShape(const string & description)
 {
 	try
 	{
-		std::string shapeType;
-		std::istringstream strm(description);
-		strm.exceptions(std::ios_base::failbit | std::ios_base::badbit);
+		istringstream strm(description);
+		strm.exceptions(ios_base::failbit | ios_base::badbit);
+
+		string shapeType;
 		strm >> shapeType;
 
 		return m_shapeFactoryMap.at(shapeType)(strm);
 	}
 	catch (...)
 	{
-		throw std::runtime_error("Shape creation error");
+		throw runtime_error("Invalid shape description");
 	}
 }
 
-std::unique_ptr<CShape> CShapeFactory::CreateRectangle(std::istream & istream)
+unique_ptr<CShape> CShapeFactory::CreateRectangle(istream & istream)
 {
-	std::cout << "Create rectangle" << std::endl;
-	std::string color;
-	double x0, y0, x1, y1;
-	istream >> color >> x0 >> y0 >> x1 >> y1;
-	std::cout << "Color: " << color << std::endl;
-	return std::make_unique<CRectangle>(Color::Black, SPoint(x0, y0), SPoint(x1, y1));
+	Color color;
+	SPoint leftTop, bottomRight;
+	istream >> color >> leftTop >> bottomRight;
+	return make_unique<CRectangle>(color, leftTop, bottomRight);
 }
 
-std::unique_ptr<CShape> CShapeFactory::CreateTriangle(std::istream & istream)
+unique_ptr<CShape> CShapeFactory::CreateTriangle(istream & istream)
 {
-	return CreateRectangle(istream);
+	Color color;
+	SPoint v1, v2, v3;
+	istream >> color >> v1 >> v2 >> v3;
+	return make_unique<CTriangle>(color, v1, v2, v3);
 }
 
-std::unique_ptr<CShape> CShapeFactory::CreateEllipse(std::istream & istream)
+unique_ptr<CShape> CShapeFactory::CreateEllipse(istream & istream)
 {
-	return CreateRectangle(istream);
+	Color color;
+	SPoint center;
+	double hRadius, vRadius;
+	istream >> color >> center >> hRadius >> vRadius;
+	return make_unique<CEllipse>(color, center, hRadius, vRadius);
+}
+
+unique_ptr<CShape> CShapeFactory::CreateRegularPolygon(istream & istream)
+{
+	Color color;
+	double vertexCount, radius;
+	SPoint center;
+	istream >> color >> vertexCount >> center >> radius;
+	return make_unique<CRegularPolygon>(color, vertexCount, center, radius);
+}
+
+std::map<std::string, Color> colorMap = {
+	{ "green", Color::Green },
+	{ "red", Color::Red },
+	{ "blue", Color::Blue },
+	{ "yellow", Color::Yellow },
+	{ "pink", Color::Pink },
+	{ "black", Color::Black }
+};
+
+istream & operator >> (istream & istream, Color & color) {
+
+	string colorDescription;
+	istream >> colorDescription;
+	color = colorMap.at(colorDescription);
+	cout << "color: " << colorDescription << endl;
+	return istream;
+}
+
+istream & operator >> (istream & istream, SPoint & point) {
+
+	istream >> point.x >> point.y;
+	cout << "x: " << point.x << " y: " << point.y << endl;
+	return istream;
 }

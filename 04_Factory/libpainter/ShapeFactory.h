@@ -1,6 +1,7 @@
 #pragma once
 #include "IShapeFactory.h"
 #include "Shape.h"
+#include "SPoint.h"
 #include <map>
 #include <memory>
 #include <boost/function.hpp>
@@ -19,6 +20,10 @@ private:
 	std::unique_ptr<CShape> CreateRectangle(std::istream & istream);
 	std::unique_ptr<CShape> CreateTriangle(std::istream & istream);
 	std::unique_ptr<CShape> CreateEllipse(std::istream & istream);
+	std::unique_ptr<CShape> CreateRegularPolygon(std::istream & istream);
+
+	friend std::istream & operator >> (std::istream & istream, Color & color);
+	friend std::istream & operator >> (std::istream & istream, SPoint & point);
 
 	ShapeFactoryMap m_shapeFactoryMap;
 };

@@ -157,6 +157,7 @@
     <ClInclude Include="IShapeFactory.h" />
     <ClInclude Include="PictureDraft.h" />
     <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RegularPolygon.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeFactory.h" />
     <ClInclude Include="SPoint.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Ellipse.cpp" />
     <ClCompile Include="PictureDraft.cpp" />
     <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="RegularPolygon.cpp" />
     <ClCompile Include="Shape.cpp" />
     <ClCompile Include="ShapeFactory.cpp" />
     <ClCompile Include="stdafx.cpp">
