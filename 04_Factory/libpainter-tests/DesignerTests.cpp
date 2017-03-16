@@ -6,7 +6,7 @@
 using namespace std;
 using boost::algorithm::all_of;
 using boost::copy;
-
+#if 0
 class CMockShape : public CShape
 {
 public:
@@ -76,3 +76,5 @@ BOOST_FIXTURE_TEST_SUITE(Designer, Designer_)
 		BOOST_AUTO_TEST_SUITE_END()
 	BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
+
+#endif

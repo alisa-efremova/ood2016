@@ -48,6 +48,30 @@
     <ClInclude Include="IShapeFactory.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
+    <ClInclude Include="SPoint.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ICanvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellipse.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeFactory.h">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,6 +84,21 @@
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas.cpp">
+      <Filter>Source Files\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeFactory.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
