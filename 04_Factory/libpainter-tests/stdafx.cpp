@@ -13,3 +13,5 @@
 #pragma warning (disable:4702)
 #include <boost/test/included/unit_test.hpp>
 #pragma warning (pop)
+
+#include <memory>
