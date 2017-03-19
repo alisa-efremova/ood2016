@@ -8,8 +8,10 @@ public:
 	CCanvas(std::ostream & ostream);
 
 	void SetColor(Color color) override;
-	void DrawLine(SPoint from, SPoint to) override;
-	void DrawEllipse(SPoint center, double hRadius, double vRadius) override;
+	virtual void DrawLine(SPoint from, SPoint to) override = 0;
+	virtual void DrawEllipse(SPoint center, double hRadius, double vRadius) override = 0;
+	virtual void StartDrawing() override = 0;
+	virtual void CompleteDrawing() override = 0;
 
 protected:
 	Color m_color = Color::Black;

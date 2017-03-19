@@ -5,7 +5,6 @@
 
 #include "RegularPolygon.h"
 #include "ICanvas.h"
-#include <iostream>
 
 CRegularPolygon::CRegularPolygon(Color color, double vertexCount, SPoint center, double radius)
 	: CShape(color)
@@ -37,8 +36,8 @@ void CRegularPolygon::Draw(ICanvas & canvas) const
 	SPoint fromPoint, toPoint;
 	fromPoint.x = m_radius * cos(0) + m_center.x;
 	fromPoint.y = m_radius * sin(0) + m_center.y;
-	std::cout << "point( " << fromPoint.x << ", " << fromPoint.y << ")" << std::endl;
-	for (int i = 1; i < m_vertexCount; i++)
+
+	for (int i = 1; i <= m_vertexCount; i++)
 	{
 		double angle = 2 * M_PI * i / m_vertexCount;
 		toPoint.x = m_radius * cos(angle) + m_center.x;
@@ -46,6 +45,5 @@ void CRegularPolygon::Draw(ICanvas & canvas) const
 		canvas.DrawLine(fromPoint, toPoint);
 		fromPoint.x = toPoint.x;
 		fromPoint.y = toPoint.y;
-		std::cout << "point( " << round(fromPoint.x) << ", " << round(fromPoint.y) << ")" << std::endl;
 	}
 }

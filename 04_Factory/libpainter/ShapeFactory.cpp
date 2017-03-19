@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "ShapeFactory.h"
-#include <iostream>
 #include <sstream>
 #include <exception>
 #include "Rectangle.h"
@@ -84,13 +83,11 @@ istream & operator >> (istream & istream, Color & color) {
 	string colorDescription;
 	istream >> colorDescription;
 	color = colorMap.at(colorDescription);
-	cout << "color: " << colorDescription << endl;
 	return istream;
 }
 
 istream & operator >> (istream & istream, SPoint & point) {
 
 	istream >> point.x >> point.y;
-	cout << "x: " << point.x << " y: " << point.y << endl;
 	return istream;
 }

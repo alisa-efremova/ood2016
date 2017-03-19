@@ -25,6 +25,15 @@
     <Filter Include="Source Files\Designer">
       <UniqueIdentifier>{d591d95e-293c-4bc6-8cd5-30add364bdd4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Painter">
+      <UniqueIdentifier>{380aab69-b203-4b57-9eb8-de5b394ee5ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shape Factory">
+      <UniqueIdentifier>{edc4aa80-11cc-41f1-bb90-3da4dee4a346}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Picture Draft">
+      <UniqueIdentifier>{f7186706-eecc-464f-a23a-4a46c39c5e3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -39,13 +48,7 @@
     <ClInclude Include="Designer.h">
       <Filter>Source Files\Designer</Filter>
     </ClInclude>
-    <ClInclude Include="PictureDraft.h">
-      <Filter>Source Files\Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="Shape.h">
-      <Filter>Source Files\Shapes</Filter>
-    </ClInclude>
-    <ClInclude Include="IShapeFactory.h">
       <Filter>Source Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="SPoint.h">
@@ -69,11 +72,23 @@
     <ClInclude Include="Canvas.h">
       <Filter>Source Files\Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="ShapeFactory.h">
-      <Filter>Source Files\Shapes</Filter>
-    </ClInclude>
     <ClInclude Include="RegularPolygon.h">
       <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="Painter.h">
+      <Filter>Source Files\Painter</Filter>
+    </ClInclude>
+    <ClInclude Include="PictureDraft.h">
+      <Filter>Source Files\Picture Draft</Filter>
+    </ClInclude>
+    <ClInclude Include="IShapeFactory.h">
+      <Filter>Source Files\Shape Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeFactory.h">
+      <Filter>Source Files\Shape Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasSVG.h">
+      <Filter>Source Files\Canvas</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -82,9 +97,6 @@
     </ClCompile>
     <ClCompile Include="Designer.cpp">
       <Filter>Source Files\Designer</Filter>
-    </ClCompile>
-    <ClCompile Include="PictureDraft.cpp">
-      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Source Files\Shapes</Filter>
@@ -101,11 +113,20 @@
     <ClCompile Include="Canvas.cpp">
       <Filter>Source Files\Canvas</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeFactory.cpp">
-      <Filter>Source Files\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="RegularPolygon.cpp">
       <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="Painter.cpp">
+      <Filter>Source Files\Painter</Filter>
+    </ClCompile>
+    <ClCompile Include="PictureDraft.cpp">
+      <Filter>Source Files\Picture Draft</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeFactory.cpp">
+      <Filter>Source Files\Shape Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="CanvasSVG.cpp">
+      <Filter>Source Files\Canvas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

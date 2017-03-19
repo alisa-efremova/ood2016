@@ -2,6 +2,7 @@
 #include "Designer.h"
 #include "PictureDraft.h"
 #include "IShapeFactory.h"
+#include <iostream>
 
 using namespace std;
 
@@ -21,7 +22,14 @@ CPictureDraft CDesigner::CreateDraft(std::istream & inputData)
 	string line;
 	while (getline(inputData, line))
 	{
-		draft.AddShape(m_factory.CreateShape(line));
+		try
+		{
+			draft.AddShape(m_factory.CreateShape(line));
+		}
+		catch (exception ex)
+		{
+			cout << "Error: " << ex.what() << endl;
+		}
 	}
 	return draft;
 }
