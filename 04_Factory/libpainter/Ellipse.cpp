@@ -6,9 +6,9 @@ CEllipse::CEllipse(Color color, SPoint center, double hRadius, double vRadius)
 	: CShape(color)
 	, m_center(center)
 {
-	if (m_hRadius <= 0 || m_vRadius <= 0)
+	if (hRadius <= 0 || vRadius <= 0)
 	{
-		std::invalid_argument("Radius should be positive number.");
+		throw std::invalid_argument("Radius should be positive number.");
 	}
 
 	m_hRadius = hRadius;

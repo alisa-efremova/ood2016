@@ -13,12 +13,12 @@ CRegularPolygon::CRegularPolygon(Color color, unsigned vertexCount, SPoint cente
 {
 	if (vertexCount < 3)
 	{
-		std::invalid_argument("Polygon should have at least 3 vertexes.");
+		throw std::invalid_argument("Polygon should have at least 3 vertexes.");
 	}
 
 	if (radius <= 0)
 	{
-		std::invalid_argument("Radius should be positive number.");
+		throw std::invalid_argument("Radius should be positive number.");
 	}
 
 	m_vertexCount = vertexCount;

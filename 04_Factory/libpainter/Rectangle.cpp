@@ -2,13 +2,14 @@
 #include "Rectangle.h"
 #include "ICanvas.h"
 #include <exception>
+#include <iostream>
 
 CRectangle::CRectangle(Color color, SPoint leftTop, SPoint rightBottom)
 	: CShape(color)
 {
-	if (m_leftTop == m_rightBottom)
+	if (leftTop == rightBottom)
 	{
-		std::invalid_argument("Left top and right bottom points should not be equal.");
+		throw std::invalid_argument("Left top and right bottom points should not be equal.");
 	}
 	m_leftTop = leftTop;
 	m_rightBottom = rightBottom;
