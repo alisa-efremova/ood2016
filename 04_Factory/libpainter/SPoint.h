@@ -24,6 +24,7 @@ struct SPoint
 
 	bool operator ==(const SPoint& a) const
 	{
-		return (x == a.x && y == a.y);
+		double maxDiff = 0.0001;
+		return (std::abs(x - a.x) < maxDiff) && (std::abs(y - a.y) < maxDiff);
 	}
 };

@@ -4,6 +4,7 @@
 #include "Triangle.h"
 #include "Ellipse.h"
 #include "RegularPolygon.h"
+#include "MockCanvas.h"
 
 using namespace std;
 
@@ -59,17 +60,60 @@ BOOST_AUTO_TEST_CASE(invalid)
 {
 	BOOST_CHECK_THROW(CRectangle(Color::Black, SPoint(10, 10), SPoint(10, 10)), std::invalid_argument);
 }
+
+BOOST_AUTO_TEST_CASE(draw)
+{
+	SPoint v1 = SPoint(10, 10);
+	SPoint v3 = SPoint(20, 20);
+	auto rect = CRectangle(Color::Green, v1, v3);
+	auto canvas = CMockCanvas();
+	rect.Draw(canvas);
+	BOOST_CHECK(canvas.penColor == Color::Green);
+	BOOST_CHECK_EQUAL(canvas.lines.size(), 4);
+	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 0);
+
+	SPoint v2 = SPoint(20, 10);
+	SPoint v4 = SPoint(10, 20);
+	BOOST_CHECK(canvas.lines[0].from == v1);
+	BOOST_CHECK(canvas.lines[0].to == v2);
+	BOOST_CHECK(canvas.lines[1].from == v2);
+	BOOST_CHECK(canvas.lines[1].to == v3);
+	BOOST_CHECK(canvas.lines[2].from == v3);
+	BOOST_CHECK(canvas.lines[2].to == v4);
+	BOOST_CHECK(canvas.lines[3].from == v4);
+	BOOST_CHECK(canvas.lines[3].to == v1);
+}
 BOOST_AUTO_TEST_SUITE_END()
 
 
 BOOST_AUTO_TEST_SUITE(Triangle)
 BOOST_AUTO_TEST_CASE(valid)
 {
-	auto triangle = CTriangle(Color::Red, SPoint(10, 10), SPoint(20, 20), SPoint(15, 15));
+	auto triangle = CTriangle(Color::Red, SPoint(10, 10), SPoint(20, 20), SPoint(5, 15));
 	BOOST_CHECK(triangle.GetColor() == Color::Red);
 	BOOST_CHECK(triangle.GetVertex1() == SPoint(10, 10));
 	BOOST_CHECK(triangle.GetVertex2() == SPoint(20, 20));
-	BOOST_CHECK(triangle.GetVertex3() == SPoint(15, 15));
+	BOOST_CHECK(triangle.GetVertex3() == SPoint(5, 15));
+}
+
+BOOST_AUTO_TEST_CASE(draw)
+{
+	SPoint v1 = SPoint(10, 10);
+	SPoint v2 = SPoint(20, 20);
+	SPoint v3 = SPoint(5, 15);
+	auto triangle = CTriangle(Color::Red, v1, v2, v3);
+	auto canvas = CMockCanvas();
+	triangle.Draw(canvas);
+	BOOST_CHECK(canvas.penColor == Color::Red);
+	BOOST_CHECK_EQUAL(canvas.lines.size(), 3);
+	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 0);
+
+	BOOST_CHECK(canvas.lines[0].from == v1);
+	BOOST_CHECK(canvas.lines[0].to == v2);
+	BOOST_CHECK(canvas.lines[1].from == v2);
+	BOOST_CHECK(canvas.lines[1].to == v3);
+	BOOST_CHECK(canvas.lines[2].from == v3);
+	BOOST_CHECK(canvas.lines[2].to == v1);
 }
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -90,6 +134,20 @@ BOOST_AUTO_TEST_CASE(invalid)
 	BOOST_CHECK_THROW(CEllipse(Color::Black, SPoint(10, 10), -5, 1), std::invalid_argument);
 	BOOST_CHECK_THROW(CEllipse(Color::Black, SPoint(10, 10), 6, -1), std::invalid_argument);
 }
+
+BOOST_AUTO_TEST_CASE(draw)
+{
+	auto ellipse = CEllipse(Color::Green, SPoint(10, 0), 10, 15);
+	auto canvas = CMockCanvas();
+	ellipse.Draw(canvas);
+	BOOST_CHECK(canvas.penColor == Color::Green);
+	BOOST_CHECK_EQUAL(canvas.lines.size(), 0);
+	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 1);
+
+	BOOST_CHECK(canvas.ellipses[0].center == SPoint(10, 0));
+	BOOST_CHECK(canvas.ellipses[0].hRadius == 10);
+	BOOST_CHECK(canvas.ellipses[0].vRaduis == 15);
+}
 BOOST_AUTO_TEST_SUITE_END()
 
 
@@ -107,5 +165,28 @@ BOOST_AUTO_TEST_CASE(invalid)
 {
 	BOOST_CHECK_THROW(CRegularPolygon(Color::Yellow, 0, SPoint(10, 10), 50), std::invalid_argument);
 	BOOST_CHECK_THROW(CRegularPolygon(Color::Yellow, 10, SPoint(10, 10), -50), std::invalid_argument);
+}
+
+BOOST_AUTO_TEST_CASE(draw)
+{
+	auto regPol = CRegularPolygon(Color::Yellow, 4, SPoint(0, 0), 10);
+	auto canvas = CMockCanvas();
+	regPol.Draw(canvas);
+	BOOST_CHECK(canvas.penColor == Color::Yellow);
+	BOOST_CHECK_EQUAL(canvas.lines.size(), 4);
+	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 0);
+
+	SPoint v1 = SPoint(10, 0);
+	SPoint v2 = SPoint(0, 10);
+	SPoint v3 = SPoint(-10, 0);
+	SPoint v4 = SPoint(0, -10);
+	BOOST_CHECK(canvas.lines[0].from == v1);
+	BOOST_CHECK(canvas.lines[0].to == v2);
+	BOOST_CHECK(canvas.lines[1].from == v2);
+	BOOST_CHECK(canvas.lines[1].to == v3);
+	BOOST_CHECK(canvas.lines[2].from == v3);
+	BOOST_CHECK(canvas.lines[2].to == v4);
+	BOOST_CHECK(canvas.lines[3].from == v4);
+	BOOST_CHECK(canvas.lines[3].to == v1);
 }
 BOOST_AUTO_TEST_SUITE_END()
