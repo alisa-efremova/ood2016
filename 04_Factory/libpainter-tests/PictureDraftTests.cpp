@@ -1,10 +1,19 @@
 #include "stdafx.h"
-#include "../libpainter/PictureDraft.h"
-#include "../libpainter/Shape.h"
+#include "PictureDraft.h"
+#include "Shape.h"
 
 using namespace std;
 
-#if 0
+class CMockDefaultShape : public CShape
+{
+public:
+	CMockDefaultShape() {}
+	void Draw(ICanvas & canvas) const override
+	{
+		canvas;
+	}
+};
+
 struct Picture_draft_
 {
 	CPictureDraft draft;
@@ -24,11 +33,11 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 
 	struct after_adding_a_shape_ : Picture_draft_
 	{
-		unique_ptr<CShape> shape1 = make_unique<CShape>();
+		unique_ptr<CShape> shape1 = make_unique<CMockDefaultShape>();
 		CShape & refShape1 = *shape1;
-		unique_ptr<CShape> shape2 = make_unique<CShape>();
+		unique_ptr<CShape> shape2 = make_unique<CMockDefaultShape>();
 		CShape & refShape2 = *shape2;
-		unique_ptr<CShape> shape3 = make_unique<CShape>();
+		unique_ptr<CShape> shape3 = make_unique<CMockDefaultShape>();
 		CShape & refShape3 = *shape3;
 
 		after_adding_a_shape_()
@@ -38,6 +47,7 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 			draft.AddShape(move(shape3));
 		}
 	};
+
 	BOOST_FIXTURE_TEST_SUITE(after_adding_a_shape, after_adding_a_shape_)
 		BOOST_AUTO_TEST_CASE(becomes_not_empty)
 		{
@@ -59,5 +69,3 @@ BOOST_FIXTURE_TEST_SUITE(Picture_draft, Picture_draft_)
 		}
 	BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-
-#endif

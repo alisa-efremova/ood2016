@@ -63,7 +63,8 @@ unique_ptr<CShape> CShapeFactory::CreateEllipse(istream & istream)
 unique_ptr<CShape> CShapeFactory::CreateRegularPolygon(istream & istream)
 {
 	Color color;
-	double vertexCount, radius;
+	unsigned vertexCount;
+	double radius;
 	SPoint center;
 	istream >> color >> vertexCount >> center >> radius;
 	return make_unique<CRegularPolygon>(color, vertexCount, center, radius);

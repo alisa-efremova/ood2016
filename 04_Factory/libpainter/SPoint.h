@@ -14,4 +14,16 @@ struct SPoint
 
 	double x = 0.0;
 	double y = 0.0;
+
+	SPoint & operator =(const SPoint & a)
+	{
+		x = a.x;
+		y = a.y;
+		return *this;
+	}
+
+	bool operator ==(const SPoint& a) const
+	{
+		return (x == a.x && y == a.y);
+	}
 };

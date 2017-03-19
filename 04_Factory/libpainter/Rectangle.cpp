@@ -1,12 +1,17 @@
 #include "stdafx.h"
 #include "Rectangle.h"
 #include "ICanvas.h"
+#include <exception>
 
 CRectangle::CRectangle(Color color, SPoint leftTop, SPoint rightBottom)
 	: CShape(color)
-	, m_leftTop(leftTop)
-	, m_rightBottom(rightBottom)
 {
+	if (m_leftTop == m_rightBottom)
+	{
+		std::invalid_argument("Left top and right bottom points should not be equal.");
+	}
+	m_leftTop = leftTop;
+	m_rightBottom = rightBottom;
 }
 
 SPoint CRectangle::GetLeftTop() const

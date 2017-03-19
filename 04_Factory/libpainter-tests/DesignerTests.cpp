@@ -1,18 +1,22 @@
 ﻿#include "stdafx.h"
-#include "../libpainter/Designer.h"
-#include "../libpainter/PictureDraft.h"
-#include "../libpainter/IShapeFactory.h"
+#include "Designer.h"
+#include "PictureDraft.h"
+#include "IShapeFactory.h"
 
 using namespace std;
 using boost::algorithm::all_of;
 using boost::copy;
-#if 0
+
 class CMockShape : public CShape
 {
 public:
 	CMockShape(const string& descr)
-		:descr(descr)
+		: descr(descr)
 	{
+	}
+	void Draw(ICanvas & canvas) const override
+	{
+		canvas;
 	}
 	string descr;
 };
@@ -21,7 +25,7 @@ struct MockShapeFactory : IShapeFactory
 {
 	vector<string> shapeDescriptions;
 	// Inherited via IShapeFactory
-	unique_ptr<CShape> CreateShape(const std::string & description) override
+	unique_ptr<CShape> CreateShape(const string & description) override
 	{
 		// Запротоколировали описание созданной фигуры
 		shapeDescriptions.push_back(description);
@@ -76,5 +80,3 @@ BOOST_FIXTURE_TEST_SUITE(Designer, Designer_)
 		BOOST_AUTO_TEST_SUITE_END()
 	BOOST_AUTO_TEST_SUITE_END()
 BOOST_AUTO_TEST_SUITE_END()
-
-#endif

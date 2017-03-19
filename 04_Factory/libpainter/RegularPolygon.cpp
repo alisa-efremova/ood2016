@@ -3,15 +3,26 @@
 #define _USE_MATH_DEFINES
 #include "math.h"
 
+#include <exception>
 #include "RegularPolygon.h"
 #include "ICanvas.h"
 
-CRegularPolygon::CRegularPolygon(Color color, double vertexCount, SPoint center, double radius)
+CRegularPolygon::CRegularPolygon(Color color, unsigned vertexCount, SPoint center, double radius)
 	: CShape(color)
-	, m_vertexCount(vertexCount)
 	, m_center(center)
-	, m_radius(radius)
 {
+	if (vertexCount < 3)
+	{
+		std::invalid_argument("Polygon should have at least 3 vertexes.");
+	}
+
+	if (radius <= 0)
+	{
+		std::invalid_argument("Radius should be positive number.");
+	}
+
+	m_vertexCount = vertexCount;
+	m_radius = radius;
 }
 
 double CRegularPolygon::GetVertexCount() const
@@ -43,7 +54,6 @@ void CRegularPolygon::Draw(ICanvas & canvas) const
 		toPoint.x = m_radius * cos(angle) + m_center.x;
 		toPoint.y = m_radius * sin(angle) + m_center.y;
 		canvas.DrawLine(fromPoint, toPoint);
-		fromPoint.x = toPoint.x;
-		fromPoint.y = toPoint.y;
+		fromPoint = toPoint;
 	}
 }
