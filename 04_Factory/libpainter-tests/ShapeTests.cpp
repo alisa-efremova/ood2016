@@ -68,7 +68,6 @@ BOOST_AUTO_TEST_CASE(draw)
 	auto rect = CRectangle(Color::Green, v1, v3);
 	auto canvas = CMockCanvas();
 	rect.Draw(canvas);
-	BOOST_CHECK(canvas.penColor == Color::Green);
 	BOOST_CHECK_EQUAL(canvas.lines.size(), 4);
 	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 0);
 
@@ -82,6 +81,10 @@ BOOST_AUTO_TEST_CASE(draw)
 	BOOST_CHECK(canvas.lines[2].to == v4);
 	BOOST_CHECK(canvas.lines[3].from == v4);
 	BOOST_CHECK(canvas.lines[3].to == v1);
+	for (auto line : canvas.lines)
+	{
+		BOOST_CHECK(line.color == Color::Green);
+	}
 }
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -104,7 +107,6 @@ BOOST_AUTO_TEST_CASE(draw)
 	auto triangle = CTriangle(Color::Red, v1, v2, v3);
 	auto canvas = CMockCanvas();
 	triangle.Draw(canvas);
-	BOOST_CHECK(canvas.penColor == Color::Red);
 	BOOST_CHECK_EQUAL(canvas.lines.size(), 3);
 	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 0);
 
@@ -114,6 +116,10 @@ BOOST_AUTO_TEST_CASE(draw)
 	BOOST_CHECK(canvas.lines[1].to == v3);
 	BOOST_CHECK(canvas.lines[2].from == v3);
 	BOOST_CHECK(canvas.lines[2].to == v1);
+	for (auto line : canvas.lines)
+	{
+		BOOST_CHECK(line.color == Color::Red);
+	}
 }
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -140,13 +146,13 @@ BOOST_AUTO_TEST_CASE(draw)
 	auto ellipse = CEllipse(Color::Green, SPoint(10, 0), 10, 15);
 	auto canvas = CMockCanvas();
 	ellipse.Draw(canvas);
-	BOOST_CHECK(canvas.penColor == Color::Green);
 	BOOST_CHECK_EQUAL(canvas.lines.size(), 0);
 	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 1);
 
 	BOOST_CHECK(canvas.ellipses[0].center == SPoint(10, 0));
 	BOOST_CHECK(canvas.ellipses[0].hRadius == 10);
 	BOOST_CHECK(canvas.ellipses[0].vRaduis == 15);
+	BOOST_CHECK(canvas.ellipses[0].color == Color::Green);
 }
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -172,7 +178,6 @@ BOOST_AUTO_TEST_CASE(draw)
 	auto regPol = CRegularPolygon(Color::Yellow, 4, SPoint(0, 0), 10);
 	auto canvas = CMockCanvas();
 	regPol.Draw(canvas);
-	BOOST_CHECK(canvas.penColor == Color::Yellow);
 	BOOST_CHECK_EQUAL(canvas.lines.size(), 4);
 	BOOST_CHECK_EQUAL(canvas.ellipses.size(), 0);
 
@@ -188,5 +193,9 @@ BOOST_AUTO_TEST_CASE(draw)
 	BOOST_CHECK(canvas.lines[2].to == v4);
 	BOOST_CHECK(canvas.lines[3].from == v4);
 	BOOST_CHECK(canvas.lines[3].to == v1);
+	for (auto line : canvas.lines)
+	{
+		BOOST_CHECK(line.color == Color::Yellow);
+	}
 }
 BOOST_AUTO_TEST_SUITE_END()

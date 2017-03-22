@@ -1,6 +1,7 @@
 #pragma once
 #include "ICanvas.h"
 #include "SPoint.h"
+#include "Color.h"
 #include <vector>
 
 class CMockCanvas : public ICanvas
@@ -10,6 +11,7 @@ public:
 	{
 		SPoint from;
 		SPoint to;
+		Color color;
 	};
 
 	struct SEllipse
@@ -17,27 +19,31 @@ public:
 		SPoint center;
 		double hRadius;
 		double vRaduis;
+		Color color;
 	};
 
 	void SetColor(Color color)
 	{
-		penColor = color;
+		m_color = color;
 	}
 
 	void DrawLine(SPoint from, SPoint to)
 	{
-		lines.push_back(SLine{ from, to });
+		lines.push_back(SLine{ from, to, m_color });
 	}
 
 	void DrawEllipse(SPoint center, double hRadius, double vRadius)
 	{
-		ellipses.push_back(SEllipse{ center, hRadius, vRadius });
+		ellipses.push_back(SEllipse{ center, hRadius, vRadius, m_color });
 	}
 
 	void StartDrawing() {};
 	void CompleteDrawing() {};
 
-	Color penColor;
+	
 	std::vector<SLine> lines;
 	std::vector<SEllipse> ellipses;
+
+private:
+	Color m_color;
 };
