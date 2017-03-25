@@ -25,6 +25,22 @@ IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<si
 	return paragraph;
 }
 
+void CDocument::ReplaceText(size_t index, const string & text)
+{
+	if (index >= GetItemsCount())
+	{
+		throw out_of_range("Position is out of range");
+	}
+	
+	auto item = *next(m_items.begin(), index);
+	if (!item->GetParagraph())
+	{
+		throw invalid_argument("Can't replace text in non-text item");
+	}
+
+	m_history.AddAndExecuteCommand(make_unique<CChangeStringCommand>(item->GetParagraph()->GetText(), text));
+}
+
 size_t CDocument::GetItemsCount() const
 {
 	return m_items.size();
@@ -34,7 +50,7 @@ CConstDocumentItem CDocument::GetItem(size_t index) const
 {
 	if (index >= GetItemsCount())
 	{
-		throw out_of_range("");
+		throw out_of_range("Position is out of range");
 	}
 	auto it = next(m_items.begin(), index);
 	return *((*it).get());

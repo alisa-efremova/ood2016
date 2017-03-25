@@ -8,7 +8,7 @@ CParagraph::CParagraph(const std::string & text)
 {
 }
 
-string CParagraph::GetText() const
+string & CParagraph::GetText()
 {
 	return m_text;
 }

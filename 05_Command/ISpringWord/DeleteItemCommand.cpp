@@ -3,29 +3,29 @@
 
 using namespace std;
 
-CDeleteItemCommand::CDeleteItemCommand(list<DocumentItemPtr> & items, size_t position)
+CDeleteItemCommand::CDeleteItemCommand(list<DocumentItemPtr> & items, size_t index)
 	: m_items(items)
-	, m_position(position)
+	, m_index(index)
 {
 }
 
 void CDeleteItemCommand::DoExecute()
 {
-	if (m_position > m_items.size())
+	if (m_index > m_items.size())
 	{
 		throw out_of_range("Position is out of range.");
 	}
-	auto it = next(m_items.begin(), m_position);
+	auto it = next(m_items.begin(), m_index);
 	m_item = *it;
 	m_items.erase(it);
 }
 
 void CDeleteItemCommand::DoUnexecute()
 {
-	if (m_position > m_items.size())
+	if (m_index > m_items.size())
 	{
 		throw out_of_range("Position is out of range.");
 	}
-	auto it = next(m_items.begin(), m_position);
+	auto it = next(m_items.begin(), m_index);
 	m_items.insert(it, m_item);
 }

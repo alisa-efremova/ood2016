@@ -12,6 +12,7 @@ public:
 	// ≈сли параметр position не указан, вставка происходит в конец документа
 	virtual IParagraphPtr InsertParagraph(const std::string& text, boost::optional<size_t> position = boost::none) = 0;
 
+	virtual void ReplaceText(size_t index, const std::string & text) = 0;
 #if 0
 	// ¬ставл€ет изображение в указанную позицию (сдвига€ последующие элементы)
 	// ѕараметр path задает путь к вставл€емому изображению

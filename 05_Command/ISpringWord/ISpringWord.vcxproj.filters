@@ -78,16 +78,10 @@
     <ClInclude Include="Image.h">
       <Filter>Header Files\DocumentItem</Filter>
     </ClInclude>
-    <ClInclude Include="ImageImpl.h">
-      <Filter>Header Files\DocumentItem</Filter>
-    </ClInclude>
     <ClInclude Include="IParagraph.h">
       <Filter>Header Files\DocumentItem</Filter>
     </ClInclude>
     <ClInclude Include="Paragraph.h">
-      <Filter>Header Files\DocumentItem</Filter>
-    </ClInclude>
-    <ClInclude Include="ParagraphImpl.h">
       <Filter>Header Files\DocumentItem</Filter>
     </ClInclude>
     <ClInclude Include="InsertItemCommand.h">
@@ -98,6 +92,9 @@
     </ClInclude>
     <ClInclude Include="DeleteItemCommand.h">
       <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -131,13 +128,7 @@
     <ClCompile Include="Image.cpp">
       <Filter>Source Files\DocumentItem</Filter>
     </ClCompile>
-    <ClCompile Include="ImageImpl.cpp">
-      <Filter>Source Files\DocumentItem</Filter>
-    </ClCompile>
     <ClCompile Include="Paragraph.cpp">
-      <Filter>Source Files\DocumentItem</Filter>
-    </ClCompile>
-    <ClCompile Include="ParagraphImpl.cpp">
       <Filter>Source Files\DocumentItem</Filter>
     </ClCompile>
     <ClCompile Include="InsertItemCommand.cpp">
@@ -145,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="DeleteItemCommand.cpp">
       <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

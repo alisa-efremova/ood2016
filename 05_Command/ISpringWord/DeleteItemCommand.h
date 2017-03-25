@@ -5,7 +5,7 @@
 class CDeleteItemCommand : public CAbstractCommand
 {
 public:
-	CDeleteItemCommand(std::list<DocumentItemPtr> & items, size_t position);
+	CDeleteItemCommand(std::list<DocumentItemPtr> & items, size_t index);
 protected:
 	void DoExecute() override;
 	void DoUnexecute() override;
@@ -13,6 +13,6 @@ protected:
 private:
 	std::list<DocumentItemPtr> & m_items;
 	DocumentItemPtr m_item;
-	size_t m_position;
+	size_t m_index;
 };
 

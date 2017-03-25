@@ -8,7 +8,9 @@ public:
 	void SetTitle(const std::string & title) override;
 	std::string GetTitle() const override;
 
-	IParagraphPtr InsertParagraph(const std::string& text, boost::optional<size_t> position = boost::none) override;
+	IParagraphPtr InsertParagraph(const std::string & text, boost::optional<size_t> position = boost::none) override;
+	void ReplaceText(size_t index, const std::string & text) override;
+
 	size_t GetItemsCount()const override;
 	CConstDocumentItem GetItem(size_t index)const override;
 	CDocumentItem GetItem(size_t index) override;
