@@ -1,37 +1,35 @@
 #pragma once
-#include <memory>
-#include <string>
-#include <boost\optional.hpp>
-#include <boost\none.hpp>
 #include "IParagraph.h"
 #include "IImage.h"
 #include "ConstDocumentItem.h"
 #include "DocumentItem.h"
+#include "DocumentItem_fwd.h"
 
 class IDocument
 {
 public:
 	// Вставляет параграф текста в указанную позицию (сдвигая последующие элементы)
 	// Если параметр position не указан, вставка происходит в конец документа
-	//virtual std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
-	//	boost::optional<size_t> position = boost::none) = 0;
+	virtual IParagraphPtr InsertParagraph(const std::string& text, boost::optional<size_t> position = boost::none) = 0;
 
-	//// Вставляет изображение в указанную позицию (сдвигая последующие элементы)
-	//// Параметр path задает путь к вставляемому изображению
-	//// При вставке изображение должно копироваться в подкаталог images 
-	//// под автоматически сгенерированным именем
-	//virtual std::shared_ptr<IImage> InsertImage(const std::string& path, int width, int height,
-	//	boost::optional<size_t> position = boost::none) = 0;
+#if 0
+	// Вставляет изображение в указанную позицию (сдвигая последующие элементы)
+	// Параметр path задает путь к вставляемому изображению
+	// При вставке изображение должно копироваться в подкаталог images 
+	// под автоматически сгенерированным именем
+	virtual std::shared_ptr<IImage> InsertImage(const std::string& path, int width, int height,
+		boost::optional<size_t> position = boost::none) = 0;
+#endif
 
-	//// Возвращает количество элементов в документе
-	//virtual size_t GetItemsCount()const = 0;
+	// Возвращает количество элементов в документе
+	virtual size_t GetItemsCount()const = 0;
 
-	//// Доступ к элементам изображения
-	//virtual CConstDocumentItem GetItem(size_t index)const = 0;
-	//virtual CDocumentItem GetItem(size_t index) = 0;
+	// Доступ к элементам изображения
+	virtual CConstDocumentItem GetItem(size_t index)const = 0;
+	virtual CDocumentItem GetItem(size_t index) = 0;
 
-	//// Удаляет элемент из документа
-	//virtual void DeleteItem(size_t index) = 0;
+	// Удаляет элемент из документа
+	virtual void DeleteItem(size_t index) = 0;
 
 	// Возвращает заголовок документа
 	virtual std::string GetTitle()const = 0;

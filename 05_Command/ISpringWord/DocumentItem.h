@@ -1,11 +1,15 @@
 #pragma once
 #include "ConstDocumentItem.h"
+#include "DocumentItem_fwd.h"
 
 class CDocumentItem : public CConstDocumentItem
 {
 public:
-	// Возвращает указатель на изображение, либо nullptr, если элемент не является изображением
-	std::shared_ptr<IImage> GetImage();
+	CDocumentItem(IParagraphPtr paragraph);
+	CDocumentItem(IImagePtr image);
+
 	// Возвращает указатель на параграф, либо nullptr, если элемент не является параграфом
-	std::shared_ptr<IParagraph> GetParagraph();
+	IParagraphPtr GetParagraph();
+	// Возвращает указатель на изображение, либо nullptr, если элемент не является изображением
+	IImagePtr GetImage();
 };

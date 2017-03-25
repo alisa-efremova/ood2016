@@ -1,10 +1,10 @@
 #pragma once
 #include "AbstractCommand.h"
-class CChangeStringCommand :
-	public CAbstractCommand
+
+class CChangeStringCommand : public CAbstractCommand
 {
 public:
-	CChangeStringCommand(std::string& target, std::string const& newValue);
+	CChangeStringCommand(std::string & target, std::string const & newValue);
 	
 protected:
 	void DoExecute() override;
@@ -12,6 +12,6 @@ protected:
 
 private:
 	std::string m_newValue;
-	std::string& m_target;
+	std::string & m_target;
 };
 

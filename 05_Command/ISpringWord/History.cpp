@@ -70,21 +70,22 @@ void CHistory::AddAndExecuteCommand(ICommandPtr && command)
 			throw;
 		}
 
+#if 0
 		// Альтернативная реализация через boost.scope_exit (не совсем здесь подходит)
-		//// флажок для утверждения изменений
-		//bool commit = false;
-		//// Блок кода, который выполнится при любом выходе из данного scope (исключение, return, обычный выход)
-		//BOOST_SCOPE_EXIT_ALL(this, commit)
-		//{
-		//	if (!commit)	// удаляем из очереди команд команду-заглушку, т.к. команда зафейлилась
-		//	{
-		//		m_commands.pop_back();
-		//	}
-		//};
-		//command->Execute();	// может выбросить исключение
-		//commit = true;		// все ок, можно утверждаем изменения
-		//m_commands.back() = move(command); // заменяем команду заглушку на исполненную (не бросает исключений)
-		//++m_nextCommandIndex;
-
+		// флажок для утверждения изменений
+		bool commit = false;
+		// Блок кода, который выполнится при любом выходе из данного scope (исключение, return, обычный выход)
+		BOOST_SCOPE_EXIT_ALL(this, commit)
+		{
+			if (!commit)	// удаляем из очереди команд команду-заглушку, т.к. команда зафейлилась
+			{
+				m_commands.pop_back();
+			}
+		};
+		command->Execute();	// может выбросить исключение
+		commit = true;		// все ок, можно утверждаем изменения
+		m_commands.back() = move(command); // заменяем команду заглушку на исполненную (не бросает исключений)
+		++m_nextCommandIndex;
+#endif
 	}
 }

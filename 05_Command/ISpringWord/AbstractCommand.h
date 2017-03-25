@@ -1,7 +1,7 @@
 #pragma once
 #include "ICommand.h"
-class CAbstractCommand :
-	public ICommand
+
+class CAbstractCommand : public ICommand
 {
 public:
 	void Execute() final;
@@ -13,6 +13,5 @@ protected:
 
 private:
 	bool m_executed = false;
-
 };
 

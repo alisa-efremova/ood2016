@@ -1,14 +1,13 @@
 #pragma once
-#include <memory>
 #include "IParagraph.h"
 
-class CParagraphImpl;
-
-class CParagraph:public IParagraph
+class CParagraph : public IParagraph
 {
 public:
-
+	CParagraph(const std::string & text);
+	virtual std::string GetText()const override;
+	virtual void SetText(const std::string & text) override;
 private:
-
+	std::string m_text;
 };
 

@@ -1,10 +1,9 @@
 #pragma once
 
-
 class CMenu
 {
 public:
-	typedef std::function<void(std::istream &args)> Command;
+	typedef std::function<void(std::istream & args)> Command;
 	void AddItem(const std::string & shortcut, const std::string & description, const Command & command);
 
 	void Run();

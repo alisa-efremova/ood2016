@@ -1,17 +1,58 @@
 #include "stdafx.h"
 #include "Document.h"
 #include "ChangeStringCommand.h"
+#include "InsertItemCommand.h"
+#include "DeleteItemCommand.h"
+#include "Paragraph.h"
 
 using namespace std;
 
-void CDocument::SetTitle(const std::string & title)
+void CDocument::SetTitle(const string & title)
 {
 	m_history.AddAndExecuteCommand(make_unique<CChangeStringCommand>(m_title, title));
 }
 
-std::string CDocument::GetTitle() const
+string CDocument::GetTitle() const
 {
 	return m_title;
+}
+
+IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<size_t> position)
+{
+	auto paragraph = make_shared<CParagraph>(text);
+	auto item = make_shared<CDocumentItem>(paragraph);
+	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_items, item, position));
+	return paragraph;
+}
+
+size_t CDocument::GetItemsCount() const
+{
+	return m_items.size();
+}
+
+CConstDocumentItem CDocument::GetItem(size_t index) const
+{
+	if (index >= GetItemsCount())
+	{
+		throw out_of_range("");
+	}
+	auto it = next(m_items.begin(), index);
+	return *((*it).get());
+}
+
+CDocumentItem CDocument::GetItem(size_t index)
+{
+	if (index >= GetItemsCount())
+	{
+		throw out_of_range("");
+	}
+	auto it = next(m_items.begin(), index);
+	return *((*it).get());
+}
+
+void CDocument::DeleteItem(size_t index)
+{
+	m_history.AddAndExecuteCommand(make_unique<CDeleteItemCommand>(m_items, index));
 }
 
 bool CDocument::CanUndo() const

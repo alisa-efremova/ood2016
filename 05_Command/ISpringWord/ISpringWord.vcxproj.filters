@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Document">
+      <UniqueIdentifier>{1c229e9a-2687-4ba5-a0b7-8799b3fcedb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Command">
+      <UniqueIdentifier>{74d3b6bc-f346-4d80-9487-4700bf1db308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DocumentItem">
+      <UniqueIdentifier>{12408d86-5fbd-431f-928c-cab79556b975}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Document">
+      <UniqueIdentifier>{a7921829-a075-4846-bdca-76195b66d78e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Command">
+      <UniqueIdentifier>{e4cf69b1-e458-4ee4-a315-255c6c7cbb0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DocumentItem">
+      <UniqueIdentifier>{1ae44953-9347-4cd9-9b56-98ff55efd893}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,53 +42,62 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ConstDocumentItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DocumentItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IParagraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IImage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageImpl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Paragraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParagraphImpl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IDocument.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Document.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ICommand_fwd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="History.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChangeStringCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AbstractCommand.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ChangeStringCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand_fwd.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="IDocument.h">
+      <Filter>Header Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Document.h">
+      <Filter>Header Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentItem.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstDocumentItem.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="IImage.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageImpl.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="IParagraph.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="Paragraph.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="ParagraphImpl.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="InsertItemCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentItem_fwd.h">
+      <Filter>Header Files\DocumentItem</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteItemCommand.h">
+      <Filter>Header Files\Command</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,27 +107,6 @@
     <ClCompile Include="ISpringWord.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ConstDocumentItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DocumentItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Paragraph.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ParagraphImpl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Document.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -108,10 +114,37 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="AbstractCommand.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Command</Filter>
     </ClCompile>
     <ClCompile Include="ChangeStringCommand.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstDocumentItem.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Document.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentItem.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageImpl.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="Paragraph.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="ParagraphImpl.cpp">
+      <Filter>Source Files\DocumentItem</Filter>
+    </ClCompile>
+    <ClCompile Include="InsertItemCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteItemCommand.cpp">
+      <Filter>Source Files\Command</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
