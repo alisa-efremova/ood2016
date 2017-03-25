@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\iSpringWord">
+      <UniqueIdentifier>{83b96434-0cdc-49e9-af9d-f36f8d103ac8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\AbstractCommand.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\ChangeStringCommand.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\ConstDocumentItem.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\DeleteItemCommand.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\Document.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\DocumentItem.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\DocumentItem_fwd.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\Editor.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\History.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\ICommand.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\ICommand_fwd.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\IDocument.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\IImage.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\Image.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\InsertItemCommand.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\IParagraph.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\Menu.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ISpringWord\Paragraph.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\AbstractCommand.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\ChangeStringCommand.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\ConstDocumentItem.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\DeleteItemCommand.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\Document.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\DocumentItem.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\Editor.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\History.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\Image.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\InsertItemCommand.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\Menu.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\Paragraph.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
