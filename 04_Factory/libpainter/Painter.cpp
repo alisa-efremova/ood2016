@@ -7,10 +7,8 @@ using namespace std;
 
 void CPainter::DrawPicture(const CPictureDraft & draft, ICanvas & canvas)
 {
-	canvas.StartDrawing();
-	for (auto it = draft.begin(); it < draft.end(); it++)
+	for (auto & shape : draft)
 	{
-		it->Draw(canvas);
+		shape.Draw(canvas);
 	}
-	canvas.CompleteDrawing();
 }

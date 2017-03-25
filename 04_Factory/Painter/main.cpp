@@ -37,7 +37,9 @@ int main()
 	}
 	CCanvasSVG canvas(ofs);
 	CPainter painter;
+	canvas.StartDrawing();
 	painter.DrawPicture(draft, canvas);
+	canvas.CompleteDrawing();
 
 	ofs.close();
 	return 0;
