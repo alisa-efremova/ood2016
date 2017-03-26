@@ -12,7 +12,6 @@ public:
 	// Если параметр position не указан, вставка происходит в конец документа
 	virtual IParagraphPtr InsertParagraph(const std::string& text, boost::optional<size_t> position = boost::none) = 0;
 
-	virtual void ReplaceText(size_t index, const std::string & text) = 0;
 #if 0
 	// Вставляет изображение в указанную позицию (сдвигая последующие элементы)
 	// Параметр path задает путь к вставляемому изображению
@@ -47,9 +46,9 @@ public:
 	// Выполняет отмененную команду редактирования
 	virtual void Redo() = 0;
 
-	//// Сохраняет документ в формате html. Изображения сохраняются в подкаталог images.
-	//// Пути к изображениям указываются относительно пути к сохраняемому HTML файлу
-	//virtual void Save(const std::string& path)const = 0;
+	// Сохраняет документ в формате html. Изображения сохраняются в подкаталог images.
+	// Пути к изображениям указываются относительно пути к сохраняемому HTML файлу
+	virtual void Save(const std::string& path)const = 0;
 
 	virtual ~IDocument() = default;
 };

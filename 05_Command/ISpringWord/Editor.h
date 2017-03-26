@@ -21,6 +21,7 @@ private:
 	void AddParagraph(istream & in);
 	void DeleteItem(istream & in);
 	void ReplaceText(istream & in);
+	void Save(istream & in);
 	void List(istream &);
 	void Undo(istream &);
 	void Redo(istream &);

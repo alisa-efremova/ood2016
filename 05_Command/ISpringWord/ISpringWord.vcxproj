@@ -157,6 +157,7 @@
     <ClInclude Include="Editor.h" />
     <ClInclude Include="History.h" />
     <ClInclude Include="DocumentItem.h" />
+    <ClInclude Include="HtmlConverter.h" />
     <ClInclude Include="ICommand_fwd.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="ICommand.h" />
@@ -178,6 +179,7 @@
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="History.cpp" />
     <ClCompile Include="DocumentItem.cpp" />
+    <ClCompile Include="HtmlConverter.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="InsertItemCommand.cpp" />
     <ClCompile Include="ISpringWord.cpp" />

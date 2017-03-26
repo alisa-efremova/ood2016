@@ -4,6 +4,7 @@
 #include "InsertItemCommand.h"
 #include "DeleteItemCommand.h"
 #include "Paragraph.h"
+#include "HtmlConverter.h"
 
 using namespace std;
 
@@ -25,20 +26,10 @@ IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<si
 	return paragraph;
 }
 
-void CDocument::ReplaceText(size_t index, const string & text)
+void CDocument::Save(const std::string & path) const
 {
-	if (index >= GetItemsCount())
-	{
-		throw out_of_range("Position is out of range");
-	}
-	
-	auto item = *next(m_items.begin(), index);
-	if (!item->GetParagraph())
-	{
-		throw invalid_argument("Can't replace text in non-text item");
-	}
-
-	item->GetParagraph()->SetText(text);
+	CHtmlConverter converter(*this);
+	converter.Save(path);
 }
 
 size_t CDocument::GetItemsCount() const

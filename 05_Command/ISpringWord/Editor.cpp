@@ -6,10 +6,11 @@ CEditor::CEditor()
 {
 	m_menu.AddItem("help", "Help", [this](istream&) { m_menu.ShowInstructions(); });
 	m_menu.AddItem("exit", "Exit", [this](istream&) { m_menu.Exit(); });
-	AddMenuItem("setTitle", "Changes title. Args: <new title>", &CEditor::SetTitle);
-	AddMenuItem("insertParagraph", "Adds paragraph to the position. Args: <position>|end <text>", &CEditor::AddParagraph);
+	AddMenuItem("setTitle", "Change title. Args: <new title>", &CEditor::SetTitle);
+	AddMenuItem("insertParagraph", "Add paragraph to the position. Args: <position>|end <text>", &CEditor::AddParagraph);
 	AddMenuItem("deleteItem", "Delete item at position. Args: <position>", &CEditor::DeleteItem);
 	AddMenuItem("replaceText", "Replace text at position. Args: <position>", &CEditor::ReplaceText);
+	AddMenuItem("save", "Save html document to path. Args: <path>", &CEditor::Save);
 	AddMenuItem("list", "Show document", &CEditor::List);
 	AddMenuItem("undo", "Undo command", &CEditor::Undo);
 	AddMenuItem("redo", "Redo undone command", &CEditor::Redo);
@@ -93,13 +94,34 @@ void CEditor::ReplaceText(istream & in)
 
 	string text;
 	getline(in >> ws, text);
+	
 	try
 	{
-		m_document->ReplaceText(index, text);
+		auto item = m_document->GetItem(index);
+		if (!item.GetParagraph())
+		{
+			throw invalid_argument("Can't replace text in non-text item");
+		}
+
+		item.GetParagraph()->SetText(text);
 	}
 	catch (exception & e)
 	{
 		cout << e.what() << endl;
+	}
+}
+
+void CEditor::Save(istream & in)
+{
+	string path;
+	in >> path;
+	if (path == "")
+	{
+		cout << "Path is missing" << endl;
+	}
+	else
+	{
+		m_document->Save(path);
 	}
 }
 
