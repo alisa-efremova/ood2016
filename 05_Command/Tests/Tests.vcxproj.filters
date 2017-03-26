@@ -89,9 +89,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\ISpringWord\AbstractCommand.cpp">
       <Filter>Source Files\iSpringWord</Filter>
     </ClCompile>
@@ -130,6 +127,9 @@
     </ClCompile>
     <ClCompile Include="..\ISpringWord\HtmlConverter.cpp">
       <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentTests.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

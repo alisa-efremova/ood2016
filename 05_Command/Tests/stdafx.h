@@ -22,7 +22,7 @@
 #include <boost/filesystem.hpp>
 
 ///=======================================
-#define BOOST_TEST_MODULE WeatherStationTests
+#define BOOST_TEST_MODULE iSpringWordTests
 #define BOOST_TEST_INCLUDED
 #pragma warning (disable:4702 4913 4535)
 #include <boost/test/unit_test.hpp>
