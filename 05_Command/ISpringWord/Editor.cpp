@@ -118,10 +118,16 @@ void CEditor::Save(istream & in)
 	if (path == "")
 	{
 		cout << "Path is missing" << endl;
+		return;
 	}
-	else
+
+	try
 	{
 		m_document->Save(path);
+	}
+	catch (exception & e)
+	{
+		cout << e.what() << endl;
 	}
 }
 

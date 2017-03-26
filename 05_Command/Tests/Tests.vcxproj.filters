@@ -81,6 +81,9 @@
     <ClInclude Include="..\ISpringWord\Paragraph.h">
       <Filter>Source Files\iSpringWord</Filter>
     </ClInclude>
+    <ClInclude Include="..\ISpringWord\HtmlConverter.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -123,6 +126,9 @@
       <Filter>Source Files\iSpringWord</Filter>
     </ClCompile>
     <ClCompile Include="..\ISpringWord\Paragraph.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\HtmlConverter.cpp">
       <Filter>Source Files\iSpringWord</Filter>
     </ClCompile>
   </ItemGroup>

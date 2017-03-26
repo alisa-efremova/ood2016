@@ -5,6 +5,8 @@
 #include "IParagraph.h"
 #include "IImage.h"
 #include <fstream>
+#include <boost/filesystem.hpp>
+namespace fs = boost::filesystem;
 
 using namespace std;
 
@@ -19,13 +21,18 @@ CHtmlConverter::~CHtmlConverter()
 
 void CHtmlConverter::Save(const string & path)
 {
-	ofstream ofs(path, ofstream::out | ofstream::trunc);
+	fs::path smartPath(path);
+	fs::create_directories(smartPath.parent_path());
+	ofstream ofs(smartPath.generic_wstring(), ofstream::out | ofstream::trunc);
+
 	if (!ofs.is_open())
 	{
-		throw ios_base::failure("Cannot open file with path " + path);
+		throw ios_base::failure("Cannot open file with path " + smartPath.generic_string());
 	}
+
 	ofs << "<!DOCTYPE html>\n<html>\n<head>\n    <title>" << m_document.GetTitle() << "</title>\n</head>\n";
 	ofs << "<body>\n" << CreateBody() << "</body>\n</html>";
+	ofs.close();
 }
 
 string CHtmlConverter::CreateBody()

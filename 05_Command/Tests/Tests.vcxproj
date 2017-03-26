@@ -92,6 +92,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>"$(TargetPath)" --log_level=message</Command>
@@ -140,6 +141,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>"$(TargetPath)" --log_level=message</Command>
@@ -161,6 +163,7 @@
     <ClInclude Include="..\ISpringWord\DocumentItem_fwd.h" />
     <ClInclude Include="..\ISpringWord\Editor.h" />
     <ClInclude Include="..\ISpringWord\History.h" />
+    <ClInclude Include="..\ISpringWord\HtmlConverter.h" />
     <ClInclude Include="..\ISpringWord\ICommand.h" />
     <ClInclude Include="..\ISpringWord\ICommand_fwd.h" />
     <ClInclude Include="..\ISpringWord\IDocument.h" />
@@ -182,6 +185,7 @@
     <ClCompile Include="..\ISpringWord\DocumentItem.cpp" />
     <ClCompile Include="..\ISpringWord\Editor.cpp" />
     <ClCompile Include="..\ISpringWord\History.cpp" />
+    <ClCompile Include="..\ISpringWord\HtmlConverter.cpp" />
     <ClCompile Include="..\ISpringWord\Image.cpp" />
     <ClCompile Include="..\ISpringWord\InsertItemCommand.cpp" />
     <ClCompile Include="..\ISpringWord\Menu.cpp" />

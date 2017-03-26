@@ -19,6 +19,7 @@
 #include <boost/scope_exit.hpp>
 #include <boost/optional.hpp>
 #include <boost/none.hpp>
+#include <boost/filesystem.hpp>
 
 ///=======================================
 #define BOOST_TEST_MODULE WeatherStationTests
