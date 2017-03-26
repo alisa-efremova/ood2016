@@ -1,19 +1,22 @@
 #include "stdafx.h"
 #include "Paragraph.h"
+#include "History.h"
+#include "ChangeStringCommand.h"
 
 using namespace std;
 
-CParagraph::CParagraph(const std::string & text)
+CParagraph::CParagraph(const std::string & text, CHistory & history)
 	: m_text(text)
+	, m_history(history)
 {
 }
 
-string & CParagraph::GetText()
+string CParagraph::GetText() const
 {
 	return m_text;
 }
 
 void CParagraph::SetText(const string & text)
 {
-	m_text = text;
+	m_history.AddAndExecuteCommand(make_unique<CChangeStringCommand>(m_text, text));
 }

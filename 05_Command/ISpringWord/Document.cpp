@@ -19,7 +19,7 @@ string CDocument::GetTitle() const
 
 IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<size_t> position)
 {
-	auto paragraph = make_shared<CParagraph>(text);
+	auto paragraph = make_shared<CParagraph>(text, m_history);
 	auto item = make_shared<CDocumentItem>(paragraph);
 	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_items, item, position));
 	return paragraph;
@@ -38,7 +38,7 @@ void CDocument::ReplaceText(size_t index, const string & text)
 		throw invalid_argument("Can't replace text in non-text item");
 	}
 
-	m_history.AddAndExecuteCommand(make_unique<CChangeStringCommand>(item->GetParagraph()->GetText(), text));
+	item->GetParagraph()->SetText(text);
 }
 
 size_t CDocument::GetItemsCount() const
