@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CDeleteItemCommand::CDeleteItemCommand(list<DocumentItemPtr> & items, size_t index)
+CDeleteItemCommand::CDeleteItemCommand(list<DocumentItemPtr> & items, unsigned index)
 	: m_items(items)
 	, m_index(index)
 {

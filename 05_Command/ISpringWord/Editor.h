@@ -1,9 +1,6 @@
 #pragma once
 #include "Menu.h"
-#include "Document.h"
-
-using namespace std;
-using namespace std::placeholders;
+#include "IDocument.h"
 
 class CEditor
 {
@@ -13,19 +10,25 @@ public:
 
 private:
 	// Указатель на метод класса CEditor, принимающий istream& и возвращающий void
-	typedef void (CEditor::*MenuHandler)(istream & in);
+	typedef void (CEditor::*MenuHandler)(std::istream & in);
 
-	void AddMenuItem(const string & shortcut, const string & description, MenuHandler handler);
+	void AddMenuItem(const std::string & shortcut, const std::string & description, MenuHandler handler);
 
-	void SetTitle(istream & in);
-	void AddParagraph(istream & in);
-	void DeleteItem(istream & in);
-	void ReplaceText(istream & in);
-	void Save(istream & in);
-	void List(istream &);
-	void Undo(istream &);
-	void Redo(istream &);
+	void SetTitle(std::istream & in);
+	void AddParagraph(std::istream & in);
+	void AddImage(std::istream & in);
+	void DeleteItem(std::istream & in);
+	void ReplaceText(std::istream & in);
+	void ResizeImage(std::istream & in);
+	void Save(std::istream & in);
+	void List(std::istream &);
+	void Undo(std::istream &);
+	void Redo(std::istream &);
+
+	unsigned ReadUnsigned(std::istream & in);
+	boost::optional<unsigned> ReadPosition(std::istream & in);
+	std::string ReadLine(std::istream & in);
 
 	CMenu m_menu;
-	unique_ptr<IDocument> m_document;
+	std::unique_ptr<IDocument> m_document;
 };

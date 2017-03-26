@@ -21,7 +21,7 @@ BOOST_AUTO_TEST_CASE(TestParagraph)
 BOOST_AUTO_TEST_CASE(TestImage)
 {
 	CHistory history;
-	IImagePtr image = make_shared<CImage>();
+	IImagePtr image = make_shared<CImage>("fake_path.png", 100, 100, history);
 	CDocumentItem item(image);
 	BOOST_REQUIRE(item.GetParagraph() == nullptr);
 	BOOST_REQUIRE(item.GetImage() == image);

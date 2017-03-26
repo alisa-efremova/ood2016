@@ -6,7 +6,7 @@
 class CInsertItemCommand : public CAbstractCommand
 {
 public:
-	CInsertItemCommand(std::list<DocumentItemPtr> & items, DocumentItemPtr item, boost::optional<size_t> position);
+	CInsertItemCommand(std::list<DocumentItemPtr> & items, DocumentItemPtr item, boost::optional<unsigned> position);
 protected:
 	void DoExecute() override;
 	void DoUnexecute() override;
@@ -14,6 +14,6 @@ protected:
 private:
 	std::list<DocumentItemPtr> & m_items;
 	DocumentItemPtr m_item;
-	boost::optional<size_t> m_position;
+	boost::optional<unsigned> m_position;
 };
 

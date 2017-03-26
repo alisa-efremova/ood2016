@@ -3,7 +3,7 @@
 
 using namespace std;
 
-CInsertItemCommand::CInsertItemCommand(list<DocumentItemPtr> & items, DocumentItemPtr item, boost::optional<size_t> position)
+CInsertItemCommand::CInsertItemCommand(list<DocumentItemPtr> & items, DocumentItemPtr item, boost::optional<unsigned> position)
 	: m_items(items)
 	, m_item(item)
 	, m_position(position)

@@ -87,6 +87,9 @@
     <ClInclude Include="MockCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\ISpringWord\ResizeImageCommand.h">
+      <Filter>Source Files\iSpringWord</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -142,6 +145,9 @@
     </ClCompile>
     <ClCompile Include="DocumentItemTests.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ISpringWord\ResizeImageCommand.cpp">
+      <Filter>Source Files\iSpringWord</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

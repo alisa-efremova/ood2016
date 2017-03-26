@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Document.h"
+#include "DocumentItem.h"
 
 using namespace std;
 

@@ -15,6 +15,6 @@ public:
 	void AddAndExecuteCommand(ICommandPtr && command);
 private:
 	std::deque<ICommandPtr> m_commands;
-	size_t m_nextCommandIndex = 0;
+	unsigned m_nextCommandIndex = 0;
 };
 

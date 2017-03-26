@@ -38,7 +38,7 @@ void CHtmlConverter::Save(const string & path)
 string CHtmlConverter::CreateBody()
 {
 	string body;
-	for (size_t i = 0; i < m_document.GetItemsCount(); i++)
+	for (unsigned i = 0; i < m_document.GetItemsCount(); i++)
 	{
 		auto item = m_document.GetItem(i);
 		if (item.GetParagraph())
@@ -47,7 +47,11 @@ string CHtmlConverter::CreateBody()
 		}
 		else if (item.GetImage())
 		{
-
+			auto image = item.GetImage();
+			body += "    <img src=\"" + image->GetPath()
+				+ "\" height=\"" + to_string(image->GetHeight())
+				+ "\" width=\"" + to_string(image->GetWidth())
+				+ "\">\n";
 		}
 	}
 	return body;

@@ -1,9 +1,12 @@
 #include "stdafx.h"
+#include "ConstDocumentItem.h"
+#include "DocumentItem.h"
 #include "Document.h"
 #include "ChangeStringCommand.h"
 #include "InsertItemCommand.h"
 #include "DeleteItemCommand.h"
 #include "Paragraph.h"
+#include "Image.h"
 #include "HtmlConverter.h"
 
 using namespace std;
@@ -18,7 +21,7 @@ string CDocument::GetTitle() const
 	return m_title;
 }
 
-IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<size_t> position)
+IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<unsigned> position)
 {
 	auto paragraph = make_shared<CParagraph>(text, m_history);
 	auto item = make_shared<CDocumentItem>(paragraph);
@@ -26,8 +29,20 @@ IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<si
 	return paragraph;
 }
 
-void CDocument::Save(const std::string & path) const
+IImagePtr CDocument::InsertImage(const string & path, unsigned width, unsigned height, boost::optional<unsigned> position)
 {
+	auto image = make_shared<CImage>(path, width, height, m_history);
+	auto item = make_shared<CDocumentItem>(image);
+	m_history.AddAndExecuteCommand(make_unique<CInsertItemCommand>(m_items, item, position));
+	return image;
+}
+
+void CDocument::Save(const string & path) const
+{
+	if (path == "")
+	{
+		throw invalid_argument("Path is missing");
+	}
 	CHtmlConverter converter(*this);
 	converter.Save(path);
 }
@@ -37,7 +52,7 @@ size_t CDocument::GetItemsCount() const
 	return m_items.size();
 }
 
-CConstDocumentItem CDocument::GetItem(size_t index) const
+CConstDocumentItem CDocument::GetItem(unsigned index) const
 {
 	if (index >= GetItemsCount())
 	{
@@ -47,7 +62,7 @@ CConstDocumentItem CDocument::GetItem(size_t index) const
 	return *((*it).get());
 }
 
-CDocumentItem CDocument::GetItem(size_t index)
+CDocumentItem CDocument::GetItem(unsigned index)
 {
 	if (index >= GetItemsCount())
 	{
@@ -57,7 +72,7 @@ CDocumentItem CDocument::GetItem(size_t index)
 	return *((*it).get());
 }
 
-void CDocument::DeleteItem(size_t index)
+void CDocument::DeleteItem(unsigned index)
 {
 	m_history.AddAndExecuteCommand(make_unique<CDeleteItemCommand>(m_items, index));
 }
