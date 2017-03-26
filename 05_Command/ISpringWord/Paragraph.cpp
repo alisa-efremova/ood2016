@@ -5,7 +5,7 @@
 
 using namespace std;
 
-CParagraph::CParagraph(const std::string & text, CHistory & history)
+CParagraph::CParagraph(const string & text, CHistory & history)
 	: m_text(text)
 	, m_history(history)
 {

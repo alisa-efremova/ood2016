@@ -84,6 +84,9 @@
     <ClInclude Include="..\ISpringWord\HtmlConverter.h">
       <Filter>Source Files\iSpringWord</Filter>
     </ClInclude>
+    <ClInclude Include="MockCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -129,6 +132,15 @@
       <Filter>Source Files\iSpringWord</Filter>
     </ClCompile>
     <ClCompile Include="DocumentTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParagraphTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HistoryTests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentItemTests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

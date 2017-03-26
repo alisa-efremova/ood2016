@@ -1,6 +1,8 @@
 #pragma once
+#include "IImage.h"
 
-class CImage
+class CImage : public IImage
 {
-
+public:
+	CImage() {};
 };
