@@ -99,9 +99,6 @@
     <ClInclude Include="AbstractCommand.h">
       <Filter>Source Files\Command</Filter>
     </ClInclude>
-    <ClInclude Include="TempDirectory.h">
-      <Filter>Source Files\DocumentItem</Filter>
-    </ClInclude>
     <ClInclude Include="ResizeImageCommand.h">
       <Filter>Source Files\Command</Filter>
     </ClInclude>

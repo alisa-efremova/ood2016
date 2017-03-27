@@ -8,6 +8,7 @@
 #include "Paragraph.h"
 #include "Image.h"
 #include "HtmlConverter.h"
+namespace fs = boost::filesystem;
 
 using namespace std;
 
@@ -37,12 +38,8 @@ IImagePtr CDocument::InsertImage(const string & path, unsigned width, unsigned h
 	return image;
 }
 
-void CDocument::Save(const string & path) const
+void CDocument::Save(const fs::path & path) const
 {
-	if (path == "")
-	{
-		throw invalid_argument("Path is missing");
-	}
 	CHtmlConverter converter(*this);
 	converter.Save(path);
 }

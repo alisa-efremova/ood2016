@@ -11,7 +11,7 @@ public:
 	IParagraphPtr InsertParagraph(const std::string & text, boost::optional<unsigned> position = boost::none) override;
 	IImagePtr InsertImage(const std::string & path, unsigned width, unsigned height,
 		boost::optional<unsigned> position = boost::none) override;
-	void Save(const std::string & path)const;
+	void Save(const fs::path & path)const;
 
 	size_t GetItemsCount()const override;
 	CConstDocumentItem GetItem(unsigned index)const override;

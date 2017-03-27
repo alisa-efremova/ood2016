@@ -5,8 +5,6 @@
 #include "IParagraph.h"
 #include "IImage.h"
 #include <fstream>
-#include <boost/filesystem.hpp>
-namespace fs = boost::filesystem;
 
 using namespace std;
 
@@ -19,23 +17,30 @@ CHtmlConverter::~CHtmlConverter()
 {
 }
 
-void CHtmlConverter::Save(const string & path)
+void CHtmlConverter::Save(const fs::path & path)
 {
-	fs::path smartPath(path);
-	fs::create_directories(smartPath.parent_path());
-	ofstream ofs(smartPath.generic_wstring(), ofstream::out | ofstream::trunc);
+	if (path.empty())
+	{
+		throw invalid_argument("Path is missing");
+	}
+	
+	if (path.has_parent_path())
+	{
+		fs::create_directories(path.parent_path());
+	}
+	ofstream ofs(path.generic_wstring(), ofstream::out | ofstream::trunc);
 
 	if (!ofs.is_open())
 	{
-		throw ios_base::failure("Cannot open file with path " + smartPath.generic_string());
+		throw ios_base::failure("Cannot open file with path " + path.generic_string());
 	}
 
 	ofs << "<!DOCTYPE html>\n<html>\n<head>\n    <title>" << m_document.GetTitle() << "</title>\n</head>\n";
-	ofs << "<body>\n" << CreateBody() << "</body>\n</html>";
+	ofs << "<body>\n" << CreateBody(path) << "</body>\n</html>";
 	ofs.close();
 }
 
-string CHtmlConverter::CreateBody()
+string CHtmlConverter::CreateBody(const fs::path & path)
 {
 	string body;
 	for (unsigned i = 0; i < m_document.GetItemsCount(); i++)
@@ -48,7 +53,9 @@ string CHtmlConverter::CreateBody()
 		else if (item.GetImage())
 		{
 			auto image = item.GetImage();
-			body += "    <img src=\"" + image->GetPath()
+			auto imagePath = path.parent_path() / image->GetPath();
+			image->Save(imagePath);
+			body += "    <img src=\"" + image->GetPath().generic_string()
 				+ "\" height=\"" + to_string(image->GetHeight())
 				+ "\" width=\"" + to_string(image->GetWidth())
 				+ "\">\n";

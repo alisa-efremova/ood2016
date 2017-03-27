@@ -5,14 +5,18 @@
 class CImage : public IImage
 {
 public:
-	CImage(const std::string & path, unsigned width, unsigned height, CHistory & history);
+	CImage(const fs::path & path, unsigned width, unsigned height, CHistory & history);
+	~CImage();
 
-	std::string GetPath()const override;
+	fs::path GetPath()const override;
 	unsigned GetWidth()const override;
 	unsigned GetHeight()const override;
 	void Resize(unsigned width, unsigned height) override;
+	void Save(const fs::path & path)const override;
+
 private:
-	std::string m_path;
+	fs::path m_tempPath;
+	std::string m_fileName;
 	unsigned m_width;
 	unsigned m_height;
 	CHistory & m_history;

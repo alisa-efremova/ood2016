@@ -128,7 +128,7 @@ void CEditor::Save(istream & in)
 	try
 	{
 		string path = ReadLine(in);
-		m_document->Save(path);
+		m_document->Save(fs::path(path));
 	}
 	catch (exception & e)
 	{
@@ -150,7 +150,7 @@ void CEditor::List(istream &)
 		else
 		{
 			auto image = item.GetImage();
-			cout << i << ". Image: " << image->GetWidth() << "x" << image->GetHeight() << " " << image->GetPath() << endl;
+			cout << i << ". Image: " << image->GetWidth() << "x" << image->GetHeight() << " " << image->GetPath().generic_string() << endl;
 		}
 	}
 	cout << "-------------" << endl;

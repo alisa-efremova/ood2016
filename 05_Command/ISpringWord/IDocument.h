@@ -2,6 +2,7 @@
 #include "IParagraph.h"
 #include "IImage.h"
 #include "DocumentItem_fwd.h"
+namespace fs = boost::filesystem;
 
 class IDocument
 {
@@ -44,7 +45,7 @@ public:
 
 	// —охран€ет документ в формате html. »зображени€ сохран€ютс€ в подкаталог images.
 	// ѕути к изображени€м указываютс€ относительно пути к сохран€емому HTML файлу
-	virtual void Save(const std::string& path)const = 0;
+	virtual void Save(const fs::path & path)const = 0;
 
 	virtual ~IDocument() = default;
 };
