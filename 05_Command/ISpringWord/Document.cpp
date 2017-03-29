@@ -30,7 +30,7 @@ IParagraphPtr CDocument::InsertParagraph(const string & text, boost::optional<un
 	return paragraph;
 }
 
-IImagePtr CDocument::InsertImage(const string & path, unsigned width, unsigned height, boost::optional<unsigned> position)
+IImagePtr CDocument::InsertImage(const fs::path & path, unsigned width, unsigned height, boost::optional<unsigned> position)
 {
 	auto image = make_shared<CImage>(path, width, height, m_history);
 	auto item = make_shared<CDocumentItem>(image);
@@ -51,22 +51,12 @@ size_t CDocument::GetItemsCount() const
 
 CConstDocumentItem CDocument::GetItem(unsigned index) const
 {
-	if (index >= GetItemsCount())
-	{
-		throw out_of_range("Position is out of range");
-	}
-	auto it = next(m_items.begin(), index);
-	return *((*it).get());
+	return FindItem(index);
 }
 
 CDocumentItem CDocument::GetItem(unsigned index)
 {
-	if (index >= GetItemsCount())
-	{
-		throw out_of_range("");
-	}
-	auto it = next(m_items.begin(), index);
-	return *((*it).get());
+	return FindItem(index);
 }
 
 void CDocument::DeleteItem(unsigned index)
@@ -92,4 +82,14 @@ bool CDocument::CanRedo() const
 void CDocument::Redo()
 {
 	m_history.Redo();
+}
+
+CDocumentItem & CDocument::FindItem(unsigned index)const
+{
+	if (index >= GetItemsCount())
+	{
+		throw out_of_range("Index of item is out of range");
+	}
+	auto it = next(m_items.begin(), index);
+	return *((*it).get());
 }

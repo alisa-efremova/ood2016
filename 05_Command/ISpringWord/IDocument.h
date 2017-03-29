@@ -15,7 +15,7 @@ public:
 	// ѕараметр path задает путь к вставл€емому изображению
 	// ѕри вставке изображение должно копироватьс€ в подкаталог images 
 	// под автоматически сгенерированным именем
-	virtual IImagePtr InsertImage(const std::string & path, unsigned width, unsigned height,
+	virtual IImagePtr InsertImage(const fs::path & path, unsigned width, unsigned height,
 		boost::optional<unsigned> position = boost::none) = 0;
 
 	// ¬озвращает количество элементов в документе

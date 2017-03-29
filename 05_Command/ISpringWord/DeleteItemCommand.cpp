@@ -11,7 +11,7 @@ CDeleteItemCommand::CDeleteItemCommand(list<DocumentItemPtr> & items, unsigned i
 
 void CDeleteItemCommand::DoExecute()
 {
-	if (m_index > m_items.size())
+	if (m_index >= m_items.size())
 	{
 		throw out_of_range("Position is out of range.");
 	}

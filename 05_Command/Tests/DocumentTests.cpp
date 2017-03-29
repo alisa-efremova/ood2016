@@ -75,7 +75,7 @@ BOOST_AUTO_TEST_CASE(TestAddingParagraph)
 BOOST_AUTO_TEST_CASE(TestDeletingParagraph)
 {
 	CDocument document;
-	BOOST_REQUIRE_THROW(document.GetItem(0), out_of_range);
+	BOOST_REQUIRE_THROW(document.DeleteItem(0), out_of_range);
 
 	// single paragraph deletion
 	document.InsertParagraph("");
@@ -236,7 +236,7 @@ BOOST_AUTO_TEST_CASE(TestDeletingParagraphUndoRedo)
 	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "third");
 }
 
-BOOST_AUTO_TEST_CASE(TestReplacingTextRedoAfterItemDeletion)
+BOOST_AUTO_TEST_CASE(TestReplacingTextUndoRedo)
 {
 	CDocument document;
 	document.InsertParagraph("text");
@@ -278,5 +278,227 @@ BOOST_AUTO_TEST_CASE(TestReplacingTextRedoAfterItemDeletion)
 	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "other text");
 	BOOST_REQUIRE(!document.CanRedo());
 }
+
+BOOST_AUTO_TEST_CASE(TestAddingImage)
+{
+	CDocument document;
+
+	// invalid path
+	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("not_existing_item"), 100, 100), invalid_argument);
+	// not existing path
+	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("not_existing_item.png"), 100, 100), invalid_argument);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+
+	// provide valid path for image
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 0, 0));
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath() , fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 0);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 0);
+
+	// insertion at last position
+	document.InsertImage(fs::path("images/2.png"), 10, 20, 1);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
+
+	// insertion at middle position
+	document.InsertImage(fs::path("images/3.png"), 30, 40, 1);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetImage()->GetPath(), fs::path("images/2.png"));
+
+	// invalid position
+	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("images/3.png"), 0, 0, 10), out_of_range);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+}
+
+BOOST_AUTO_TEST_CASE(TestDeletingImage)
+{
+	CDocument document;
+
+	// single image deletion
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
+	BOOST_REQUIRE_THROW(document.GetItem(1), out_of_range);
+	BOOST_REQUIRE_NO_THROW(document.DeleteItem(0));
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+
+	// deletion of the first image
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 30, 40));
+
+	BOOST_REQUIRE_THROW(document.GetItem(2), out_of_range);
+	BOOST_REQUIRE_NO_THROW(document.DeleteItem(0));
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
+
+	// deletion of the image in the middle of the list
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 30, 40));
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/3.png"), 50, 60));
+	BOOST_REQUIRE_NO_THROW(document.DeleteItem(1));
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+
+	// invalid position
+	BOOST_REQUIRE_THROW(document.DeleteItem(2), out_of_range);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+}
+
+BOOST_AUTO_TEST_CASE(TestInsertingImageUndoRedo)
+{
+	CDocument document;
+
+	// no history for invalid input
+	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("not_existing_item"), 100, 100), invalid_argument);
+	BOOST_REQUIRE(!document.CanUndo());
+
+	// single image
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE(document.CanUndo());
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+
+	// multiple images
+	document.InsertImage(fs::path("images/2.png"), 30, 40, 1);
+	document.InsertImage(fs::path("images/3.png"), 50, 70, 1);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
+
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetImage()->GetPath(), fs::path("images/2.png"));
+
+	BOOST_REQUIRE(!document.CanRedo());
+}
+
+BOOST_AUTO_TEST_CASE(TestDeletingImagesUndoRedo)
+{
+	CDocument document;
+
+	// single image
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
+	document.DeleteItem(0);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	BOOST_REQUIRE(document.CanUndo());
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+
+	// multiple actions
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 15, 25));
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/3.png"), 30, 40));
+	// delete item in the middle - second
+	document.DeleteItem(1);
+	// delete first item - first
+	document.DeleteItem(0);
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/3.png"));
+	BOOST_REQUIRE(document.CanUndo());
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetImage()->GetPath(), fs::path("images/3.png"));
+
+	BOOST_REQUIRE(document.CanRedo());
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+
+	BOOST_REQUIRE(document.CanRedo());
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/3.png"));
+}
+
+BOOST_AUTO_TEST_CASE(TestResizingImageUndoRedo)
+{
+	CDocument document;
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+
+	document.GetItem(0).GetImage()->Resize(50, 30);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 50);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 30);
+
+	document.DeleteItem(0);
+	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 100, 20));
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 50);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 30);
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+
+	document.Undo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	BOOST_REQUIRE(!document.CanUndo());
+
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 50);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 30);
+
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+
+	document.Redo();
+	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
+	BOOST_REQUIRE(!document.CanRedo());
+}
+
 
 BOOST_AUTO_TEST_SUITE_END()

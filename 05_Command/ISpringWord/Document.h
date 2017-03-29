@@ -9,7 +9,7 @@ public:
 	std::string GetTitle() const override;
 
 	IParagraphPtr InsertParagraph(const std::string & text, boost::optional<unsigned> position = boost::none) override;
-	IImagePtr InsertImage(const std::string & path, unsigned width, unsigned height,
+	IImagePtr InsertImage(const fs::path & path, unsigned width, unsigned height,
 		boost::optional<unsigned> position = boost::none) override;
 	void Save(const fs::path & path)const;
 
@@ -24,6 +24,8 @@ public:
 	void Redo() override;
 
 private:
+	CDocumentItem & FindItem(unsigned index)const;
+
 	std::string m_title;
 	CHistory m_history;
 	std::list<DocumentItemPtr> m_items;

@@ -26,7 +26,7 @@ CImage::~CImage()
 
 fs::path CImage::GetPath() const
 {
-	return fs::path("image") / m_fileName;
+	return fs::path("images") / m_fileName;
 }
 
 unsigned CImage::GetWidth() const

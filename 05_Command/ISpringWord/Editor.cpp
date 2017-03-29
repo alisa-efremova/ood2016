@@ -182,8 +182,8 @@ void CEditor::Redo(istream &)
 
 unsigned CEditor::ReadUnsigned(istream & in)
 {
-	unsigned index;
-	if (!(in >> index))
+	int index;
+	if (!(in >> index) || index < 0)
 	{
 		throw invalid_argument("Unsigned number expected");
 	}

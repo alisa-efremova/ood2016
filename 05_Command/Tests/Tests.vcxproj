@@ -195,6 +195,7 @@
     <ClCompile Include="..\ISpringWord\ResizeImageCommand.cpp" />
     <ClCompile Include="DocumentItemTests.cpp" />
     <ClCompile Include="HistoryTests.cpp" />
+    <ClCompile Include="ImageTests.cpp" />
     <ClCompile Include="ParagraphTests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

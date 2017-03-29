@@ -32,7 +32,7 @@ void CInsertItemCommand::DoUnexecute()
 {
 	if (m_position)
 	{
-		if (*m_position > m_items.size())
+		if (*m_position >= m_items.size())
 		{
 			throw out_of_range("Position is out of range.");
 		}
