@@ -10,7 +10,7 @@ BOOST_AUTO_TEST_CASE(TestConstructor)
 {
 	CHistory history;
 	CImage image(fs::path("images/1.png"), 10, 20, history);
-	BOOST_REQUIRE_EQUAL(image.GetPath(), fs::path("images/1.png"));
+	BOOST_REQUIRE_EQUAL(image.GetName(), "1.png");
 	BOOST_REQUIRE_EQUAL(image.GetWidth(), 10);
 	BOOST_REQUIRE_EQUAL(image.GetHeight(), 20);
 	BOOST_REQUIRE(!history.CanRedo());

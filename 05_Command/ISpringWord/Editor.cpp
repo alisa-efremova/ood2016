@@ -150,7 +150,7 @@ void CEditor::List(istream &)
 		else
 		{
 			auto image = item.GetImage();
-			cout << i << ". Image: " << image->GetWidth() << "x" << image->GetHeight() << " " << image->GetPath().generic_string() << endl;
+			cout << i << ". Image: " << image->GetWidth() << "x" << image->GetHeight() << " " << image->GetName() << endl;
 		}
 	}
 	cout << "-------------" << endl;

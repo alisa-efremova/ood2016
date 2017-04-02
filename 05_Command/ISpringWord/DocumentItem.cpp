@@ -3,12 +3,12 @@
 
 using namespace std;
 
-CDocumentItem::CDocumentItem(IParagraphPtr paragraph)
+CDocumentItem::CDocumentItem(const IParagraphPtr & paragraph)
 	: CConstDocumentItem(paragraph)
 {
 }
 
-CDocumentItem::CDocumentItem(IImagePtr image)
+CDocumentItem::CDocumentItem(const IImagePtr & image)
 	: CConstDocumentItem(image)
 {
 }

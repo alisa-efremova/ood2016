@@ -11,8 +11,6 @@ protected:
 	void DoUnexecute() override;
 
 private:
-	void SwapUnsigned(unsigned & val1, unsigned & val2);
-
 	unsigned & m_width;
 	unsigned & m_height;
 	unsigned m_newWidth;

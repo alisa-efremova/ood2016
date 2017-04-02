@@ -6,8 +6,8 @@
 class CConstDocumentItem
 {
 public:
-	CConstDocumentItem(IParagraphPtr paragraph);
-	CConstDocumentItem(IImagePtr image);
+	CConstDocumentItem(const IParagraphPtr & paragraph);
+	CConstDocumentItem(const IImagePtr & image);
 	// ¬озвращает указатель на константное изображение, либо nullptr,
 	// если элемент не €вл€етс€ изображением
 	IImageConstPtr GetImage()const;

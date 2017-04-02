@@ -5,8 +5,8 @@
 class CDocumentItem : public CConstDocumentItem
 {
 public:
-	CDocumentItem(IParagraphPtr paragraph);
-	CDocumentItem(IImagePtr image);
+	CDocumentItem(const IParagraphPtr & paragraph);
+	CDocumentItem(const IImagePtr & image);
 
 	// Возвращает указатель на параграф, либо nullptr, если элемент не является параграфом
 	IParagraphPtr GetParagraph();

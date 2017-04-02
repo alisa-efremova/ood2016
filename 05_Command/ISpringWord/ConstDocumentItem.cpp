@@ -3,13 +3,13 @@
 
 using namespace std;
 
-CConstDocumentItem::CConstDocumentItem(IParagraphPtr paragraph)
+CConstDocumentItem::CConstDocumentItem(const IParagraphPtr & paragraph)
 	: m_paragraph(paragraph)
 	, m_image(nullptr)
 {
 }
 
-CConstDocumentItem::CConstDocumentItem(IImagePtr image)
+CConstDocumentItem::CConstDocumentItem(const IImagePtr & image)
 	: m_image(image)
 	, m_paragraph(nullptr)
 {	

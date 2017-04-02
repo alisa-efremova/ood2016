@@ -8,7 +8,7 @@ public:
 	CImage(const fs::path & path, unsigned width, unsigned height, CHistory & history);
 	~CImage();
 
-	fs::path GetPath()const override;
+	std::string GetName()const override;
 	unsigned GetWidth()const override;
 	unsigned GetHeight()const override;
 	void Resize(unsigned width, unsigned height) override;

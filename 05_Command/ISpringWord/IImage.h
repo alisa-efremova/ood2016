@@ -4,8 +4,8 @@ namespace fs = boost::filesystem;
 class IImage
 {
 public:
-	// Возвращает путь относительно каталога документа
-	virtual fs::path GetPath()const = 0;
+	// Возвращает имя картинки
+	virtual std::string GetName()const = 0;
 
 	// Ширина изображения в пикселях
 	virtual unsigned GetWidth()const = 0;

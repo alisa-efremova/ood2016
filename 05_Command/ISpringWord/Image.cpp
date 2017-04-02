@@ -21,12 +21,18 @@ CImage::CImage(const fs::path & path, unsigned width, unsigned height, CHistory 
 
 CImage::~CImage()
 {
-	fs::remove(m_tempPath);
+	try
+	{
+		fs::remove(m_tempPath);
+	}
+	catch (...)
+	{
+	}
 }
 
-fs::path CImage::GetPath() const
+string CImage::GetName() const
 {
-	return fs::path("images") / m_fileName;
+	return m_fileName;
 }
 
 unsigned CImage::GetWidth() const

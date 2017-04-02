@@ -4,7 +4,37 @@
 
 using namespace std;
 
-BOOST_AUTO_TEST_SUITE(DocumentTests)
+struct Document_
+{
+	void CheckParagraphItems(const CDocument & document, const vector<string> & items)
+	{
+		BOOST_REQUIRE_EQUAL(document.GetItemsCount(), items.size());
+		for (int i = 0; i < items.size(); i++)
+		{
+			BOOST_REQUIRE_EQUAL(document.GetItem(i).GetParagraph()->GetText(), items[i]);
+		}
+	}
+
+	struct SImageInfo
+	{
+		string name;
+		unsigned width;
+		unsigned height;
+	};
+
+	void CheckImageItems(const CDocument & document, const vector<SImageInfo> & items)
+	{
+		BOOST_REQUIRE_EQUAL(document.GetItemsCount(), items.size());
+		for (int i = 0; i < items.size(); i++)
+		{
+			BOOST_REQUIRE_EQUAL(document.GetItem(i).GetImage()->GetName(), items[i].name);
+			BOOST_REQUIRE_EQUAL(document.GetItem(i).GetImage()->GetWidth(), items[i].width);
+			BOOST_REQUIRE_EQUAL(document.GetItem(i).GetImage()->GetHeight(), items[i].height);
+		}
+	}
+};
+
+BOOST_FIXTURE_TEST_SUITE(DocumentTests, Document_)
 
 BOOST_AUTO_TEST_CASE(TestConstructor)
 {
@@ -34,47 +64,33 @@ BOOST_AUTO_TEST_CASE(TestAddingParagraph)
 
 	// empty paragraph
 	document.InsertParagraph("");
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "");
+	CheckParagraphItems(document, { "" });
 
 	// not empty paragraph insertion at the end
 	document.InsertParagraph("alice");
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "alice");
+	CheckParagraphItems(document, { "", "alice" });
 
 	// insertion at first position
 	document.InsertParagraph("bob", 0);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "bob");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "");
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetParagraph()->GetText(), "alice");
+	CheckParagraphItems(document, { "bob", "", "alice" });
 
 	// insertion at last position
 	document.InsertParagraph("last", 3);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 4);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "bob");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "");
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetParagraph()->GetText(), "alice");
-	BOOST_REQUIRE_EQUAL(document.GetItem(3).GetParagraph()->GetText(), "last");
+	CheckParagraphItems(document, { "bob", "", "alice", "last" });
 
 	// insertion at middle position
 	document.InsertParagraph("middle", 2);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 5);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "bob");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "");
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetParagraph()->GetText(), "middle");
-	BOOST_REQUIRE_EQUAL(document.GetItem(3).GetParagraph()->GetText(), "alice");
-	BOOST_REQUIRE_EQUAL(document.GetItem(4).GetParagraph()->GetText(), "last");
+	CheckParagraphItems(document, { "bob", "", "middle", "alice", "last" });
 
 	// invalid position
 	BOOST_REQUIRE_THROW(document.InsertParagraph("invalid", 10), out_of_range);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 5);
+	CheckParagraphItems(document, { "bob", "", "middle", "alice", "last" });
 }
 
 BOOST_AUTO_TEST_CASE(TestDeletingParagraph)
 {
 	CDocument document;
+
 	BOOST_REQUIRE_THROW(document.DeleteItem(0), out_of_range);
 
 	// single paragraph deletion
@@ -88,20 +104,17 @@ BOOST_AUTO_TEST_CASE(TestDeletingParagraph)
 	document.InsertParagraph("second");
 	BOOST_REQUIRE_THROW(document.GetItem(2), out_of_range);
 	BOOST_REQUIRE_NO_THROW(document.DeleteItem(0));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "second");
+	CheckParagraphItems(document, { "second" });
 
 	// deletion of the paragraph in the middle of the list
 	document.InsertParagraph("alice");
 	document.InsertParagraph("bob");
 	BOOST_REQUIRE_NO_THROW(document.DeleteItem(1));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "second");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "bob");
+	CheckParagraphItems(document, { "second", "bob" });
 
 	// invalid position
 	BOOST_REQUIRE_THROW(document.DeleteItem(5), out_of_range);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	CheckParagraphItems(document, { "second", "bob" });
 }
 
 BOOST_AUTO_TEST_CASE(TestSettingTitleUndoRedo)
@@ -151,36 +164,27 @@ BOOST_AUTO_TEST_CASE(TestInsertingParagraphUndoRedo)
 	document.InsertParagraph("first");
 	BOOST_REQUIRE(document.CanUndo());
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckParagraphItems(document, {});
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
+	CheckParagraphItems(document, { "first" });
 
 	// multiple paragraphs
 	document.InsertParagraph("third", 1);
 	document.InsertParagraph("second", 1);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+	CheckParagraphItems(document, { "first", "second", "third" });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "third");
+	CheckParagraphItems(document, { "first", "third" });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
+	CheckParagraphItems(document, { "first" });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "third");
+	CheckParagraphItems(document, { "first", "third" });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "second");
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetParagraph()->GetText(), "third");
+	CheckParagraphItems(document, { "first", "second", "third" });
 
 	BOOST_REQUIRE(!document.CanRedo());
 }
@@ -196,86 +200,72 @@ BOOST_AUTO_TEST_CASE(TestDeletingParagraphUndoRedo)
 	// single paragraph
 	document.InsertParagraph("first");
 	document.DeleteItem(0);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
-	BOOST_REQUIRE(document.CanUndo());
+	CheckParagraphItems(document, {});
+
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
+	CheckParagraphItems(document, { "first" });
 
 	// multiple actions
 	document.InsertParagraph("second");
 	document.InsertParagraph("third");
+	CheckParagraphItems(document, { "first", "second", "third" });
+
 	// delete item in the middle - second
 	document.DeleteItem(1);
+	CheckParagraphItems(document, { "first", "third" });
+
 	// delete first item - first
 	document.DeleteItem(0);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "third");
-	BOOST_REQUIRE(document.CanUndo());
+	CheckParagraphItems(document, { "third" });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "third");
+	CheckParagraphItems(document, { "first", "third" });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "second");
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetParagraph()->GetText(), "third");
+	CheckParagraphItems(document, { "first", "second", "third" });
 
-	BOOST_REQUIRE(document.CanRedo());
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "first");
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetParagraph()->GetText(), "third");
+	CheckParagraphItems(document, { "first", "third" });
 
-	BOOST_REQUIRE(document.CanRedo());
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "third");
+	CheckParagraphItems(document, { "third" });
 }
 
 BOOST_AUTO_TEST_CASE(TestReplacingTextUndoRedo)
 {
 	CDocument document;
+
 	document.InsertParagraph("text");
 	document.GetItem(0).GetParagraph()->SetText("new text");
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "new text");
+	CheckParagraphItems(document, { "new text" });
+
 	document.DeleteItem(0);
 	document.InsertParagraph("other text");
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "other text");
+	CheckParagraphItems(document, { "other text" });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckParagraphItems(document, {});
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "new text");
+	CheckParagraphItems(document, { "new text" });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "text");
+	CheckParagraphItems(document, { "text" });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
-	BOOST_REQUIRE(!document.CanUndo());
+	CheckParagraphItems(document, {});
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "text");
+	CheckParagraphItems(document, { "text" });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "new text");
+	CheckParagraphItems(document, { "new text" });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckParagraphItems(document, {});
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetParagraph()->GetText(), "other text");
+	CheckParagraphItems(document, { "other text" });
 	BOOST_REQUIRE(!document.CanRedo());
 }
 
@@ -287,31 +277,23 @@ BOOST_AUTO_TEST_CASE(TestAddingImage)
 	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("not_existing_item"), 100, 100), invalid_argument);
 	// not existing path
 	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("not_existing_item.png"), 100, 100), invalid_argument);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckImageItems(document, {});
 
 	// provide valid path for image
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 0, 0));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath() , fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 0);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 0);
+	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 } });
 
 	// insertion at last position
 	document.InsertImage(fs::path("images/2.png"), 10, 20, 1);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 }, SImageInfo{ "2.png", 10, 20 } });
 
 	// insertion at middle position
 	document.InsertImage(fs::path("images/3.png"), 30, 40, 1);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 }, SImageInfo{ "3.png", 30, 40 }, SImageInfo{ "2.png", 10, 20 } });
 
 	// invalid position
 	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("images/3.png"), 0, 0, 10), out_of_range);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 }, SImageInfo{ "3.png", 30, 40 }, SImageInfo{ "2.png", 10, 20 } });
 }
 
 BOOST_AUTO_TEST_CASE(TestDeletingImage)
@@ -322,28 +304,27 @@ BOOST_AUTO_TEST_CASE(TestDeletingImage)
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
 	BOOST_REQUIRE_THROW(document.GetItem(1), out_of_range);
 	BOOST_REQUIRE_NO_THROW(document.DeleteItem(0));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckImageItems(document, {});
 
 	// deletion of the first image
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 30, 40));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 30, 40 } });
 
-	BOOST_REQUIRE_THROW(document.GetItem(2), out_of_range);
 	BOOST_REQUIRE_NO_THROW(document.DeleteItem(0));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 } });
 
 	// deletion of the image in the middle of the list
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 30, 40));
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/3.png"), 50, 60));
+	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 }, SImageInfo{ "1.png", 30, 40 }, SImageInfo{ "3.png", 50, 60 } });
+
 	BOOST_REQUIRE_NO_THROW(document.DeleteItem(1));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 }, SImageInfo{ "3.png", 50, 60 } });
 
 	// invalid position
 	BOOST_REQUIRE_THROW(document.DeleteItem(2), out_of_range);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
+	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 }, SImageInfo{ "3.png", 50, 60 } });
 }
 
 BOOST_AUTO_TEST_CASE(TestInsertingImageUndoRedo)
@@ -356,41 +337,31 @@ BOOST_AUTO_TEST_CASE(TestInsertingImageUndoRedo)
 
 	// single image
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+
 	BOOST_REQUIRE(document.CanUndo());
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckImageItems(document, {});
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
 
 	// multiple images
 	document.InsertImage(fs::path("images/2.png"), 30, 40, 1);
 	document.InsertImage(fs::path("images/3.png"), 50, 70, 1);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 50, 70 }, SImageInfo{ "2.png", 30, 40 } });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 30, 40 } });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 30, 40 } });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 50, 70 }, SImageInfo{ "2.png", 30, 40 } });
 
 	BOOST_REQUIRE(!document.CanRedo());
 }
@@ -402,103 +373,80 @@ BOOST_AUTO_TEST_CASE(TestDeletingImagesUndoRedo)
 	// single image
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
 	document.DeleteItem(0);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckImageItems(document, {});
+
 	BOOST_REQUIRE(document.CanUndo());
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
 
 	// multiple actions
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 15, 25));
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/3.png"), 30, 40));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 15, 25 }, SImageInfo{ "3.png", 30, 40 } });
+
 	// delete item in the middle - second
 	document.DeleteItem(1);
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 30, 40 } });
+
 	// delete first item - first
 	document.DeleteItem(0);
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/3.png"));
+	CheckImageItems(document, { SImageInfo{ "3.png", 30, 40 } });
 	BOOST_REQUIRE(document.CanUndo());
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 30, 40 } });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 3);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/2.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(2).GetImage()->GetPath(), fs::path("images/3.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 15, 25 }, SImageInfo{ "3.png", 30, 40 } });
 
 	BOOST_REQUIRE(document.CanRedo());
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 2);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(1).GetImage()->GetPath(), fs::path("images/3.png"));
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 30, 40 } });
 
 	BOOST_REQUIRE(document.CanRedo());
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/3.png"));
+	CheckImageItems(document, { SImageInfo{ "3.png", 30, 40 } });
 }
 
 BOOST_AUTO_TEST_CASE(TestResizingImageUndoRedo)
 {
 	CDocument document;
+
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
 
 	document.GetItem(0).GetImage()->Resize(50, 30);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 50);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 30);
+	CheckImageItems(document, { SImageInfo{ "1.png", 50, 30 } });
 
 	document.DeleteItem(0);
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 100, 20));
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "2.png", 100, 20 } });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckImageItems(document, {});
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 50);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 30);
+	CheckImageItems(document, { SImageInfo{ "1.png", 50, 30 } });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
 
 	document.Undo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckImageItems(document, {});
 	BOOST_REQUIRE(!document.CanUndo());
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 10);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 20);
+	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/1.png"));
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetWidth(), 50);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetHeight(), 30);
+	CheckImageItems(document, { SImageInfo{ "1.png", 50, 30 } });
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 0);
+	CheckImageItems(document, {});
 
 	document.Redo();
-	BOOST_REQUIRE_EQUAL(document.GetItemsCount(), 1);
-	BOOST_REQUIRE_EQUAL(document.GetItem(0).GetImage()->GetPath(), fs::path("images/2.png"));
+	CheckImageItems(document, { SImageInfo{ "2.png", 100, 20 } });
 	BOOST_REQUIRE(!document.CanRedo());
 }
-
 
 BOOST_AUTO_TEST_SUITE_END()

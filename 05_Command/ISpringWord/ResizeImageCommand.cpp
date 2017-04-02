@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "ResizeImageCommand.h"
 
+using namespace std;
+
 CResizeImageCommand::CResizeImageCommand(unsigned & width, unsigned & height, unsigned newWidth, unsigned newHeight)
 	: m_width(width)
 	, m_height(height)
@@ -11,20 +13,14 @@ CResizeImageCommand::CResizeImageCommand(unsigned & width, unsigned & height, un
 
 void CResizeImageCommand::DoExecute()
 {
-	SwapUnsigned(m_width, m_newWidth);
-	SwapUnsigned(m_height, m_newHeight);
+	swap(m_width, m_newWidth);
+	swap(m_height, m_newHeight);
 }
 
 void CResizeImageCommand::DoUnexecute()
 {
-	SwapUnsigned(m_width, m_newWidth);
-	SwapUnsigned(m_height, m_newHeight);
+	swap(m_width, m_newWidth);
+	swap(m_height, m_newHeight);
 }
 
-void CResizeImageCommand::SwapUnsigned(unsigned & val1, unsigned & val2)
-{
-	unsigned tmpVal = val1;
-	val1 = val2;
-	val2 = tmpVal;
-}
 
