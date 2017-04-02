@@ -10,4 +10,5 @@ CCanvasPainter::CCanvasPainter(graphics_lib::ICanvas & canvas)
 
 void CCanvasPainter::Draw(const ICanvasDrawable & drawable)
 {
+	drawable.Draw(m_canvas);
 }

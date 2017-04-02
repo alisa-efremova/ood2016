@@ -4,6 +4,8 @@
 #include "shape_drawing_lib\Triangle.h"
 #include "graphics_lib\Canvas.h"
 #include "modern_graphics_lib\ModernGraphicsRenderer.h"
+#include "ModernCanvasAdapter.h"
+#include "ModernCanvasClassAdapter.h"
 
 using namespace std;
 
@@ -16,7 +18,8 @@ namespace app
 		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
 		CRectangle rectangle({ 30, 40 }, 18, 24);
 
-		// TODO: нарисовать прямоугольник и треугольник при помощи painter
+		painter.Draw(triangle);
+		painter.Draw(rectangle);
 	}
 
 	void PaintPictureOnCanvas()
@@ -29,21 +32,34 @@ namespace app
 	void PaintPictureOnModernGraphicsRenderer()
 	{
 		modern_graphics_lib::CModernGraphicsRenderer renderer(cout);
-		(void)&renderer; // устраняем предупреждение о неиспользуемой переменной
+		renderer.BeginDraw();
+		
+		CModernCanvasAdapter canvas(renderer);
+		shape_drawing_lib::CCanvasPainter painter(canvas);
+		PaintPicture(painter);
+		
+		renderer.EndDraw();
+	}
 
-						 // TODO: при помощи существующей функции PaintPicture() нарисовать
-						 // картину на renderer
-						 // Подсказка: используйте паттерн "Адаптер"
+	void PaintPictureOnModernGraphicsRendererClassAdapter()
+	{
+		CModernCanvasClassAdapter canvas(cout);
+		canvas.BeginDraw();
+
+		shape_drawing_lib::CCanvasPainter painter(canvas);
+		PaintPicture(painter);
+
+		canvas.EndDraw();
 	}
 }
 
 int main()
 {
-	cout << "Should we use new API (y)?";
+	cout << "Should we use new API (y)? ";
 	string userInput;
 	if (getline(cin, userInput) && (userInput == "y" || userInput == "Y"))
 	{
-		app::PaintPictureOnModernGraphicsRenderer();
+		app::PaintPictureOnModernGraphicsRendererClassAdapter();
 	}
 	else
 	{

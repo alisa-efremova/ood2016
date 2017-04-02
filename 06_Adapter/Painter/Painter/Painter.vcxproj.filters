@@ -27,6 +27,12 @@
     <ClInclude Include="stdafx.h">
       <Filter>Support files</Filter>
     </ClInclude>
+    <ClInclude Include="ModernCanvasAdapter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModernCanvasClassAdapter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -34,6 +40,12 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Support files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernCanvasAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ModernCanvasClassAdapter.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -12,4 +12,9 @@ CTriangle::CTriangle(const Point & p1, const Point & p2, const Point & p3)
 
 void CTriangle::Draw(graphics_lib::ICanvas & canvas) const
 {
+	canvas.MoveTo(m_p1.x, m_p1.y);
+
+	canvas.LineTo(m_p2.x, m_p2.y);
+	canvas.LineTo(m_p3.x, m_p3.y);
+	canvas.LineTo(m_p1.x, m_p1.y);
 }
