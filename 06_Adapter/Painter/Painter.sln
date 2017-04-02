@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "shape_drawing_lib", "shape_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "modern_graphics_lib", "modern_graphics_lib\modern_graphics_lib.vcxproj", "{A2C4C9DB-DEF3-46F4-ABA5-BE86F3C7DE86}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "..\Tests\Tests.vcxproj", "{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{A2C4C9DB-DEF3-46F4-ABA5-BE86F3C7DE86}.Release|x64.Build.0 = Release|x64
 		{A2C4C9DB-DEF3-46F4-ABA5-BE86F3C7DE86}.Release|x86.ActiveCfg = Release|Win32
 		{A2C4C9DB-DEF3-46F4-ABA5-BE86F3C7DE86}.Release|x86.Build.0 = Release|Win32
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Debug|x64.ActiveCfg = Debug|x64
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Debug|x64.Build.0 = Debug|x64
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Debug|x86.ActiveCfg = Debug|Win32
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Debug|x86.Build.0 = Debug|Win32
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Release|x64.ActiveCfg = Release|x64
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Release|x64.Build.0 = Release|x64
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Release|x86.ActiveCfg = Release|Win32
+		{663E31E6-F4B0-4A56-82F8-6E29E931C7F1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -16,7 +16,8 @@ void CModernCanvasClassAdapter::MoveTo(int x, int y)
 
 void CModernCanvasClassAdapter::LineTo(int x, int y)
 {
-	DrawLine(m_start, { x, y });
+	DrawLine(m_start, { x, y }, m_color);
+	MoveTo(x, y);
 }
 
 void CModernCanvasClassAdapter::SetColor(uint32_t rgbColor)

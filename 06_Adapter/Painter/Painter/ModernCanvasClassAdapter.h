@@ -19,6 +19,6 @@ namespace app
 
 	private:
 		modern_graphics_lib::CPoint m_start = { 0, 0 };
-		modern_graphics_lib::CRGBAColor m_color = modern_graphics_lib::CRGBAColor(0, 0, 0, 0);
+		modern_graphics_lib::CRGBAColor m_color = modern_graphics_lib::CRGBAColor(0, 0, 0, 1);
 	};
 }

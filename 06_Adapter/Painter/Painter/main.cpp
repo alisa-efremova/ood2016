@@ -59,7 +59,7 @@ int main()
 	string userInput;
 	if (getline(cin, userInput) && (userInput == "y" || userInput == "Y"))
 	{
-		app::PaintPictureOnModernGraphicsRenderer();
+		app::PaintPictureOnModernGraphicsRendererClassAdapter();
 	}
 	else
 	{
