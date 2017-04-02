@@ -8,5 +8,6 @@ namespace graphics_lib
 	public:
 		void MoveTo(int x, int y) override;
 		void LineTo(int x, int y) override;
+		void SetColor(uint32_t rgbColor) override;
 	};
 }

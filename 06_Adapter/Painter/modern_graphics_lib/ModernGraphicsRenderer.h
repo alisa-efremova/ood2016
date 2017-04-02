@@ -1,5 +1,6 @@
 #pragma once
 #include "Point.h"
+#include "RGBAColor.h"
 
 namespace modern_graphics_lib
 {
@@ -10,7 +11,7 @@ namespace modern_graphics_lib
 		~CModernGraphicsRenderer();
 
 		void BeginDraw();
-		void DrawLine(const CPoint & start, const CPoint & end);
+		void DrawLine(const CPoint & start, const CPoint & end, const CRGBAColor & color = CRGBAColor(0, 0, 0, 0));
 		void EndDraw();
 	private:
 		std::ostream & m_out;

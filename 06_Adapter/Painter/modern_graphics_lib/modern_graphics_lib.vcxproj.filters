@@ -33,6 +33,9 @@
     <ClInclude Include="ModernGraphicsRenderer.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="RGBAColor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

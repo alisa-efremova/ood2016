@@ -15,8 +15,8 @@ namespace app
 	{
 		using namespace shape_drawing_lib;
 
-		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 });
-		CRectangle rectangle({ 30, 40 }, 18, 24);
+		CTriangle triangle({ 10, 15 }, { 100, 200 }, { 150, 250 }, 0xE3B71A);
+		CRectangle rectangle({ 30, 40 }, 18, 24, 0xFF10AB);
 
 		painter.Draw(triangle);
 		painter.Draw(rectangle);
@@ -59,7 +59,7 @@ int main()
 	string userInput;
 	if (getline(cin, userInput) && (userInput == "y" || userInput == "Y"))
 	{
-		app::PaintPictureOnModernGraphicsRendererClassAdapter();
+		app::PaintPictureOnModernGraphicsRenderer();
 	}
 	else
 	{
