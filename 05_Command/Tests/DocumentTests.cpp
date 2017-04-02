@@ -281,19 +281,19 @@ BOOST_AUTO_TEST_CASE(TestAddingImage)
 
 	// provide valid path for image
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 0, 0));
-	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 } });
+	CheckImageItems(document, { { "1.png", 0, 0 } });
 
 	// insertion at last position
 	document.InsertImage(fs::path("images/2.png"), 10, 20, 1);
-	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 }, SImageInfo{ "2.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 0, 0 }, { "2.png", 10, 20 } });
 
 	// insertion at middle position
 	document.InsertImage(fs::path("images/3.png"), 30, 40, 1);
-	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 }, SImageInfo{ "3.png", 30, 40 }, SImageInfo{ "2.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 0, 0 }, { "3.png", 30, 40 }, { "2.png", 10, 20 } });
 
 	// invalid position
 	BOOST_REQUIRE_THROW(document.InsertImage(fs::path("images/3.png"), 0, 0, 10), out_of_range);
-	CheckImageItems(document, { SImageInfo{ "1.png", 0, 0 }, SImageInfo{ "3.png", 30, 40 }, SImageInfo{ "2.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 0, 0 }, { "3.png", 30, 40 }, { "2.png", 10, 20 } });
 }
 
 BOOST_AUTO_TEST_CASE(TestDeletingImage)
@@ -309,22 +309,22 @@ BOOST_AUTO_TEST_CASE(TestDeletingImage)
 	// deletion of the first image
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 30, 40));
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "2.png", 30, 40 } });
 
 	BOOST_REQUIRE_NO_THROW(document.DeleteItem(0));
-	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 } });
+	CheckImageItems(document, { { "2.png", 30, 40 } });
 
 	// deletion of the image in the middle of the list
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 30, 40));
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/3.png"), 50, 60));
-	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 }, SImageInfo{ "1.png", 30, 40 }, SImageInfo{ "3.png", 50, 60 } });
+	CheckImageItems(document, { { "2.png", 30, 40 }, { "1.png", 30, 40 }, { "3.png", 50, 60 } });
 
 	BOOST_REQUIRE_NO_THROW(document.DeleteItem(1));
-	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 }, SImageInfo{ "3.png", 50, 60 } });
+	CheckImageItems(document, { { "2.png", 30, 40 }, { "3.png", 50, 60 } });
 
 	// invalid position
 	BOOST_REQUIRE_THROW(document.DeleteItem(2), out_of_range);
-	CheckImageItems(document, { SImageInfo{ "2.png", 30, 40 }, SImageInfo{ "3.png", 50, 60 } });
+	CheckImageItems(document, { { "2.png", 30, 40 }, { "3.png", 50, 60 } });
 }
 
 BOOST_AUTO_TEST_CASE(TestInsertingImageUndoRedo)
@@ -337,31 +337,31 @@ BOOST_AUTO_TEST_CASE(TestInsertingImageUndoRedo)
 
 	// single image
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 10, 20 } });
 
 	BOOST_REQUIRE(document.CanUndo());
 	document.Undo();
 	CheckImageItems(document, {});
 
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 10, 20 } });
 
 	// multiple images
 	document.InsertImage(fs::path("images/2.png"), 30, 40, 1);
 	document.InsertImage(fs::path("images/3.png"), 50, 70, 1);
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 50, 70 }, SImageInfo{ "2.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "3.png", 50, 70 }, { "2.png", 30, 40 } });
 
 	document.Undo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "2.png", 30, 40 } });
 
 	document.Undo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 10, 20 } });
 
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "2.png", 30, 40 } });
 
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 50, 70 }, SImageInfo{ "2.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "3.png", 50, 70 }, { "2.png", 30, 40 } });
 
 	BOOST_REQUIRE(!document.CanRedo());
 }
@@ -377,35 +377,35 @@ BOOST_AUTO_TEST_CASE(TestDeletingImagesUndoRedo)
 
 	BOOST_REQUIRE(document.CanUndo());
 	document.Undo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 10, 20 } });
 
 	// multiple actions
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 15, 25));
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/3.png"), 30, 40));
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 15, 25 }, SImageInfo{ "3.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "2.png", 15, 25 }, { "3.png", 30, 40 } });
 
 	// delete item in the middle - second
 	document.DeleteItem(1);
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "3.png", 30, 40 } });
 
 	// delete first item - first
 	document.DeleteItem(0);
-	CheckImageItems(document, { SImageInfo{ "3.png", 30, 40 } });
+	CheckImageItems(document, { { "3.png", 30, 40 } });
 	BOOST_REQUIRE(document.CanUndo());
 
 	document.Undo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "3.png", 30, 40 } });
 
 	document.Undo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "2.png", 15, 25 }, SImageInfo{ "3.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "2.png", 15, 25 }, { "3.png", 30, 40 } });
 
 	BOOST_REQUIRE(document.CanRedo());
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 }, SImageInfo{ "3.png", 30, 40 } });
+	CheckImageItems(document, { { "1.png", 10, 20 }, { "3.png", 30, 40 } });
 
 	BOOST_REQUIRE(document.CanRedo());
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "3.png", 30, 40 } });
+	CheckImageItems(document, { { "3.png", 30, 40 } });
 }
 
 BOOST_AUTO_TEST_CASE(TestResizingImageUndoRedo)
@@ -413,39 +413,39 @@ BOOST_AUTO_TEST_CASE(TestResizingImageUndoRedo)
 	CDocument document;
 
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/1.png"), 10, 20));
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 10, 20 } });
 
 	document.GetItem(0).GetImage()->Resize(50, 30);
-	CheckImageItems(document, { SImageInfo{ "1.png", 50, 30 } });
+	CheckImageItems(document, { { "1.png", 50, 30 } });
 
 	document.DeleteItem(0);
 	BOOST_REQUIRE_NO_THROW(document.InsertImage(fs::path("images/2.png"), 100, 20));
-	CheckImageItems(document, { SImageInfo{ "2.png", 100, 20 } });
+	CheckImageItems(document, { { "2.png", 100, 20 } });
 
 	document.Undo();
 	CheckImageItems(document, {});
 
 	document.Undo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 50, 30 } });
+	CheckImageItems(document, { { "1.png", 50, 30 } });
 
 	document.Undo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 10, 20 } });
 
 	document.Undo();
 	CheckImageItems(document, {});
 	BOOST_REQUIRE(!document.CanUndo());
 
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 10, 20 } });
+	CheckImageItems(document, { { "1.png", 10, 20 } });
 
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "1.png", 50, 30 } });
+	CheckImageItems(document, { { "1.png", 50, 30 } });
 
 	document.Redo();
 	CheckImageItems(document, {});
 
 	document.Redo();
-	CheckImageItems(document, { SImageInfo{ "2.png", 100, 20 } });
+	CheckImageItems(document, { { "2.png", 100, 20 } });
 	BOOST_REQUIRE(!document.CanRedo());
 }
 
