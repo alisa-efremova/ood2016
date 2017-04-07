@@ -41,7 +41,7 @@ void CHtmlConverter::Save(const fs::path & path)
 		throw ios_base::failure("Cannot open file with path " + path.generic_string());
 	}
 
-	ofs << "<!DOCTYPE html>\n<html>\n<head>\n    <title>" << m_document.GetTitle() << "</title>\n</head>\n";
+	ofs << "<!DOCTYPE html>\n<html>\n<head>\n    <title>" << EncodeHtmlEntities(m_document.GetTitle()) << "</title>\n</head>\n";
 	ofs << "<body>\n" << CreateBody(path) << "</body>\n</html>";
 	ofs.close();
 }
