@@ -1,7 +1,9 @@
 #pragma once
-#include "CommonTypes.h"
+#include "Rect.h"
 #include "IDrawable.h"
+#include <memory>
 class IStyle;
+class ILineStyle;
 class IGroupShape;
 
 class IShape : public IDrawable
@@ -10,16 +12,14 @@ public:
 	virtual RectD GetFrame() = 0;
 	virtual void SetFrame(const RectD & rect) = 0;
 
-	virtual IStyle & GetOutlineStyle() = 0;
-	virtual const IStyle & GetOutlineStyle()const = 0;
+	virtual ILineStyle & GetOutlineStyle() = 0;
+	virtual const ILineStyle & GetOutlineStyle()const = 0;
 
 	virtual IStyle & GetFillStyle() = 0;
 	virtual const IStyle & GetFillStyle()const = 0;
 
 	virtual std::shared_ptr<IGroupShape> GetGroup() = 0;
 	virtual std::shared_ptr<const IGroupShape> GetGroup() const = 0;
-
-	virtual void Draw(const ICanvas & canvas) override = 0;
 
 	virtual ~IShape() = default;
 };

@@ -10,4 +10,3 @@ struct Rect
 };
 
 typedef Rect<double> RectD;
-typedef uint32_t RGBAColor;

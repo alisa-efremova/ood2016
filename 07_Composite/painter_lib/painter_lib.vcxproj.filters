@@ -39,9 +39,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommonTypes.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="IDrawable.h">
       <Filter>Source Files</Filter>
     </ClInclude>
@@ -72,6 +69,21 @@
     <ClInclude Include="Shape.h">
       <Filter>Source Files\Shape</Filter>
     </ClInclude>
+    <ClInclude Include="ILineStyle.h">
+      <Filter>Source Files\Style</Filter>
+    </ClInclude>
+    <ClInclude Include="RGBAColor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="CanvasSVG.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -79,6 +91,9 @@
     </ClCompile>
     <ClCompile Include="Shape.cpp">
       <Filter>Source Files\Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="CanvasSVG.cpp">
+      <Filter>Source Files\Canvas</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
