@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Composite", "Composite\Composite.vcxproj", "{C647D0C2-BFB8-42B6-BD86-14224CD394A8}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "painter_lib", "painter_lib\painter_lib.vcxproj", "{C647D0C2-BFB8-42B6-BD86-14224CD394A8}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Painter", "Painter\Painter.vcxproj", "{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{C647D0C2-BFB8-42B6-BD86-14224CD394A8}.Release|x64.Build.0 = Release|x64
 		{C647D0C2-BFB8-42B6-BD86-14224CD394A8}.Release|x86.ActiveCfg = Release|Win32
 		{C647D0C2-BFB8-42B6-BD86-14224CD394A8}.Release|x86.Build.0 = Release|Win32
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Debug|x64.ActiveCfg = Debug|x64
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Debug|x64.Build.0 = Debug|x64
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Debug|x86.ActiveCfg = Debug|Win32
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Debug|x86.Build.0 = Debug|Win32
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Release|x64.ActiveCfg = Release|x64
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Release|x64.Build.0 = Release|x64
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Release|x86.ActiveCfg = Release|Win32
+		{E1A9064F-EDF7-4AA3-BB90-626079DBE7B0}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

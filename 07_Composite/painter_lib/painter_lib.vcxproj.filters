@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Support files">
+      <UniqueIdentifier>{ceedc2a0-10bd-4462-a04c-295df99950ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Slide">
+      <UniqueIdentifier>{8a2b24f7-2c83-4048-8671-fe362d2ac6ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shape">
+      <UniqueIdentifier>{3710c00a-797b-492b-a44a-0ad9890cb8d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shape\Simple Shape">
+      <UniqueIdentifier>{ee411218-a971-4b30-a113-535cc267d314}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Shape\Group Shape">
+      <UniqueIdentifier>{07f717d2-2c14-4955-bc2e-6b9a1076057f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Style">
+      <UniqueIdentifier>{c0de37ba-a5f7-44a9-add3-79609e343c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Canvas">
+      <UniqueIdentifier>{aaf65165-3329-45bb-816e-d70b3e67184f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommonTypes.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IDrawable.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source Files\Support files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source Files\Support files</Filter>
+    </ClInclude>
+    <ClInclude Include="ICanvas.h">
+      <Filter>Source Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="ISlide.h">
+      <Filter>Source Files\Slide</Filter>
+    </ClInclude>
+    <ClInclude Include="IStyle.h">
+      <Filter>Source Files\Style</Filter>
+    </ClInclude>
+    <ClInclude Include="IShapes.h">
+      <Filter>Source Files\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="IShape.h">
+      <Filter>Source Files\Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="IGroupShape.h">
+      <Filter>Source Files\Shape\Group Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Source Files\Shape</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files\Support files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>Source Files\Shape</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
