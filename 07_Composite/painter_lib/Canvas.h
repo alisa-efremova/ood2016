@@ -33,7 +33,7 @@ public:
 
 protected:
 	size_t m_lineWidth = 1;
-	CRGBAColor m_lineColor = CRGBAColor(0xFFFFFF);
+	CRGBAColor m_lineColor;
 	boost::optional<CRGBAColor> m_fillColor;
 	std::ostream & m_ostream;
 };

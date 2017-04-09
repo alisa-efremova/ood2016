@@ -1,5 +1,10 @@
 #include "stdafx.h"
 #include "CanvasSVG.h"
+#include "Rectangle.h"
+#include "Ellipse.h"
+#include "Triangle.h"
+#include "LineStyle.h"
+#include "Style.h"
 #include <fstream>
 
 using namespace std;
@@ -16,19 +21,22 @@ int main()
 	CCanvasSVG canvas(ifs);
 	canvas.BeginDraw();
 
-	canvas.SetLineColor(0xFF2398);
-	canvas.SetLineWidth(2);
-	canvas.MoveTo(100, 100);
-	canvas.LineTo(200, 300);
-	canvas.LineTo(50, 300);
-	canvas.LineTo(100, 100);
-	canvas.BeginFill(0xFF0034);
-	canvas.MoveTo(400, 100);
-	canvas.LineTo(400, 200);
-	canvas.LineTo(500, 200);
-	canvas.LineTo(500, 100);
-	canvas.DrawEllipse(100, 300, 10, 20);
-	canvas.EndFill();
+	CRectangle rect({ 100, 200 }, 300, 200);
+	rect.SetFillStyle(make_unique<CStyle>(true, CRGBAColor(0x94631e)));
+	rect.SetOutlineStyle(make_unique<CLineStyle>(true, CRGBAColor(0)));
+
+	CEllipse ellipse({ 600, 150 }, 70, 70);
+	ellipse.SetFillStyle(make_unique<CStyle>(true, CRGBAColor(0xffd724)));
+	ellipse.SetOutlineStyle(make_unique<CLineStyle>(true, CRGBAColor(0xFF7924)));
+
+	CTriangle triangle({ 100, 200 }, { 250, 100 }, { 400, 200 });
+	triangle.SetFillStyle(make_unique<CStyle>(true, CRGBAColor(0x96260d)));
+	triangle.SetOutlineStyle(make_unique<CLineStyle>(true, CRGBAColor(0)));
+
+	rect.Draw(canvas);
+	ellipse.Draw(canvas);
+	triangle.Draw(canvas);
+
 	canvas.EndDraw();
 
 	ifs.close();

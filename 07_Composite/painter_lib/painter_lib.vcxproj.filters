@@ -84,6 +84,27 @@
     <ClInclude Include="CanvasSVG.h">
       <Filter>Source Files\Canvas</Filter>
     </ClInclude>
+    <ClInclude Include="LineStyle.h">
+      <Filter>Source Files\Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Style.h">
+      <Filter>Source Files\Style</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleShape.h">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="SPoint.h">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Rectangle.h">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangle.h">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Ellipse.h">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -94,6 +115,24 @@
     </ClCompile>
     <ClCompile Include="CanvasSVG.cpp">
       <Filter>Source Files\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="Style.cpp">
+      <Filter>Source Files\Style</Filter>
+    </ClCompile>
+    <ClCompile Include="LineStyle.cpp">
+      <Filter>Source Files\Style</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleShape.cpp">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Rectangle.cpp">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Ellipse.cpp">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangle.cpp">
+      <Filter>Source Files\Shape\Simple Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

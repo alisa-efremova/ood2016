@@ -5,7 +5,7 @@
 class CRGBAColor
 {
 public:
-	CRGBAColor(uint32_t rgbColor, float opacity = 1.0)
+	CRGBAColor(uint32_t rgbColor = 0, float opacity = 1.0)
 		: rgbColor(rgbColor)
 		, opacity(opacity)
 	{

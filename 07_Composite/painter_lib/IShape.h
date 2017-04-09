@@ -9,12 +9,14 @@ class IGroupShape;
 class IShape : public IDrawable
 {
 public:
-	virtual RectD GetFrame() = 0;
+	virtual RectD GetFrame()const = 0;
 	virtual void SetFrame(const RectD & rect) = 0;
 
+	virtual void SetOutlineStyle(std::unique_ptr<ILineStyle> && style) = 0;
 	virtual ILineStyle & GetOutlineStyle() = 0;
 	virtual const ILineStyle & GetOutlineStyle()const = 0;
 
+	virtual void SetFillStyle(std::unique_ptr<IStyle> && style) = 0;
 	virtual IStyle & GetFillStyle() = 0;
 	virtual const IStyle & GetFillStyle()const = 0;
 
