@@ -42,7 +42,7 @@ RectD CRectangle::GetFrame() const
 
 void CRectangle::SetFrame(const RectD & rect)
 {
-	m_leftTop = { rect.top, rect.left };
+	m_leftTop = { rect.left, rect.top };
 	m_width = rect.width;
 	m_height = rect.height;
 }

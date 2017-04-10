@@ -1,6 +1,7 @@
 #pragma once
 #include "SimpleShape.h"
 #include "SPoint.h"
+#include <vector>
 
 class CTriangle : public CSimpleShape
 {
@@ -12,8 +13,6 @@ public:
 	void SetFrame(const RectD & rect) override;
 
 private:
-	SPoint m_p1;
-	SPoint m_p2;
-	SPoint m_p3;
+	std::vector<SPoint> m_points;
 };
 
