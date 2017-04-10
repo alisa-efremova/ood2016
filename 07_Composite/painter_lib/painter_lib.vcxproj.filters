@@ -105,6 +105,9 @@
     <ClInclude Include="Ellipse.h">
       <Filter>Source Files\Shape\Simple Shape</Filter>
     </ClInclude>
+    <ClInclude Include="GroupShape.h">
+      <Filter>Source Files\Shape\Group Shape</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="Triangle.cpp">
       <Filter>Source Files\Shape\Simple Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="GroupShape.cpp">
+      <Filter>Source Files\Shape\Group Shape</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

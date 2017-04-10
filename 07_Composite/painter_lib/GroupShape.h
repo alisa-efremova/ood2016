@@ -1,19 +1,23 @@
 #pragma once
 #include "IGroupShape.h"
 #include <vector>
+#include "LineStyle.h"
+#include "Style.h"
+#include "SPoint.h"
+#include "Rect.h"
 
 class CGroupShape : public IGroupShape
 {
 public:
-#if 0
+
 	RectD GetFrame()const override;
 	void SetFrame(const RectD & rect) override;
 
-	void SetOutlineStyle(std::unique_ptr<ILineStyle> && style) override;
+	void SetOutlineStyle(const std::shared_ptr<ILineStyle> & style) override;
 	ILineStyle & GetOutlineStyle() override;
 	const ILineStyle & GetOutlineStyle()const override;
 
-	void SetFillStyle(std::unique_ptr<IStyle> && style) override;
+	void SetFillStyle(const std::shared_ptr<IStyle> & style) override;
 	IStyle & GetFillStyle() override;
 	const IStyle & GetFillStyle()const override;
 
@@ -25,8 +29,10 @@ public:
 	std::shared_ptr<IShape> GetShapeAtIndex(size_t index) override;
 	void RemoveShapeAtIndex(size_t index) override;
 
+	void Draw(ICanvas & canvas) override;
+
 private:
 	std::vector<std::shared_ptr<IShape>> m_shapes;
-#endif
+	CLineStyle m_tmpStyle = CLineStyle();
 };
 

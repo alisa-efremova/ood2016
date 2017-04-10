@@ -3,9 +3,9 @@
 
 using namespace std;
 
-void CSimpleShape::SetOutlineStyle(unique_ptr<ILineStyle> && style)
+void CSimpleShape::SetOutlineStyle(const shared_ptr<ILineStyle> & style)
 {
-	m_outlineStyle = move(style);
+	m_outlineStyle = style;
 }
 
 ILineStyle & CSimpleShape::GetOutlineStyle()
@@ -18,9 +18,9 @@ const ILineStyle & CSimpleShape::GetOutlineStyle() const
 	return *m_outlineStyle;
 }
 
-void CSimpleShape::SetFillStyle(unique_ptr<IStyle> && style)
+void CSimpleShape::SetFillStyle(const shared_ptr<IStyle> & style)
 {
-	m_fillStyle = move(style);
+	m_fillStyle = style;
 }
 
 IStyle & CSimpleShape::GetFillStyle()

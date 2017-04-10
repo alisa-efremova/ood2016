@@ -142,6 +142,7 @@
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="CanvasSVG.h" />
     <ClInclude Include="Ellipse.h" />
+    <ClInclude Include="GroupShape.h" />
     <ClInclude Include="LineStyle.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="ICanvas.h" />
@@ -165,6 +166,7 @@
   <ItemGroup>
     <ClCompile Include="CanvasSVG.cpp" />
     <ClCompile Include="Ellipse.cpp" />
+    <ClCompile Include="GroupShape.cpp" />
     <ClCompile Include="LineStyle.cpp" />
     <ClCompile Include="Rectangle.cpp" />
     <ClCompile Include="Shape.cpp" />
