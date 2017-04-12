@@ -5,7 +5,8 @@
 #include "Triangle.h"
 #include "LineStyle.h"
 #include "Style.h"
-#include "GroupShape.h"
+//#include "GroupShape.h"
+#include "Slide.h"
 #include <fstream>
 
 using namespace std;
@@ -21,32 +22,36 @@ int main()
 			return 1;
 		}
 
+		CSlide slide;
+
 		CCanvasSVG canvas(ifs);
 		canvas.BeginDraw();
 
-		CRectangle rect({ 100, 210 }, 300, 200);
-		auto fillStyle = make_shared<CStyle>(true, CRGBAColor(0x94631e));
-		rect.SetFillStyle(fillStyle);
-		rect.SetOutlineStyle(make_shared<CLineStyle>(true, CRGBAColor(0)));
+		// add house as group
+		auto houseBlock = make_shared<CRectangle>( SPoint{ 100, 310 }, 300, 200);
+		houseBlock->SetFillStyle(make_shared<CStyle>(true, CRGBAColor(0x94631e)));
+		houseBlock->SetOutlineStyle(make_shared<CLineStyle>(true, CRGBAColor(0)));
 
-#if 0
-		CEllipse ellipse({ 600, 150 }, 70, 70);
-		ellipse.SetFillStyle(make_shared<CStyle>(true, CRGBAColor(0xffd724)));
-		ellipse.SetOutlineStyle(make_shared<CLineStyle>(true, CRGBAColor(0xFF7924)));
-		ellipse.Draw(canvas);
-#endif
+		auto roof = make_shared<CTriangle>( SPoint{ 100, 300 }, SPoint{ 250, 200 }, SPoint{ 400, 300 });
+		roof->SetFillStyle(make_shared<CStyle>(true, CRGBAColor(0x96260d)));
+		roof->SetOutlineStyle(make_shared<CLineStyle>(true, CRGBAColor(0)));
+		roof->SetFrame({ 50, 200, 400, 100 });
 
-		CTriangle triangle({ 100, 200 }, { 250, 100 }, { 400, 200 });
-		triangle.SetFillStyle(make_shared<CStyle>(true, CRGBAColor(0x96260d)));
-		triangle.SetOutlineStyle(make_shared<CLineStyle>(true, CRGBAColor(0)));
-		triangle.SetFrame({ 50, 100, 400, 100 });
+		auto house = make_shared<CGroupShape>();
+		house->InsertShape(houseBlock);
+		house->InsertShape(roof);
+		slide.GetShapes().InsertShape(house);
 
-		CGroupShape group;
-		group.InsertShape(shared_ptr<CRectangle>(&rect));
-		group.InsertShape(shared_ptr<CTriangle>(&triangle));
-		group.Draw(canvas);
+		slide.Draw(canvas);
 
-		auto frame = group.GetFrame();
+		// add sun
+		auto sun = make_shared<CEllipse>(SPoint{ 100, 100 }, 70, 70);
+		sun->SetFillStyle(make_shared<CStyle>(true, CRGBAColor(0xffd724)));
+		sun->SetOutlineStyle(make_shared<CLineStyle>(true, CRGBAColor(0xFF7924)));
+		slide.GetShapes().InsertShape(sun);
+
+		// demonstrate frame changes for group
+		auto frame = house->GetFrame();
 
 		CRectangle groupFrame({ 0, 0 }, 0, 0);
 		groupFrame.SetFrame(frame);
@@ -60,8 +65,9 @@ int main()
 		groupFrame.SetFrame(frame);
 		groupFrame.Draw(canvas);
 
-		group.SetFrame(frame);
-		group.Draw(canvas);
+		house->SetFrame(frame);
+
+		slide.Draw(canvas);
 
 		canvas.EndDraw();
 		ifs.close();

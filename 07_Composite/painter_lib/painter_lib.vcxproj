@@ -155,8 +155,8 @@
     <ClInclude Include="IStyle.h" />
     <ClInclude Include="Rectangle.h" />
     <ClInclude Include="RGBAColor.h" />
-    <ClInclude Include="Shape.h" />
     <ClInclude Include="SimpleShape.h" />
+    <ClInclude Include="Slide.h" />
     <ClInclude Include="SPoint.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="Style.h" />
@@ -169,8 +169,8 @@
     <ClCompile Include="GroupShape.cpp" />
     <ClCompile Include="LineStyle.cpp" />
     <ClCompile Include="Rectangle.cpp" />
-    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="SimpleShape.cpp" />
+    <ClCompile Include="Slide.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

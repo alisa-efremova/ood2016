@@ -66,9 +66,6 @@
     <ClInclude Include="IGroupShape.h">
       <Filter>Source Files\Shape\Group Shape</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.h">
-      <Filter>Source Files\Shape</Filter>
-    </ClInclude>
     <ClInclude Include="ILineStyle.h">
       <Filter>Source Files\Style</Filter>
     </ClInclude>
@@ -108,13 +105,13 @@
     <ClInclude Include="GroupShape.h">
       <Filter>Source Files\Shape\Group Shape</Filter>
     </ClInclude>
+    <ClInclude Include="Slide.h">
+      <Filter>Source Files\Slide</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files\Support files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>Source Files\Shape</Filter>
     </ClCompile>
     <ClCompile Include="CanvasSVG.cpp">
       <Filter>Source Files\Canvas</Filter>
@@ -139,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="GroupShape.cpp">
       <Filter>Source Files\Shape\Group Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Slide.cpp">
+      <Filter>Source Files\Slide</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
