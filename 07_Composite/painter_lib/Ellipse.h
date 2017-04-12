@@ -12,6 +12,8 @@ public:
 	void SetFrame(const RectD & rect) override;
 
 private:
+	void CalculateFrame() override;
+	
 	SPoint m_center;
 	double m_hRadius;
 	double m_vRadius;

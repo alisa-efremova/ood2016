@@ -2,23 +2,32 @@
 #include "IShape.h"
 #include "Style.h"
 #include "LineStyle.h"
+class ICanvas;
 
 class CSimpleShape : public IShape
 {
 public:
-	void SetOutlineStyle(const std::shared_ptr<ILineStyle> & style) override;
-	ILineStyle & GetOutlineStyle() override;
-	const ILineStyle & GetOutlineStyle()const override;
+	CSimpleShape();
 
-	void SetFillStyle(const std::shared_ptr<IStyle> & style) override;
-	IStyle & GetFillStyle() override;
-	const IStyle & GetFillStyle()const override;
+	void SetOutlineStyle(const ILineStylePtr & style) override;
+	ILineStylePtr GetOutlineStyle() override;
+	ILineStyleConstPtr GetOutlineStyle()const override;
 
-	std::shared_ptr<IGroupShape> GetGroup() override;
-	std::shared_ptr<const IGroupShape> GetGroup() const override;
+	void SetFillStyle(const IStylePtr & style) override;
+	IStylePtr GetFillStyle() override;
+	IStyleConstPtr GetFillStyle()const override;
+
+	IGroupShapePtr GetGroup() override;
+	IGroupShapeConstPtr GetGroup() const override;
 
 protected:
+	void BeginDraw(ICanvas & canvas);
+	void EndDraw(ICanvas & canvas);
+
+	virtual void CalculateFrame() = 0;
+
 	std::shared_ptr<ILineStyle> m_outlineStyle;
 	std::shared_ptr<IStyle> m_fillStyle;
+	RectD m_frame = { 0, 0, 0, 0 };
 };
 

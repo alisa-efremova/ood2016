@@ -13,26 +13,28 @@ public:
 	RectD GetFrame()const override;
 	void SetFrame(const RectD & rect) override;
 
-	void SetOutlineStyle(const std::shared_ptr<ILineStyle> & style) override;
-	ILineStyle & GetOutlineStyle() override;
-	const ILineStyle & GetOutlineStyle()const override;
+	void SetOutlineStyle(const ILineStylePtr & style) override;
+	ILineStylePtr GetOutlineStyle() override;
+	ILineStyleConstPtr GetOutlineStyle()const override;
 
-	void SetFillStyle(const std::shared_ptr<IStyle> & style) override;
-	IStyle & GetFillStyle() override;
-	const IStyle & GetFillStyle()const override;
+	void SetFillStyle(const IStylePtr & style) override;
+	IStylePtr GetFillStyle() override;
+	IStyleConstPtr GetFillStyle()const override;
 
-	std::shared_ptr<IGroupShape> GetGroup() override;
-	std::shared_ptr<const IGroupShape> GetGroup() const override;
+	IGroupShapePtr GetGroup() override;
+	IGroupShapeConstPtr GetGroup() const override;
 
 	size_t GetShapesCount()const override;
-	void InsertShape(const std::shared_ptr<IShape> & shape, size_t position = std::numeric_limits<size_t>::max()) override;
+	void InsertShape(const std::shared_ptr<IShape> & shape) override;
 	std::shared_ptr<IShape> GetShapeAtIndex(size_t index) override;
 	void RemoveShapeAtIndex(size_t index) override;
 
 	void Draw(ICanvas & canvas) override;
 
 private:
+	IStylePtr CalculateFillStyle()const;
+	ILineStylePtr CalculateOutlineStyle()const;
+
 	std::vector<std::shared_ptr<IShape>> m_shapes;
-	CLineStyle m_tmpStyle = CLineStyle();
 };
 

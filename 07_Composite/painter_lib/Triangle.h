@@ -13,6 +13,8 @@ public:
 	void SetFrame(const RectD & rect) override;
 
 private:
+	void CalculateFrame() override;
+
 	std::vector<SPoint> m_points;
 };
 

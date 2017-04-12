@@ -1,44 +1,72 @@
 #include "stdafx.h"
 #include "SimpleShape.h"
+#include "ICanvas.h"
 
 using namespace std;
 
-void CSimpleShape::SetOutlineStyle(const shared_ptr<ILineStyle> & style)
+CSimpleShape::CSimpleShape()
+{
+	m_fillStyle = make_shared<CStyle>();
+	m_outlineStyle = make_shared<CLineStyle>(true, 0);
+}
+
+void CSimpleShape::SetOutlineStyle(const ILineStylePtr & style)
 {
 	m_outlineStyle = style;
 }
 
-ILineStyle & CSimpleShape::GetOutlineStyle()
+ILineStylePtr CSimpleShape::GetOutlineStyle()
 {
-	return *m_outlineStyle;
+	return m_outlineStyle;
 }
 
-const ILineStyle & CSimpleShape::GetOutlineStyle() const
+ILineStyleConstPtr CSimpleShape::GetOutlineStyle() const
 {
-	return *m_outlineStyle;
+	return m_outlineStyle;
 }
 
-void CSimpleShape::SetFillStyle(const shared_ptr<IStyle> & style)
+void CSimpleShape::SetFillStyle(const IStylePtr & style)
 {
 	m_fillStyle = style;
 }
 
-IStyle & CSimpleShape::GetFillStyle()
+IStylePtr CSimpleShape::GetFillStyle()
 {
-	return *m_fillStyle;
+	return m_fillStyle;
 }
 
-const IStyle & CSimpleShape::GetFillStyle() const
+IStyleConstPtr CSimpleShape::GetFillStyle() const
 {
-	return *m_fillStyle;
+	return m_fillStyle;
 }
 
-std::shared_ptr<IGroupShape> CSimpleShape::GetGroup()
+IGroupShapePtr CSimpleShape::GetGroup()
 {
 	return nullptr;
 }
 
-std::shared_ptr<const IGroupShape> CSimpleShape::GetGroup() const
+IGroupShapeConstPtr CSimpleShape::GetGroup() const
 {
 	return nullptr;
+}
+
+void CSimpleShape::BeginDraw(ICanvas & canvas)
+{
+	if (m_fillStyle->IsEnabled())
+	{
+		canvas.BeginFill(m_fillStyle->GetColor());
+	}
+
+	if (m_outlineStyle->IsEnabled())
+	{
+		canvas.SetLineColor(m_outlineStyle->GetColor());
+	}
+}
+
+void CSimpleShape::EndDraw(ICanvas & canvas)
+{
+	if (m_fillStyle->IsEnabled())
+	{
+		canvas.EndFill();
+	}
 }

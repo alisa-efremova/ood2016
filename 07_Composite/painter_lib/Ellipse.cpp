@@ -12,32 +12,19 @@ CEllipse::CEllipse(SPoint center, double hRadius, double vRadius)
 
 	m_hRadius = hRadius;
 	m_vRadius = vRadius;
+	CalculateFrame();
 }
 
 void CEllipse::Draw(ICanvas & canvas)
 {
-	bool isFillStyleEnabled = m_fillStyle && m_fillStyle->IsEnabled() && m_fillStyle->GetColor();
-	if (isFillStyleEnabled)
-	{
-		canvas.BeginFill(*(m_fillStyle->GetColor()));
-	}
-
-	if (m_outlineStyle && m_outlineStyle->IsEnabled() && m_outlineStyle->GetColor())
-	{
-		canvas.SetLineColor(*(m_outlineStyle->GetColor()));
-	}
-
+	BeginDraw(canvas);
 	canvas.DrawEllipse(m_center.x, m_center.y, m_hRadius, m_vRadius);
-
-	if (isFillStyleEnabled)
-	{
-		canvas.EndFill();
-	}
+	EndDraw(canvas);
 }
 
 RectD CEllipse::GetFrame() const
 {
-	return { m_center.x - m_hRadius, m_center.y - m_vRadius, 2 * m_vRadius, 2 * m_hRadius };
+	return m_frame;
 }
 
 void CEllipse::SetFrame(const RectD & rect)
@@ -46,4 +33,10 @@ void CEllipse::SetFrame(const RectD & rect)
 	m_center.y = rect.top + rect.height / 2;
 	m_hRadius = rect.width / 2;
 	m_vRadius = rect.height / 2;
+	CalculateFrame();
+}
+
+void CEllipse::CalculateFrame()
+{
+	m_frame = { m_center.x - m_hRadius, m_center.y - m_vRadius, 2 * m_vRadius, 2 * m_hRadius };
 }

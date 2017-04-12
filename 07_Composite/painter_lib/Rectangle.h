@@ -12,6 +12,8 @@ public:
 	void SetFrame(const RectD & rect) override;
 
 private:
+	void CalculateFrame() override;
+
 	SPoint m_leftTop;
 	double m_width;
 	double m_height;

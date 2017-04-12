@@ -7,20 +7,12 @@ CRectangle::CRectangle(const SPoint & leftTop, double width, double height)
 	, m_width(width)
 	, m_height(height)
 {
+	CalculateFrame();
 }
 
 void CRectangle::Draw(ICanvas & canvas)
 {
-	bool isFillStyleEnabled = m_fillStyle && m_fillStyle->IsEnabled() && m_fillStyle->GetColor();
-	if (isFillStyleEnabled)
-	{
-		canvas.BeginFill(*(m_fillStyle->GetColor()));
-	}
-
-	if (m_outlineStyle && m_outlineStyle->IsEnabled() && m_outlineStyle->GetColor())
-	{
-		canvas.SetLineColor(*(m_outlineStyle->GetColor()));
-	}
+	BeginDraw(canvas);
 
 	canvas.MoveTo(m_leftTop.x, m_leftTop.y);
 
@@ -29,15 +21,12 @@ void CRectangle::Draw(ICanvas & canvas)
 	canvas.LineTo(m_leftTop.x, m_leftTop.y + m_height);
 	canvas.LineTo(m_leftTop.x, m_leftTop.y);
 
-	if (isFillStyleEnabled)
-	{
-		canvas.EndFill();
-	}
+	EndDraw(canvas);
 }
 
 RectD CRectangle::GetFrame() const
 {
-	return { m_leftTop.x, m_leftTop.y, m_width, m_height };
+	return m_frame;
 }
 
 void CRectangle::SetFrame(const RectD & rect)
@@ -45,4 +34,10 @@ void CRectangle::SetFrame(const RectD & rect)
 	m_leftTop = { rect.left, rect.top };
 	m_width = rect.width;
 	m_height = rect.height;
+	CalculateFrame();
+}
+
+void CRectangle::CalculateFrame()
+{
+	m_frame = { m_leftTop.x, m_leftTop.y, m_width, m_height };
 }

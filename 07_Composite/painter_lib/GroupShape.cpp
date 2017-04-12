@@ -1,16 +1,16 @@
 #include "stdafx.h"
 #include "GroupShape.h"
 #include <algorithm>
-
+#include <limits>
 
 using namespace std;
 
-shared_ptr<IGroupShape> CGroupShape::GetGroup()
+IGroupShapePtr CGroupShape::GetGroup()
 {
 	return make_shared<CGroupShape>(*this);
 }
 
-shared_ptr<const IGroupShape> CGroupShape::GetGroup() const
+IGroupShapeConstPtr CGroupShape::GetGroup() const
 {
 	return make_shared<CGroupShape>(*this);
 }
@@ -20,10 +20,9 @@ size_t CGroupShape::GetShapesCount() const
 	return m_shapes.size();
 }
 
-void CGroupShape::InsertShape(const shared_ptr<IShape> & shape, size_t position)
+void CGroupShape::InsertShape(const shared_ptr<IShape> & shape)
 {
 	m_shapes.push_back(shape);
-	//m_shapes.at(position) = shape;
 }
 
 shared_ptr<IShape> CGroupShape::GetShapeAtIndex(size_t index)
@@ -49,6 +48,48 @@ void CGroupShape::Draw(ICanvas & canvas)
 	{
 		shape->Draw(canvas);
 	}
+}
+
+IStylePtr CGroupShape::CalculateFillStyle() const
+{
+	if (m_shapes.empty())
+	{
+		throw runtime_error("No shapes in the group");
+	}
+
+	auto & style = m_shapes.at(0)->GetFillStyle();
+	bool hasSameStyle = true;
+	for (auto & shape : m_shapes)
+	{
+		if (shape->GetFillStyle() != style)
+		{
+			hasSameStyle = false;
+			break;
+		}
+	}
+
+	return hasSameStyle ? style : nullptr;
+}
+
+ILineStylePtr CGroupShape::CalculateOutlineStyle() const
+{
+	if (m_shapes.empty())
+	{
+		throw runtime_error("No shapes in the group");
+	}
+
+	auto & style = m_shapes.at(0)->GetOutlineStyle();
+	bool hasSameStyle = true;
+	for (auto & shape : m_shapes)
+	{
+		if (shape->GetOutlineStyle() != style)
+		{
+			hasSameStyle = false;
+			break;
+		}
+	}
+
+	return hasSameStyle ? style : nullptr;
 }
 
 RectD CGroupShape::GetFrame() const
@@ -84,7 +125,7 @@ void CGroupShape::SetFrame(const RectD & rect)
 	}
 }
 
-void CGroupShape::SetOutlineStyle(const shared_ptr<ILineStyle> & style)
+void CGroupShape::SetOutlineStyle(const ILineStylePtr & style)
 {
 	for (auto & shape : m_shapes)
 	{
@@ -92,17 +133,17 @@ void CGroupShape::SetOutlineStyle(const shared_ptr<ILineStyle> & style)
 	}
 }
 
-ILineStyle & CGroupShape::GetOutlineStyle()
+ILineStylePtr CGroupShape::GetOutlineStyle()
 {
-	return m_tmpStyle;
+	return CalculateOutlineStyle();
 }
 
-const ILineStyle & CGroupShape::GetOutlineStyle() const
+ILineStyleConstPtr CGroupShape::GetOutlineStyle() const
 {
-	return m_tmpStyle;
+	return CalculateOutlineStyle();
 }
 
-void CGroupShape::SetFillStyle(const shared_ptr<IStyle> & style)
+void CGroupShape::SetFillStyle(const IStylePtr & style)
 {
 	for (auto & shape : m_shapes)
 	{
@@ -110,14 +151,13 @@ void CGroupShape::SetFillStyle(const shared_ptr<IStyle> & style)
 	}
 }
 
-IStyle & CGroupShape::GetFillStyle()
+IStylePtr CGroupShape::GetFillStyle()
 {
-	return m_tmpStyle;
+	return CalculateFillStyle();
 
 }
 
-const IStyle & CGroupShape::GetFillStyle() const
+IStyleConstPtr CGroupShape::GetFillStyle() const
 {
-	return m_tmpStyle;
-
+	return CalculateFillStyle();
 }
