@@ -26,6 +26,12 @@ bool CSoldState::TurnCrank()
 	return false;
 }
 
+bool CSoldState::Refill(unsigned numBalls)
+{
+	m_out << "Can't refill machine while dispensing a gumball\n";
+	return false;
+}
+
 bool CSoldState::Dispense()
 {
 	m_gumballMachine.ReleaseBall();

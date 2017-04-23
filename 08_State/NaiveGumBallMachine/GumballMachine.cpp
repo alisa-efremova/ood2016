@@ -101,10 +101,69 @@ bool CGumballMachine::TurnCrank()
 	return result;
 }
 
-void CGumballMachine::Refill(unsigned numBalls)
+bool CGumballMachine::Refill(unsigned numBalls)
 {
-	m_ballCount = numBalls;
-	m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
+	bool result = false;
+
+	switch (m_state)
+	{
+	case State::NoQuarter:
+	case State::HasQuarter:
+		m_ballCount = numBalls;
+		if (numBalls == 0)
+		{
+			m_out << "Machine is empty\n";
+			m_state = State::SoldOut;
+		}
+		else
+		{
+			m_out << "Machine is refilled\n";
+		}
+		result = true;
+		break;
+	case State::SoldOut:
+		m_ballCount = numBalls;
+		if (numBalls == 0)
+		{
+			m_out << "Machine is empty\n";
+		}
+		else
+		{
+			m_out << "Machine is refilled\n";
+			m_state = m_quarterCount > 0 ? State::HasQuarter : State::NoQuarter;
+		}
+		result = true;
+		break;
+	case State::Sold:
+		m_out << "Can't refill machine while dispensing a gumball\n";
+		break;
+	}
+
+	if (m_state == State::Sold)
+	{
+		m_out << "Can't refill machine while dispensing a gumball\n";
+	}
+	else
+	{
+		m_ballCount = numBalls;
+		result = true;
+		if (m_ballCount == 0)
+		{
+			m_state = State::SoldOut;
+		}
+		else
+		{
+			if (m_quarterCount == 0)
+			{
+				m_state = State::NoQuarter;
+			}
+			else
+			{
+				m_state = State::HasQuarter;
+			}
+		}
+	}
+	return result;
 }
 
 string CGumballMachine::ToString()const

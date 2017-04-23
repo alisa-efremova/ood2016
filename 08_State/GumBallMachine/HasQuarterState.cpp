@@ -36,6 +36,20 @@ bool CHasQuarterState::Dispense()
 	return false;
 }
 
+bool CHasQuarterState::Refill(unsigned numBalls)
+{
+	if (numBalls == 0)
+	{
+		m_out << "Machine is empty\n";
+		m_gumballMachine.SetSoldOutState();
+	}
+	else
+	{
+		m_out << "Machine is refilled\n";
+	}
+	return true;
+}
+
 string CHasQuarterState::ToString() const
 {
 	return "waiting for turn of crank";

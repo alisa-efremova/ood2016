@@ -17,7 +17,7 @@ public:
 	bool InsertQuarter();
 	bool EjectQuarter();
 	bool TurnCrank();
-	void Refill(unsigned numBalls);
+	bool Refill(unsigned numBalls);
 
 	std::string ToString()const;
 	unsigned GetBallCount()const;

@@ -35,6 +35,27 @@ bool CSoldOutState::TurnCrank()
 	return false;
 }
 
+bool CSoldOutState::Refill(unsigned numBalls)
+{
+	if (numBalls == 0)
+	{
+		m_out << "Machine is empty\n";
+	}
+	else
+	{
+		m_out << "Machine is refilled\n";
+		if (m_gumballMachine.GetQuarterCount() == 0)
+		{
+			m_gumballMachine.SetNoQuarterState();
+		}
+		else
+		{
+			m_gumballMachine.SetHasQuarterState();
+		}
+	}
+	return true;
+}
+
 bool CSoldOutState::Dispense()
 {
 	m_out << "No gumball dispensed\n";

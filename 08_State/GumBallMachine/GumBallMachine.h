@@ -11,6 +11,8 @@ public:
 	bool EjectQuarter();
 	bool InsertQuarter();
 	bool TurnCrank();
+	bool Refill(unsigned numBalls);
+
 	unsigned GetBallCount()const override;
 	unsigned GetQuarterCount()const override;
 

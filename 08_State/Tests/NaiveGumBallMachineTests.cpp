@@ -28,6 +28,20 @@ BOOST_AUTO_TEST_CASE(no_shopper_actions_are_valid)
 	BOOST_REQUIRE(machine.GetCurrentState() == State::SoldOut);
 	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
 }
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_zero_amount)
+{
+	BOOST_REQUIRE(machine.Refill(0));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 0);
+	BOOST_REQUIRE(machine.GetCurrentState() == State::SoldOut);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
+}
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_balls)
+{
+	BOOST_REQUIRE(machine.Refill(3));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 3);
+	BOOST_REQUIRE(machine.GetCurrentState() == State::NoQuarter);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
+}
 BOOST_AUTO_TEST_SUITE_END()
 
 struct non_empty_gumball_machine_
@@ -55,9 +69,23 @@ BOOST_AUTO_TEST_CASE(quarter_cannot_be_ejected)
 	BOOST_REQUIRE(machine.GetCurrentState() == State::NoQuarter);
 	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
 }
-BOOST_AUTO_TEST_CASE(crunk_cannot_be_turned)
+BOOST_AUTO_TEST_CASE(gumball_cannot_be_sold)
 {
 	BOOST_REQUIRE(!machine.TurnCrank());
+	BOOST_REQUIRE(machine.GetCurrentState() == State::NoQuarter);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
+}
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_zero_amount)
+{
+	BOOST_REQUIRE(machine.Refill(0));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 0);
+	BOOST_REQUIRE(machine.GetCurrentState() == State::SoldOut);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
+}
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_balls)
+{
+	BOOST_REQUIRE(machine.Refill(3));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 3);
 	BOOST_REQUIRE(machine.GetCurrentState() == State::NoQuarter);
 	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
 }
@@ -89,12 +117,26 @@ BOOST_AUTO_TEST_CASE(quarter_can_be_inserted_again)
 	BOOST_REQUIRE(machine.GetCurrentState() == State::HasQuarter);
 	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 2);
 }
-BOOST_AUTO_TEST_CASE(crank_can_be_turned)
+BOOST_AUTO_TEST_CASE(gumball_can_be_sold)
 {
 	BOOST_REQUIRE(machine.TurnCrank());
 	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 1);
 	BOOST_REQUIRE(machine.GetCurrentState() == State::NoQuarter);
 	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
+}
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_zero_amount)
+{
+	BOOST_REQUIRE(machine.Refill(0));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 0);
+	BOOST_REQUIRE(machine.GetCurrentState() == State::SoldOut);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 1);
+}
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_balls)
+{
+	BOOST_REQUIRE(machine.Refill(3));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 3);
+	BOOST_REQUIRE(machine.GetCurrentState() == State::HasQuarter);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 1);
 }
 BOOST_AUTO_TEST_SUITE_END()
 
@@ -171,6 +213,20 @@ BOOST_AUTO_TEST_CASE(quarters_can_be_ejected_when_gum_sold_out)
 	BOOST_REQUIRE(machine.EjectQuarter());
 	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 0);
 	BOOST_REQUIRE(machine.GetCurrentState() == State::SoldOut);
+}
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_zero_amount)
+{
+	BOOST_REQUIRE(machine.Refill(0));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 0);
+	BOOST_REQUIRE(machine.GetCurrentState() == State::SoldOut);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 5);
+}
+BOOST_AUTO_TEST_CASE(can_be_refilled_with_balls)
+{
+	BOOST_REQUIRE(machine.Refill(3));
+	BOOST_REQUIRE_EQUAL(machine.GetBallCount(), 3);
+	BOOST_REQUIRE(machine.GetCurrentState() == State::HasQuarter);
+	BOOST_REQUIRE_EQUAL(machine.GetQuarterCount(), 5);
 }
 BOOST_AUTO_TEST_SUITE_END()
 

@@ -9,6 +9,7 @@ public:
 	bool EjectQuarter() override;
 	bool TurnCrank() override;
 	bool Dispense() override;
+	bool Refill(unsigned numBalls) override;
 	std::string ToString() const override;
 };
 

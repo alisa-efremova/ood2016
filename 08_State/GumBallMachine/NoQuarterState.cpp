@@ -27,6 +27,20 @@ bool CNoQuarterState::TurnCrank()
 	return false;
 }
 
+bool CNoQuarterState::Refill(unsigned numBalls)
+{
+	if (numBalls == 0)
+	{
+		m_out << "Machine is empty\n";
+		m_gumballMachine.SetSoldOutState();
+	}
+	else
+	{
+		m_out << "Machine is refilled\n";
+	}
+	return true;
+}
+
 bool CNoQuarterState::Dispense()
 {
 	m_out << "You need to pay first\n";

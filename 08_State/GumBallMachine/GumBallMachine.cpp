@@ -48,6 +48,16 @@ bool CGumBallMachine::TurnCrank()
 	return m_currentState->Dispense();
 }
 
+bool CGumBallMachine::Refill(unsigned numBalls)
+{
+	if (m_currentState->Refill(numBalls))
+	{
+		m_ballCount = numBalls;
+		return true;
+	}
+	return false;
+}
+
 string CGumBallMachine::ToString()const
 {
 	auto fmt = boost::format(R"(
