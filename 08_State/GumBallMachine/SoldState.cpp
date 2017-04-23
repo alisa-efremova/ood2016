@@ -1,41 +1,44 @@
 #include "stdafx.h"
 #include "SoldState.h"
-#include <iostream>
 
 using namespace std;
 
-CSoldState::CSoldState(IGumBallMachine & gumballMachine)
-	:m_gumballMachine(gumballMachine)
+CSoldState::CSoldState(IGumBallMachine & gumballMachine, ostream & out)
+	: CState(gumballMachine, out)
 {
 }
 
-void CSoldState::InsertQuarter()
+bool CSoldState::InsertQuarter()
 {
-	cout << "Please wait, we're already giving you a gumball\n";
+	m_out << "Please wait, we're already giving you a gumball\n";
+	return false;
 }
 
-void CSoldState::EjectQuarter()
+bool CSoldState::EjectQuarter()
 {
-	cout << "Sorry you already turned the crank\n";
+	m_out << "Sorry you already turned the crank\n";
+	return false;
 }
 
-void CSoldState::TurnCrank()
+bool CSoldState::TurnCrank()
 {
-	cout << "Turning twice doesn't get you another gumball\n";
+	m_out << "Turning twice doesn't get you another gumball\n";
+	return false;
 }
 
-void CSoldState::Dispense()
+bool CSoldState::Dispense()
 {
 	m_gumballMachine.ReleaseBall();
 	if (m_gumballMachine.GetBallCount() == 0)
 	{
-		cout << "Oops, out of gumballs\n";
+		m_out << "Oops, out of gumballs\n";
 		m_gumballMachine.SetSoldOutState();
 	}
 	else
 	{
 		m_gumballMachine.SetNoQuarterState();
 	}
+	return true;
 }
 
 string CSoldState::ToString() const

@@ -1,34 +1,37 @@
 #include "stdafx.h"
 #include "HasQuarterState.h"
-#include <iostream>
 
 using namespace std;
 
-CHasQuarterState::CHasQuarterState(IGumBallMachine & gumballMachine)
-	:m_gumballMachine(gumballMachine)
+CHasQuarterState::CHasQuarterState(IGumBallMachine & gumballMachine, ostream & out)
+	: CState(gumballMachine, out)
 {
 }
 
-void CHasQuarterState::InsertQuarter()
+bool CHasQuarterState::InsertQuarter()
 {
-	cout << "You can't insert another quarter\n";
+	m_out << "You can't insert another quarter\n";
+	return false;
 }
 
-void CHasQuarterState::EjectQuarter()
+bool CHasQuarterState::EjectQuarter()
 {
-	cout << "Quarter returned\n";
+	m_out << "Quarter returned\n";
 	m_gumballMachine.SetNoQuarterState();
+	return true;
 }
 
-void CHasQuarterState::TurnCrank()
+bool CHasQuarterState::TurnCrank()
 {
-	cout << "You turned...\n";
+	m_out << "You turned...\n";
 	m_gumballMachine.SetSoldState();
+	return true;
 }
 
-void CHasQuarterState::Dispense()
+bool CHasQuarterState::Dispense()
 {
-	cout << "No gumball dispensed\n";
+	m_out << "No gumball dispensed\n";
+	return false;
 }
 
 string CHasQuarterState::ToString() const

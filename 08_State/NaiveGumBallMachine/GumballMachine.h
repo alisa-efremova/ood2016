@@ -1,5 +1,5 @@
 #pragma once
-#include <string>
+#include <iostream>
 
 class CGumballMachine
 {
@@ -12,17 +12,21 @@ public:
 		Sold,			// Монетка выдана
 	};
 
-	CGumballMachine(unsigned count);
+	CGumballMachine(std::ostream & out = std::cout, unsigned count = 0);
 
-	void InsertQuarter();
-	void EjectQuarter();
-	void TurnCrank();
+	bool InsertQuarter();
+	bool EjectQuarter();
+	bool TurnCrank();
 	void Refill(unsigned numBalls);
+
 	std::string ToString()const;
+	unsigned GetBallCount()const;
+	State GetCurrentState()const;
 
 private:
-	void Dispense();
+	bool Dispense();
 
 	unsigned m_count;	// Количество шариков
 	State m_state = State::SoldOut;
+	std::ostream & m_out;
 };

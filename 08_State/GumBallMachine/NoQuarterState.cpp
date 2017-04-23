@@ -1,33 +1,36 @@
 #include "stdafx.h"
 #include "NoQuarterState.h"
-#include <iostream>
 
 using namespace std;
 
-CNoQuarterState::CNoQuarterState(IGumBallMachine & gumballMachine)
-	: m_gumballMachine(gumballMachine)
+CNoQuarterState::CNoQuarterState(IGumBallMachine & gumballMachine, ostream & out)
+	: CState(gumballMachine, out)
 {
 }
 
-void CNoQuarterState::InsertQuarter()
+bool CNoQuarterState::InsertQuarter()
 {
-	cout << "You inserted a quarter\n";
+	m_out << "You inserted a quarter\n";
 	m_gumballMachine.SetHasQuarterState();
+	return true;
 }
 
-void CNoQuarterState::EjectQuarter()
+bool CNoQuarterState::EjectQuarter()
 {
-	cout << "You haven't inserted a quarter\n";
+	m_out << "You haven't inserted a quarter\n";
+	return false;
 }
 
-void CNoQuarterState::TurnCrank()
+bool CNoQuarterState::TurnCrank()
 {
-	cout << "You turned but there's no quarter\n";
+	m_out << "You turned but there's no quarter\n";
+	return false;
 }
 
-void CNoQuarterState::Dispense()
+bool CNoQuarterState::Dispense()
 {
-	cout << "You need to pay first\n";
+	m_out << "You need to pay first\n";
+	return false;
 }
 
 string CNoQuarterState::ToString() const

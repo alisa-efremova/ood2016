@@ -1,75 +1,83 @@
 #include "stdafx.h"
 #include "GumballMachine.h"
-#include <iostream>
 #include <boost/format.hpp>
 
 using namespace std;
 
-CGumballMachine::CGumballMachine(unsigned count)
-	: m_count(count)
-	, m_state(count > 0 ? State::NoQuarter : State::SoldOut)
+CGumballMachine::CGumballMachine(ostream & out, unsigned count)
+	: m_out(out)
+	, m_count(count)
 {
+	m_state = count == 0 ? State::SoldOut : State::NoQuarter;
 }
 
-void CGumballMachine::InsertQuarter()
+bool CGumballMachine::InsertQuarter()
 {
+	bool result = false;
 	switch (m_state)
 	{
 	case State::SoldOut:
-		cout << "You can't insert a quarter, the machine is sold out\n";
+		m_out << "You can't insert a quarter, the machine is sold out\n";
 		break;
 	case State::NoQuarter:
-		cout << "You inserted a quarter\n";
+		m_out << "You inserted a quarter\n";
 		m_state = State::HasQuarter;
+		result = true;
 		break;
 	case State::HasQuarter:
-		cout << "You can't insert another quarter\n";
+		m_out << "You can't insert another quarter\n";
 		break;
 	case State::Sold:
-		cout << "Please wait, we're already giving you a gumball\n";
+		m_out << "Please wait, we're already giving you a gumball\n";
 		break;
 	}
+	return result;
 }
 
-void CGumballMachine::EjectQuarter()
+bool CGumballMachine::EjectQuarter()
 {
+	bool result = false;
 	switch (m_state)
 	{
 	case State::HasQuarter:
-		cout << "Quarter returned\n";
+		m_out << "Quarter returned\n";
 		m_state = State::NoQuarter;
+		result = true;
 		break;
 	case State::NoQuarter:
-		cout << "You haven't inserted a quarter\n";
+		m_out << "You haven't inserted a quarter\n";
 		break;
 	case State::Sold:
-		cout << "Sorry you already turned the crank\n";
+		m_out << "Sorry you already turned the crank\n";
 		break;
 	case State::SoldOut:
-		cout << "You can't eject, you haven't inserted a quarter yet\n";
+		m_out << "You can't eject, you haven't inserted a quarter yet\n";
 		break;
 	}
+	return result;
 }
 
-void CGumballMachine::TurnCrank()
+bool CGumballMachine::TurnCrank()
 {
+	bool result = false;
 	switch (m_state)
 	{
 	case State::SoldOut:
-		cout << "You turned but there's no gumballs\n";
+		m_out << "You turned but there's no gumballs\n";
 		break;
 	case State::NoQuarter:
-		cout << "You turned but there's no quarter\n";
+		m_out << "You turned but there's no quarter\n";
 		break;
 	case State::HasQuarter:
-		cout << "You turned...\n";
+		m_out << "You turned...\n";
 		m_state = State::Sold;
-		Dispense();
+		result = Dispense();
 		break;
 	case State::Sold:
-		cout << "Turning twice doesn't get you another gumball\n";
+		m_out << "Turning twice doesn't get you another gumball\n";
 		break;
 	}
+	return result;
 }
 
 void CGumballMachine::Refill(unsigned numBalls)
@@ -94,30 +102,42 @@ Machine is %3%
 	return (fmt % m_count % (m_count != 1 ? "s" : "") % state).str();
 }
 
-void CGumballMachine::Dispense()
+unsigned CGumballMachine::GetBallCount() const
 {
-	using namespace std;
+	return m_count;
+}
+
+CGumballMachine::State CGumballMachine::GetCurrentState() const
+{
+	return m_state;
+}
+
+bool CGumballMachine::Dispense()
+{
+	bool result = false;
 	switch (m_state)
 	{
 	case State::Sold:
-		cout << "A gumball comes rolling out the slot\n";
+		m_out << "A gumball comes rolling out the slot\n";
 		--m_count;
 		if (m_count == 0)
 		{
-			cout << "Oops, out of gumballs\n";
+			m_out << "Oops, out of gumballs\n";
 			m_state = State::SoldOut;
 		}
 		else
 		{
 			m_state = State::NoQuarter;
 		}
+		result = true;
 		break;
 	case State::NoQuarter:
-		cout << "You need to pay first\n";
+		m_out << "You need to pay first\n";
 		break;
 	case State::SoldOut:
 	case State::HasQuarter:
-		cout << "No gumball dispensed\n";
+		m_out << "No gumball dispensed\n";
 		break;
 	}
+	return result;
 }

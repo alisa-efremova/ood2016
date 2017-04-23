@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "State", "State\State.vcxproj", "{9B6DBD80-D331-43C8-A8E1-ECFF2D73044B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NaiveGumBallMachine", "NaiveGumBallMachine\NaiveGumBallMachine.vcxproj", "{06B577F2-43C1-457D-87BF-03B1703B325A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NaiveGumBallMachineLib", "NaiveGumBallMachine\NaiveGumBallMachine.vcxproj", "{06B577F2-43C1-457D-87BF-03B1703B325A}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GumBallMachine", "GumBallMachine\GumBallMachine.vcxproj", "{5B80A6CD-3216-43FB-97E7-0BCAF8FCC85E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GumBallMachineLib", "GumBallMachine\GumBallMachine.vcxproj", "{5B80A6CD-3216-43FB-97E7-0BCAF8FCC85E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tests", "Tests\Tests.vcxproj", "{82319B4A-D259-4DE6-950A-48097FD4B7F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,14 @@ Global
 		{5B80A6CD-3216-43FB-97E7-0BCAF8FCC85E}.Release|x64.Build.0 = Release|x64
 		{5B80A6CD-3216-43FB-97E7-0BCAF8FCC85E}.Release|x86.ActiveCfg = Release|Win32
 		{5B80A6CD-3216-43FB-97E7-0BCAF8FCC85E}.Release|x86.Build.0 = Release|Win32
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Debug|x64.ActiveCfg = Debug|x64
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Debug|x64.Build.0 = Debug|x64
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Debug|x86.ActiveCfg = Debug|Win32
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Debug|x86.Build.0 = Debug|Win32
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Release|x64.ActiveCfg = Release|x64
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Release|x64.Build.0 = Release|x64
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Release|x86.ActiveCfg = Release|Win32
+		{82319B4A-D259-4DE6-950A-48097FD4B7F5}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

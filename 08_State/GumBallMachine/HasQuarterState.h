@@ -1,18 +1,14 @@
 #pragma once
-#include "IState.h"
-#include "IGumBallMachine.h"
+#include "State.h"
 
-class CHasQuarterState : public IState
+class CHasQuarterState : public CState
 {
 public:
-	CHasQuarterState(IGumBallMachine & gumballMachine);
-	void InsertQuarter() override;
-	void EjectQuarter() override;
-	void TurnCrank() override;
-	void Dispense() override;
+	CHasQuarterState(IGumBallMachine & gumballMachine, std::ostream & out = std::cout);
+	bool InsertQuarter() override;
+	bool EjectQuarter() override;
+	bool TurnCrank() override;
+	bool Dispense() override;
 	std::string ToString() const override;
-
-private:
-	IGumBallMachine & m_gumballMachine;
 };
 

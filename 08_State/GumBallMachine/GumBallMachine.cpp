@@ -4,13 +4,13 @@
 #include "HasQuarterState.h"
 #include "NoQuarterState.h"
 #include "SoldState.h"
-#include <iostream>
 #include <boost/format.hpp>
 
 using namespace std;
 
-CGumBallMachine::CGumBallMachine(unsigned numBalls)
-	: m_count(numBalls)
+CGumBallMachine::CGumBallMachine(ostream & out, unsigned numBalls)
+	: m_out(out)
+	, m_count(numBalls)
 {
 	if (m_count > 0)
 	{
@@ -22,20 +22,20 @@ CGumBallMachine::CGumBallMachine(unsigned numBalls)
 	}
 }
 
-void CGumBallMachine::EjectQuarter()
+bool CGumBallMachine::EjectQuarter()
 {
-	m_currentState->EjectQuarter();
+	return m_currentState->EjectQuarter();
 }
 
-void CGumBallMachine::InsertQuarter()
+bool CGumBallMachine::InsertQuarter()
 {
-	m_currentState->InsertQuarter();
+	return m_currentState->InsertQuarter();
 }
 
-void CGumBallMachine::TurnCrank()
+bool CGumBallMachine::TurnCrank()
 {
 	m_currentState->TurnCrank();
-	m_currentState->Dispense();
+	return m_currentState->Dispense();
 }
 
 string CGumBallMachine::ToString()const
@@ -54,31 +54,36 @@ unsigned CGumBallMachine::GetBallCount() const
 	return m_count;
 }
 
+const IState & CGumBallMachine::GetCurrentState() const
+{
+	return *m_currentState;
+}
+
 void CGumBallMachine::ReleaseBall()
 {
 	if (m_count != 0)
 	{
-		cout << "A gumball comes rolling out the slot...\n";
+		m_out << "A gumball comes rolling out the slot...\n";
 		--m_count;
 	}
 }
 
 void CGumBallMachine::SetSoldOutState()
 {
-	m_currentState.reset(new CSoldOutState(*this));
+	m_currentState.reset(new CSoldOutState(*this, m_out));
 }
 
 void CGumBallMachine::SetNoQuarterState()
 {
-	m_currentState.reset(new CNoQuarterState(*this));
+	m_currentState.reset(new CNoQuarterState(*this, m_out));
 }
 
 void CGumBallMachine::SetSoldState()
 {
-	m_currentState.reset(new CSoldState(*this));
+	m_currentState.reset(new CSoldState(*this, m_out));
 }
 
 void CGumBallMachine::SetHasQuarterState()
 {
-	m_currentState.reset(new CHasQuarterState(*this));
+	m_currentState.reset(new CHasQuarterState(*this, m_out));
 }

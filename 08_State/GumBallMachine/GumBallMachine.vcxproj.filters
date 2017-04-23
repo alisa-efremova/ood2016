@@ -54,6 +54,9 @@
     <ClInclude Include="HasQuarterState.h">
       <Filter>Source Files\State</Filter>
     </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Source Files\State</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GumBallMachine.cpp">

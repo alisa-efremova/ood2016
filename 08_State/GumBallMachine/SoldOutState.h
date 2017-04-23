@@ -1,18 +1,14 @@
 #pragma once
-#include "IState.h"
-#include "IGumBallMachine.h"
+#include "State.h"
 
-class CSoldOutState : public IState
+class CSoldOutState : public CState
 {
 public:
-	CSoldOutState(IGumBallMachine & gumballMachine);
-	void InsertQuarter() override;
-	void EjectQuarter() override;
-	void TurnCrank() override;
-	void Dispense() override;
+	CSoldOutState(IGumBallMachine & gumballMachine, std::ostream & out = std::cout);
+	bool InsertQuarter() override;
+	bool EjectQuarter() override;
+	bool TurnCrank() override;
+	bool Dispense() override;
 	std::string ToString() const override;
-
-private:
-	IGumBallMachine & m_gumballMachine;
 };
 
