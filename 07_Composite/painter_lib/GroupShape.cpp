@@ -94,6 +94,11 @@ ILineStylePtr CGroupShape::CalculateOutlineStyle() const
 
 RectD CGroupShape::GetFrame() const
 {
+	if (GetShapesCount() == 0)
+	{
+		return { 0, 0, 0, 0 };
+	}
+
 	double minX = numeric_limits<double>::infinity();
 	double minY = numeric_limits<double>::infinity();
 	double maxX = -numeric_limits<double>::infinity();

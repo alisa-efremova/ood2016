@@ -38,5 +38,5 @@ void CEllipse::SetFrame(const RectD & rect)
 
 void CEllipse::CalculateFrame()
 {
-	m_frame = { m_center.x - m_hRadius, m_center.y - m_vRadius, 2 * m_vRadius, 2 * m_hRadius };
+	m_frame = { m_center.x - m_hRadius, m_center.y - m_vRadius, 2 * m_hRadius, 2 * m_vRadius };
 }

@@ -5,7 +5,6 @@
 #include "Triangle.h"
 #include "LineStyle.h"
 #include "Style.h"
-//#include "GroupShape.h"
 #include "Slide.h"
 #include <fstream>
 
