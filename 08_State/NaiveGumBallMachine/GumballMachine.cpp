@@ -4,11 +4,11 @@
 
 using namespace std;
 
-CGumballMachine::CGumballMachine(ostream & out, unsigned count)
+CGumballMachine::CGumballMachine(ostream & out, unsigned ballCount)
 	: m_out(out)
-	, m_count(count)
+	, m_ballCount(ballCount)
 {
-	m_state = count == 0 ? State::SoldOut : State::NoQuarter;
+	m_state = m_ballCount == 0 ? State::SoldOut : State::NoQuarter;
 }
 
 bool CGumballMachine::InsertQuarter()
@@ -22,10 +22,20 @@ bool CGumballMachine::InsertQuarter()
 	case State::NoQuarter:
 		m_out << "You inserted a quarter\n";
 		m_state = State::HasQuarter;
+		++m_quarterCount;
 		result = true;
 		break;
 	case State::HasQuarter:
-		m_out << "You can't insert another quarter\n";
+		if (m_quarterCount >= m_maxQuarterCount)
+		{
+			m_out << "You can't insert another quarter\n";
+		}
+		else
+		{
+			m_out << "You inserted a quarter\n";
+			++m_quarterCount;
+			result = true;
+		}
 		break;
 	case State::Sold:
 		m_out << "Please wait, we're already giving you a gumball\n";
@@ -41,6 +51,7 @@ bool CGumballMachine::EjectQuarter()
 	{
 	case State::HasQuarter:
 		m_out << "Quarter returned\n";
+		m_quarterCount = 0;
 		m_state = State::NoQuarter;
 		result = true;
 		break;
@@ -51,7 +62,16 @@ bool CGumballMachine::EjectQuarter()
 		m_out << "Sorry you already turned the crank\n";
 		break;
 	case State::SoldOut:
-		m_out << "You can't eject, you haven't inserted a quarter yet\n";
+		if (m_quarterCount > 0)
+		{
+			m_out << "Quarter returned\n";
+			m_quarterCount = 0;
+			result = true;
+		}
+		else
+		{
+			m_out << "You can't eject, you haven't inserted a quarter yet\n";
+		}
 		break;
 	}
 	return result;
@@ -71,6 +91,7 @@ bool CGumballMachine::TurnCrank()
 	case State::HasQuarter:
 		m_out << "You turned...\n";
 		m_state = State::Sold;
+		--m_quarterCount;
 		result = Dispense();
 		break;
 	case State::Sold:
@@ -82,7 +103,7 @@ bool CGumballMachine::TurnCrank()
 
 void CGumballMachine::Refill(unsigned numBalls)
 {
-	m_count = numBalls;
+	m_ballCount = numBalls;
 	m_state = numBalls > 0 ? State::NoQuarter : State::SoldOut;
 }
 
@@ -99,12 +120,17 @@ C++-enabled Standing Gumball Model #2016
 Inventory: %1% gumball%2%
 Machine is %3%
 )");
-	return (fmt % m_count % (m_count != 1 ? "s" : "") % state).str();
+	return (fmt % m_ballCount % (m_ballCount != 1 ? "s" : "") % state).str();
 }
 
 unsigned CGumballMachine::GetBallCount() const
 {
-	return m_count;
+	return m_ballCount;
+}
+
+unsigned CGumballMachine::GetQuarterCount() const
+{
+	return m_quarterCount;
 }
 
 CGumballMachine::State CGumballMachine::GetCurrentState() const
@@ -119,15 +145,22 @@ bool CGumballMachine::Dispense()
 	{
 	case State::Sold:
 		m_out << "A gumball comes rolling out the slot\n";
-		--m_count;
-		if (m_count == 0)
+		--m_ballCount;
+		if (m_ballCount == 0)
 		{
 			m_out << "Oops, out of gumballs\n";
 			m_state = State::SoldOut;
 		}
 		else
 		{
-			m_state = State::NoQuarter;
+			if (m_quarterCount > 0)
+			{
+				m_state = State::HasQuarter;
+			}
+			else
+			{
+				m_state = State::NoQuarter;
+			}
 		}
 		result = true;
 		break;

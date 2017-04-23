@@ -16,8 +16,17 @@ bool CSoldOutState::InsertQuarter()
 
 bool CSoldOutState::EjectQuarter()
 {
-	m_out << "You can't eject, you haven't inserted a quarter yet\n";
-	return false;
+	if (m_gumballMachine.GetQuarterCount() > 0)
+	{
+		m_gumballMachine.ReleaseQuaters();
+		m_out << "Quarter returned\n";
+		return true;
+	}
+	else
+	{
+		m_out << "You can't eject, you haven't inserted a quarter yet\n";
+		return false;
+	}
 }
 
 bool CSoldOutState::TurnCrank()

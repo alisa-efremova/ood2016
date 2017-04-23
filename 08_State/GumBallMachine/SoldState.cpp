@@ -34,7 +34,10 @@ bool CSoldState::Dispense()
 		m_out << "Oops, out of gumballs\n";
 		m_gumballMachine.SetSoldOutState();
 	}
-	else
+	else if (m_gumballMachine.GetQuarterCount() > 0)
+	{
+		m_gumballMachine.SetHasQuarterState();
+	} else
 	{
 		m_gumballMachine.SetNoQuarterState();
 	}

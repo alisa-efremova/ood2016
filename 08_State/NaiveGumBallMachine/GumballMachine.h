@@ -12,7 +12,7 @@ public:
 		Sold,			// Монетка выдана
 	};
 
-	CGumballMachine(std::ostream & out = std::cout, unsigned count = 0);
+	CGumballMachine(std::ostream & out = std::cout, unsigned ballCount = 0);
 
 	bool InsertQuarter();
 	bool EjectQuarter();
@@ -21,12 +21,15 @@ public:
 
 	std::string ToString()const;
 	unsigned GetBallCount()const;
+	unsigned GetQuarterCount()const;
 	State GetCurrentState()const;
 
 private:
 	bool Dispense();
 
-	unsigned m_count;	// Количество шариков
+	unsigned m_ballCount;
+	unsigned m_quarterCount = 0;
+	const unsigned m_maxQuarterCount = 5;
 	State m_state = State::SoldOut;
 	std::ostream & m_out;
 };

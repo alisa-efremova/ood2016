@@ -10,13 +10,15 @@ CHasQuarterState::CHasQuarterState(IGumBallMachine & gumballMachine, ostream & o
 
 bool CHasQuarterState::InsertQuarter()
 {
-	m_out << "You can't insert another quarter\n";
-	return false;
+	m_out << "You inserted a quarter\n";
+	m_gumballMachine.SetHasQuarterState();
+	return true;
 }
 
 bool CHasQuarterState::EjectQuarter()
 {
 	m_out << "Quarter returned\n";
+	m_gumballMachine.ReleaseQuaters();
 	m_gumballMachine.SetNoQuarterState();
 	return true;
 }

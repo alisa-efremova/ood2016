@@ -10,9 +10,9 @@ using namespace std;
 
 CGumBallMachine::CGumBallMachine(ostream & out, unsigned numBalls)
 	: m_out(out)
-	, m_count(numBalls)
+	, m_ballCount(numBalls)
 {
-	if (m_count > 0)
+	if (m_ballCount > 0)
 	{
 		SetNoQuarterState();
 	}
@@ -29,7 +29,17 @@ bool CGumBallMachine::EjectQuarter()
 
 bool CGumBallMachine::InsertQuarter()
 {
-	return m_currentState->InsertQuarter();
+	bool result = false;
+	if (m_quarterCount >= m_maxQuarterCount)
+	{
+		m_out << "Max count of quaters is inserted\n";
+	}
+	else if (m_currentState->InsertQuarter())
+	{
+		++m_quarterCount;
+		result = true;
+	}
+	return result;
 }
 
 bool CGumBallMachine::TurnCrank()
@@ -46,12 +56,12 @@ C++-enabled Standing Gumball Model #2016 (with state)
 Inventory: %1% gumball%2%
 Machine is %3%
 )");
-	return (fmt % m_count % (m_count != 1 ? "s" : "") % m_currentState->ToString()).str();
+	return (fmt % m_ballCount % (m_ballCount != 1 ? "s" : "") % m_currentState->ToString()).str();
 }
 
 unsigned CGumBallMachine::GetBallCount() const
 {
-	return m_count;
+	return m_ballCount;
 }
 
 const IState & CGumBallMachine::GetCurrentState() const
@@ -59,13 +69,24 @@ const IState & CGumBallMachine::GetCurrentState() const
 	return *m_currentState;
 }
 
+unsigned CGumBallMachine::GetQuarterCount() const
+{
+	return m_quarterCount;
+}
+
 void CGumBallMachine::ReleaseBall()
 {
-	if (m_count != 0)
+	if (m_ballCount != 0)
 	{
 		m_out << "A gumball comes rolling out the slot...\n";
-		--m_count;
+		--m_ballCount;
+		--m_quarterCount;
 	}
+}
+
+void CGumBallMachine::ReleaseQuaters()
+{
+	m_quarterCount = 0;
 }
 
 void CGumBallMachine::SetSoldOutState()
