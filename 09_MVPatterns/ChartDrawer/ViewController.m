@@ -13,6 +13,7 @@
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSMutableArray<CDHarmonicFunction *> *harmonics;
 @property (nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIImageView *graphImageView;
 @end
 
 static NSString *const kCellReuseIdentifier = @"Cell";
@@ -21,9 +22,23 @@ static NSString *const kCellReuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _harmonics = [NSMutableArray arrayWithObject:[[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:4.2 frequency:10 phase:2]];
+    _harmonics = [NSMutableArray arrayWithObject:[[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:4.38 frequency:2.25 phase:1.5]];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseIdentifier];
+    [self updateGraph];
+}
+
+- (void)updateGraph {
+    unsigned size = 100;
+    double values[size];
+    double step = 0.05;
+    for (int i = 0; i < size; i++) {
+        values[i] = 0;
+        for (CDHarmonicFunction *function in self.harmonics) {
+            values[i] += [function valueWithX:(i*step)];
+        }
+    }
+    [self drawGraphWithStep:step values:values size:size];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -35,6 +50,7 @@ static NSString *const kCellReuseIdentifier = @"Cell";
             if (function) {
                 [self.harmonics addObject:function];
                 [self.tableView reloadData];
+                [self updateGraph];
             }
         };
     } else if ([segue.identifier isEqualToString:@"EditFunctionSeque"]) {
@@ -48,6 +64,7 @@ static NSString *const kCellReuseIdentifier = @"Cell";
                 edittingFunction.frequency = function.frequency;
                 edittingFunction.phase = function.phase;
                 [self.tableView reloadData];
+                [self updateGraph];
             }
         };
     }
@@ -93,6 +110,47 @@ static NSString *const kCellReuseIdentifier = @"Cell";
         [self.harmonics removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+}
+
+#pragma mark - Drawing
+
+- (void)drawGraphWithStep:(double)step values:(double[])values size:(int)size {
+    double width = self.graphImageView.bounds.size.width;
+    double height = self.graphImageView.bounds.size.height;
+    
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    // draw legend
+    CGContextSetLineWidth(context, 1.0);
+    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+    CGContextMoveToPoint(context, 0, 0);
+    CGContextAddLineToPoint(context, 0, height);
+    CGContextMoveToPoint(context, 0, height/2);
+    CGContextAddLineToPoint(context, width, height/2);
+    CGContextStrokePath(context);
+    
+    // find max Y
+    double maxY = 0;
+    for (int i = 0; i < size; i++) {
+        double tmp = values[i] < 0 ? -values[i] : values[i];
+        maxY = MAX(maxY, tmp);
+    }
+    
+    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
+    CGContextMoveToPoint(context, 0, height/2 - values[0]*height/2/maxY);
+    for (int i = 1; i < size; i++) {
+        double realX = i*step;
+        double realY = values[i];
+        double scaledX = realX*width/size/step;
+        double scaledY = height/2 - realY*height/2/maxY;
+        CGContextAddLineToPoint(context, scaledX, scaledY);
+    }
+
+    CGContextStrokePath(context);
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    self.graphImageView.image = img;
 }
 
 @end
