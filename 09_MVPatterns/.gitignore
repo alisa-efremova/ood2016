@@ -1,0 +1,21 @@
+# Mac OSX
+.DS_Store
+
+# Backup files
+*.swp
+*~.nib
+
+# Build directory
+build/
+Products/
+
+# user specific configurations
+*.pbxuser
+*.perspective
+*.perspectivev3
+*.xcuserdatad
+
+*.mode1v3
+*.mode2v3
+
+xcuserdata
