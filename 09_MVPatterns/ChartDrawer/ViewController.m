@@ -42,7 +42,6 @@ static NSString *const kCellReuseIdentifier = @"Cell";
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    NSLog(@"segue:%@", segue.identifier);
     UINavigationController *navigationVC = (UINavigationController *)[segue destinationViewController];
     HarmonicViewController *vc = (HarmonicViewController *)[navigationVC topViewController];
     if ([segue.identifier isEqualToString:@"CreateFunctionSeque"]) {
@@ -103,12 +102,14 @@ static NSString *const kCellReuseIdentifier = @"Cell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"EditFunctionSeque" sender:self];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.harmonics removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self updateGraph];
     }
 }
 
