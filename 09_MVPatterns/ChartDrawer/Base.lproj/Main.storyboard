@@ -16,7 +16,7 @@
             <objects>
                 <navigationController id="T2d-gP-mya" sceneMemberID="viewController">
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="efC-Ms-bBS">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="efC-Ms-bBS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -66,53 +66,51 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="srL-53-0E0"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tDY-yl-x5h">
-                                <rect key="frame" x="16" y="262" width="343" height="200"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqJ-3C-hf6" customClass="CDChartView">
+                                <rect key="frame" x="16" y="254" width="343" height="200"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="86p-kF-CoR"/>
+                                    <constraint firstAttribute="height" constant="200" id="EBZ-br-zsJ"/>
                                 </constraints>
-                            </imageView>
+                                <variation key="heightClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="EBZ-br-zsJ"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tDY-yl-x5h" firstAttribute="centerY" secondItem="N6g-iH-DHD" secondAttribute="centerY" id="6xM-dm-UZj"/>
+                            <constraint firstItem="VqJ-3C-hf6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="14U-t7-s68"/>
+                            <constraint firstItem="VqJ-3C-hf6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="3h2-zm-r9x"/>
                             <constraint firstItem="N6g-iH-DHD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="7zt-l2-A3h"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="tDY-yl-x5h" secondAttribute="leading" id="CxD-ct-Oem"/>
                             <constraint firstItem="N6g-iH-DHD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IvC-j5-NQG"/>
-                            <constraint firstItem="tDY-yl-x5h" firstAttribute="top" secondItem="N6g-iH-DHD" secondAttribute="bottom" constant="16" id="Qve-Eu-DEc"/>
-                            <constraint firstItem="tDY-yl-x5h" firstAttribute="leading" secondItem="N6g-iH-DHD" secondAttribute="trailing" constant="20" id="SFc-Fd-wZh"/>
                             <constraint firstItem="N6g-iH-DHD" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="Sbb-qV-E7G"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="tDY-yl-x5h" secondAttribute="trailing" id="gXj-uq-PYr"/>
+                            <constraint firstItem="VqJ-3C-hf6" firstAttribute="top" secondItem="N6g-iH-DHD" secondAttribute="bottom" constant="8" id="d9h-cc-xrC"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="VqJ-3C-hf6" secondAttribute="bottom" constant="8" id="eft-pi-Mcj"/>
+                            <constraint firstItem="VqJ-3C-hf6" firstAttribute="leading" secondItem="N6g-iH-DHD" secondAttribute="trailing" constant="20" id="i9k-jM-bKZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="N6g-iH-DHD" secondAttribute="bottom" id="u9W-9P-9cv"/>
+                            <constraint firstItem="VqJ-3C-hf6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="wdj-co-stF"/>
                             <constraint firstAttribute="trailing" secondItem="N6g-iH-DHD" secondAttribute="trailing" id="zAA-Ay-cOl"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Sbb-qV-E7G"/>
-                                <exclude reference="6xM-dm-UZj"/>
-                                <exclude reference="SFc-Fd-wZh"/>
+                                <exclude reference="14U-t7-s68"/>
+                                <exclude reference="i9k-jM-bKZ"/>
+                                <exclude reference="eft-pi-Mcj"/>
                                 <exclude reference="u9W-9P-9cv"/>
                             </mask>
                         </variation>
-                        <variation key="heightClass=compact-widthClass=compact">
+                        <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <include reference="Sbb-qV-E7G"/>
                                 <exclude reference="zAA-Ay-cOl"/>
-                                <include reference="6xM-dm-UZj"/>
-                                <exclude reference="CxD-ct-Oem"/>
-                                <exclude reference="Qve-Eu-DEc"/>
-                                <include reference="SFc-Fd-wZh"/>
-                                <include reference="u9W-9P-9cv"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=compact-widthClass=regular">
-                            <mask key="constraints">
-                                <include reference="Sbb-qV-E7G"/>
-                                <exclude reference="zAA-Ay-cOl"/>
-                                <include reference="6xM-dm-UZj"/>
-                                <exclude reference="CxD-ct-Oem"/>
-                                <exclude reference="Qve-Eu-DEc"/>
-                                <include reference="SFc-Fd-wZh"/>
+                                <include reference="14U-t7-s68"/>
+                                <exclude reference="d9h-cc-xrC"/>
+                                <include reference="i9k-jM-bKZ"/>
+                                <exclude reference="wdj-co-stF"/>
+                                <include reference="eft-pi-Mcj"/>
                                 <include reference="u9W-9P-9cv"/>
                             </mask>
                         </variation>
@@ -125,14 +123,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="graphImageView" destination="tDY-yl-x5h" id="wq5-E3-5nm"/>
+                        <outlet property="chartView" destination="VqJ-3C-hf6" id="HRM-v5-txy"/>
                         <outlet property="tableView" destination="N6g-iH-DHD" id="jrg-LZ-MXS"/>
                         <segue destination="nwP-6J-LX0" kind="presentation" identifier="EditFunctionSeque" id="2lo-lI-A3v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-435" y="562"/>
+            <point key="canvasLocation" x="-436.73163418290858" y="560.79999999999995"/>
         </scene>
         <!--Add new-->
         <scene sceneID="Lfa-Cr-BsE">

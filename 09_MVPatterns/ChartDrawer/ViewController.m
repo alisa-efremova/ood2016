@@ -9,25 +9,31 @@
 #import "ViewController.h"
 #import "CDHarmonicFunction.h"
 #import "HarmonicViewController.h"
+#import "CDChartView.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSMutableArray<CDHarmonicFunction *> *functions;
 @property (nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIImageView *graphImageView;
+@property (nonatomic) IBOutlet CDChartView *chartView;
 @end
 
 static NSString *const kCellReuseId = @"Cell";
 static NSString *const kCreateFunctionSequeId = @"CreateFunctionSeque";
 static NSString *const kEditFunctionSequeId = @"EditFunctionSeque";
 
+static double kStep = 0.05;
+static NSUInteger kPointsCount = 100;
+
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _functions = [NSMutableArray arrayWithObject:[[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:4.38 frequency:2.25 phase:1.5]];
-    
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseId];
-    [self updateGraph];
+    
+    self.functions = [NSMutableArray arrayWithObject:[[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:4.38 frequency:2.25 phase:1.5]];
+    
+    self.chartView.step = kStep;
+    [self recalculateChartData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -38,7 +44,7 @@ static NSString *const kEditFunctionSequeId = @"EditFunctionSeque";
             if (function) {
                 [self.functions addObject:function];
                 [self.tableView reloadData];
-                [self updateGraph];
+                [self recalculateChartData];
             }
         };
     } else if ([segue.identifier isEqualToString:kEditFunctionSequeId]) {
@@ -52,7 +58,7 @@ static NSString *const kEditFunctionSequeId = @"EditFunctionSeque";
                 edittingFunction.frequency = function.frequency;
                 edittingFunction.phase = function.phase;
                 [self.tableView reloadData];
-                [self updateGraph];
+                [self recalculateChartData];
             }
         };
     }
@@ -66,8 +72,7 @@ static NSString *const kEditFunctionSequeId = @"EditFunctionSeque";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellReuseId forIndexPath:indexPath];
-    CDHarmonicFunction *function = self.functions[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", function];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", self.functions[indexPath.row]];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     return cell;
 }
@@ -79,7 +84,7 @@ static NSString *const kEditFunctionSequeId = @"EditFunctionSeque";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"EditFunctionSeque" sender:self];
+    [self performSegueWithIdentifier:kEditFunctionSequeId sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -87,64 +92,22 @@ static NSString *const kEditFunctionSequeId = @"EditFunctionSeque";
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.functions removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self updateGraph];
+        [self recalculateChartData];
     }
 }
 
 #pragma mark - Helpers
 
-- (void)updateGraph {
-    unsigned size = 100;
-    double values[size];
-    double step = 0.05;
-    for (int i = 0; i < size; i++) {
-        values[i] = 0;
+- (void)recalculateChartData {
+    NSMutableArray<NSNumber *> *values = [NSMutableArray array];
+    for (int i = 0; i < kPointsCount; i++) {
+        double sum = 0;
         for (CDHarmonicFunction *function in self.functions) {
-            values[i] += [function valueWithX:(i*step)];
+            sum += [function valueWithX:(i * kStep)];
         }
+        values[i] = [NSNumber numberWithDouble:sum];
     }
-    [self drawGraphWithStep:step values:values size:size];
-}
-
-#pragma mark - Drawing
-
-- (void)drawGraphWithStep:(double)step values:(double[])values size:(int)size {
-    double width = self.graphImageView.bounds.size.width;
-    double height = self.graphImageView.bounds.size.height;
-    
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(width, height), NO, 0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    // draw legend
-    CGContextSetLineWidth(context, 1.0);
-    CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-    CGContextMoveToPoint(context, 0, 0);
-    CGContextAddLineToPoint(context, 0, height);
-    CGContextMoveToPoint(context, 0, height/2);
-    CGContextAddLineToPoint(context, width, height/2);
-    CGContextStrokePath(context);
-    
-    // find max Y
-    double maxY = 0;
-    for (int i = 0; i < size; i++) {
-        double tmp = values[i] < 0 ? -values[i] : values[i];
-        maxY = MAX(maxY, tmp);
-    }
-    
-    CGContextSetStrokeColorWithColor(context, [UIColor blueColor].CGColor);
-    CGContextMoveToPoint(context, 0, height/2 - values[0]*height/2/maxY);
-    for (int i = 1; i < size; i++) {
-        double realX = i*step;
-        double realY = values[i];
-        double scaledX = realX*width/size/step;
-        double scaledY = height/2 - realY*height/2/maxY;
-        CGContextAddLineToPoint(context, scaledX, scaledY);
-    }
-
-    CGContextStrokePath(context);
-    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    self.graphImageView.image = img;
+    self.chartView.values = values;
 }
 
 @end

@@ -8,10 +8,6 @@
 
 #import "CDHarmonicFunction.h"
 
-NSString *const CDHarmonicFunctionAmplitudeChanged = @"CDHarmonicFunctionAmplitudeChanged";
-NSString *const CDHarmonicFunctionFrequencyChanged = @"CDHarmonicFunctionFrequencyChanged";
-NSString *const CDHarmonicFunctionPhaseChanged = @"CDHarmonicFunctionPhaseChanged";
-
 @implementation CDHarmonicFunction
 
 - (instancetype)init {
@@ -45,23 +41,6 @@ NSString *const CDHarmonicFunctionPhaseChanged = @"CDHarmonicFunctionPhaseChange
         default:
             return 0.0;
     }
-}
-
-#pragma mark - Setters
-
-- (void)setAmplitude:(double)amplitude {
-    _amplitude = amplitude;
-    [[NSNotificationCenter defaultCenter] postNotificationName:CDHarmonicFunctionAmplitudeChanged object:nil];
-}
-
-- (void)setFrequency:(double)frequency {
-    _frequency = frequency;
-    [[NSNotificationCenter defaultCenter] postNotificationName:CDHarmonicFunctionFrequencyChanged object:nil];
-}
-
-- (void)setPhase:(double)phase {
-    _phase = phase;
-    [[NSNotificationCenter defaultCenter] postNotificationName:CDHarmonicFunctionPhaseChanged object:nil];
 }
 
 #pragma mark - Presentation

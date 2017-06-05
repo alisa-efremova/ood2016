@@ -13,10 +13,6 @@ typedef NS_ENUM(NSUInteger, CDFunctionType) {
     CDFuncitonTypeCos
 };
 
-extern NSString *const CDHarmonicFunctionAmplitudeChanged;
-extern NSString *const CDHarmonicFunctionFrequencyChanged;
-extern NSString *const CDHarmonicFunctionPhaseChanged;
-
 @interface CDHarmonicFunction : NSObject
 @property (nonatomic) double amplitude;
 @property (nonatomic) CDFunctionType type;

@@ -16,6 +16,7 @@
 		F46805431EE05BF9002BF1B4 /* ChartDrawerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F46805421EE05BF9002BF1B4 /* ChartDrawerTests.m */; };
 		F468054F1EE05C43002BF1B4 /* CDHarmonicFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = F468054E1EE05C43002BF1B4 /* CDHarmonicFunction.m */; };
 		F46805521EE068BC002BF1B4 /* HarmonicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46805511EE068BC002BF1B4 /* HarmonicViewController.m */; };
+		F4C754511EE5884500BB6DF1 /* CDChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C754501EE5884500BB6DF1 /* CDChartView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		F468054E1EE05C43002BF1B4 /* CDHarmonicFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDHarmonicFunction.m; sourceTree = "<group>"; };
 		F46805501EE068BC002BF1B4 /* HarmonicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HarmonicViewController.h; sourceTree = "<group>"; };
 		F46805511EE068BC002BF1B4 /* HarmonicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HarmonicViewController.m; sourceTree = "<group>"; };
+		F4C7544F1EE5884500BB6DF1 /* CDChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDChartView.h; sourceTree = "<group>"; };
+		F4C754501EE5884500BB6DF1 /* CDChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDChartView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +92,7 @@
 			children = (
 				F46805311EE05BF9002BF1B4 /* Main.storyboard */,
 				F46805281EE05BF9002BF1B4 /* Supporting Files */,
+				F4C754521EE5888700BB6DF1 /* View */,
 				F46805531EE13223002BF1B4 /* Model */,
 				F46805541EE1322D002BF1B4 /* Controller */,
 			);
@@ -135,6 +139,15 @@
 				F46805511EE068BC002BF1B4 /* HarmonicViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		F4C754521EE5888700BB6DF1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F4C7544F1EE5884500BB6DF1 /* CDChartView.h */,
+				F4C754501EE5884500BB6DF1 /* CDChartView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,6 +255,7 @@
 			files = (
 				F46805301EE05BF9002BF1B4 /* ViewController.m in Sources */,
 				F46805521EE068BC002BF1B4 /* HarmonicViewController.m in Sources */,
+				F4C754511EE5884500BB6DF1 /* CDChartView.m in Sources */,
 				F468054F1EE05C43002BF1B4 /* CDHarmonicFunction.m in Sources */,
 				F468052D1EE05BF9002BF1B4 /* AppDelegate.m in Sources */,
 				F468052A1EE05BF9002BF1B4 /* main.m in Sources */,
