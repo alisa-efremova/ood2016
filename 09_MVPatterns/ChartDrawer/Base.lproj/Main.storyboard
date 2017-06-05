@@ -120,7 +120,6 @@
                     <navigationItem key="navigationItem" title="Harmonics" id="sEF-Ce-sTO">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="e5X-Hx-7dv">
                             <connections>
-                                <action selector="addHarmonicAction:" destination="BYZ-38-t0r" id="YBA-mp-Z4j"/>
                                 <segue destination="nwP-6J-LX0" kind="presentation" identifier="CreateFunctionSeque" id="piT-ko-mPQ"/>
                             </connections>
                         </barButtonItem>
@@ -133,7 +132,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-434.51086956521743" y="452.17391304347831"/>
+            <point key="canvasLocation" x="-435" y="562"/>
         </scene>
         <!--Add new-->
         <scene sceneID="Lfa-Cr-BsE">
@@ -244,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBI-vJ-jIb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="336.80000000000001" y="452.92353823088462"/>
+            <point key="canvasLocation" x="338" y="562"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Zzm-HC-zk1">
@@ -266,6 +265,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="piT-ko-mPQ"/>
+        <segue reference="2lo-lI-A3v"/>
     </inferredMetricsTieBreakers>
 </document>

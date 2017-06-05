@@ -19,7 +19,7 @@ extern NSString *const CDHarmonicFunctionPhaseChanged;
 
 @interface CDHarmonicFunction : NSObject
 @property (nonatomic) double amplitude;
-@property (nonatomic) CDFunctionType functionType;
+@property (nonatomic) CDFunctionType type;
 @property (nonatomic) double frequency;
 @property (nonatomic) double phase;
 

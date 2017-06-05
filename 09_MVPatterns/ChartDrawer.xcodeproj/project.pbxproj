@@ -382,6 +382,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T2BWHF82G9;
 				INFOPLIST_FILE = ChartDrawer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aci.ChartDrawer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -394,6 +395,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T2BWHF82G9;
 				INFOPLIST_FILE = ChartDrawer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aci.ChartDrawer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,6 +445,7 @@
 				F46805491EE05BF9002BF1B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F468054A1EE05BF9002BF1B4 /* Build configuration list for PBXNativeTarget "ChartDrawerTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +454,7 @@
 				F468054C1EE05BF9002BF1B4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

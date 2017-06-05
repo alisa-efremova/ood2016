@@ -12,5 +12,4 @@
 @interface HarmonicViewController : UIViewController
 @property (nonatomic) CDHarmonicFunction *function;
 @property (nonatomic, copy) void (^completionBlock)(CDHarmonicFunction *function);
-- (instancetype)initWithFunction:(CDHarmonicFunction *)function completion:(void (^)(CDHarmonicFunction *function))completion;
 @end

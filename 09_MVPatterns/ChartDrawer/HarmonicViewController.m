@@ -14,7 +14,6 @@
 @property (nonatomic) IBOutlet UITextField *phaseTextField;
 @property (nonatomic) IBOutlet UISegmentedControl *functionTypeSwitcher;
 @property (nonatomic) CDFunctionType functionType;
-
 @end
 
 @implementation HarmonicViewController
@@ -27,25 +26,9 @@
     [self displayFunction];
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _function = [[CDHarmonicFunction alloc] init];
-    }
-    return self;
-}
-
-- (instancetype)initWithFunction:(CDHarmonicFunction *)function completion:(void (^)(CDHarmonicFunction *function))completion {
-    self = [super init];
-    if (self) {
-        _function = function ? function : [[CDHarmonicFunction alloc] init];
-        _completionBlock = completion;
-    }
-    return self;
-}
-
 - (void)setFunction:(CDHarmonicFunction *)function {
     _function = function;
+    self.title = @"Edit function";
     [self displayFunction];
 }
 
@@ -61,7 +44,7 @@
             self.function.amplitude = [self.amplitudeTextField.text doubleValue];
             self.function.frequency = [self.frequencyTextField.text doubleValue];
             self.function.phase = [self.phaseTextField.text doubleValue];
-            self.function.functionType = self.functionTypeSwitcher.selectedSegmentIndex;
+            self.function.type = self.functionTypeSwitcher.selectedSegmentIndex;
             self.completionBlock(self.function);
         }
     }];
@@ -82,7 +65,7 @@
         self.amplitudeTextField.text = [self doubleToString:self.function.amplitude];
         self.frequencyTextField.text = [self doubleToString:self.function.frequency];
         self.phaseTextField.text = [self doubleToString:self.function.phase];
-        self.functionTypeSwitcher.selectedSegmentIndex = self.function.functionType;
+        self.functionTypeSwitcher.selectedSegmentIndex = self.function.type;
     }
 }
 

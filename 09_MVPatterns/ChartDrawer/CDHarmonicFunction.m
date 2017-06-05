@@ -17,7 +17,7 @@ NSString *const CDHarmonicFunctionPhaseChanged = @"CDHarmonicFunctionPhaseChange
 - (instancetype)init {
     self = [super init];
     if (self) {
-        _functionType = CDFunctionTypeSin;
+        _type = CDFunctionTypeSin;
         _amplitude = 1.0;
         _frequency = 1.0;
         _phase = 0.0;
@@ -28,7 +28,7 @@ NSString *const CDHarmonicFunctionPhaseChanged = @"CDHarmonicFunctionPhaseChange
 - (instancetype)initWithFunctionType:(CDFunctionType)functionType amplitude:(double)amplitude frequency:(double)frequency phase:(double)phase {
     self = [super init];
     if (self) {
-        _functionType = functionType;
+        _type = functionType;
         _amplitude = amplitude;
         _frequency = frequency;
         _phase = phase;
@@ -37,7 +37,7 @@ NSString *const CDHarmonicFunctionPhaseChanged = @"CDHarmonicFunctionPhaseChange
 }
 
 - (double)valueWithX:(double)x {
-    switch (self.functionType) {
+    switch (self.type) {
         case CDFunctionTypeSin:
             return self.amplitude * sin(self.frequency * x + self.phase);
         case CDFuncitonTypeCos:
@@ -67,7 +67,7 @@ NSString *const CDHarmonicFunctionPhaseChanged = @"CDHarmonicFunctionPhaseChange
 #pragma mark - Presentation
 
 - (NSString *)description {
-    return [NSString stringWithFormat:@"%g*%@(%g*x + %g)", self.amplitude, [CDHarmonicFunction titleForFunctionType:self.functionType], self.frequency, self.phase];
+    return [NSString stringWithFormat:@"%g*%@(%g*x + %g)", self.amplitude, [CDHarmonicFunction titleForFunctionType:self.type], self.frequency, self.phase];
 }
 
 + (NSString *)titleForFunctionType:(CDFunctionType)functionType {
