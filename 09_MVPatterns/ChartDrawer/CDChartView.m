@@ -12,7 +12,7 @@
 
 #pragma mark - Initialization
 
-- (nonnull instancetype)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         _step = 0.0;
@@ -20,7 +20,7 @@
     return self;
 }
 
-- (nullable id)initWithCoder:(nonnull NSCoder *)coder {
+- (id)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
         _step = 0.0;
@@ -28,7 +28,7 @@
     return self;
 }
 
-- (nonnull instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         _step = 0.0;
@@ -51,26 +51,68 @@
 #pragma mark - UIViewRendering
 
 - (void)drawRect:(CGRect)rect {
-    NSLog(@"DRAW");
     [self drawAxes];
     [self drawGraph];
 }
 
 #pragma mark - Drawing Helpers
 
+static double kLeftPadding = 30.0;
+static double kTopPadding = 10.0;
+static double kBottomPadding = 10.0;
+static double kHAxisWidth = 0.5;
+static double kVAxisWidth = 0.5;
+
 - (void)drawAxes {
-    double width = self.bounds.size.width;
-    double height = self.bounds.size.height;
+    double width = [self chartWidth];
+    double height = [self chartHeight];
     
     [[UIColor lightGrayColor] setStroke];
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    path.lineWidth = 1.0;
-    [path moveToPoint:CGPointMake(0, 0)];
-    [path addLineToPoint:CGPointMake(0, height)];
-    [path moveToPoint:CGPointMake(0, height/2)];
-    [path addLineToPoint:CGPointMake(width, height/2)];
+    UIBezierPath *pathAxisY = [UIBezierPath bezierPath];
+    pathAxisY.lineWidth = kVAxisWidth;
+    [pathAxisY moveToPoint:CGPointMake(0, 0)];
+    [pathAxisY addLineToPoint:CGPointMake(0, height)];
+    [pathAxisY applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, kLeftPadding, kTopPadding)];
+    [pathAxisY stroke];
     
-    [path stroke];
+    UIBezierPath *pathAxisX = [UIBezierPath bezierPath];
+    pathAxisX.lineWidth = kHAxisWidth;
+    if ([self.values count] == 0) {
+        // draw only main OX
+        [pathAxisX moveToPoint:CGPointMake(0, height/2)];
+        [pathAxisX addLineToPoint:CGPointMake(width, height/2)];
+    } else {
+        // draw main and secondary OXs
+        double maxY = ceil([self maxY]);
+        double stepY = height/maxY/2;
+        for (int i = 0; i <= maxY * 2; i++) {
+            [pathAxisX moveToPoint:CGPointMake(0, i * stepY)];
+            [pathAxisX addLineToPoint:CGPointMake(width, i * stepY)];
+        }
+        [pathAxisX applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, kLeftPadding, kTopPadding)];
+        [pathAxisX stroke];
+        
+        
+        UIFont *font = [UIFont systemFontOfSize:10.0];
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        [style setAlignment:NSTextAlignmentRight];
+        NSDictionary *attributes = @{
+                                     NSFontAttributeName: font,
+                                     NSParagraphStyleAttributeName:style,
+                                     };
+        
+        NSString *maxString = [NSString stringWithFormat:@"-%.0f", maxY];
+        CGSize stringSize = [maxString sizeWithAttributes:attributes];
+        
+        double currentY = maxY;
+        for (int i = 0; i <= maxY * 2; i++) {
+            double x = kLeftPadding - stringSize.width - 10;
+            double y = i * height/maxY/2 - stringSize.height/2 + kTopPadding;
+            NSString *string = [NSString stringWithFormat:@"%.0f", currentY];
+            currentY -= 1;
+            [string drawInRect:CGRectMake(x, y, stringSize.width + 5, stringSize.height) withAttributes:attributes];
+        }
+    }
 }
 
 - (void)drawGraph {
@@ -78,32 +120,44 @@
         return;
     }
     
-    // find max Y
-    double maxY = 0;
-    for (NSNumber *value in self.values) {
-        double tmp = [value doubleValue] < 0 ? -[value doubleValue] : [value doubleValue];
-        maxY = MAX(maxY, tmp);
-    }
- 
-    double width = self.bounds.size.width;
-    double height = self.bounds.size.height;
+    double width = [self chartWidth];
+    double height = [self chartHeight];
     NSUInteger size = [self.values count];
-    
+    double maxY = ceil([self maxY]);
     
     [[UIColor blueColor] setStroke];
     UIBezierPath *path = [UIBezierPath bezierPath];
     path.lineWidth = 1.0;
     
-    [path moveToPoint:CGPointMake(0, height/2 - [self.values[0] doubleValue] * height/2/maxY)];
+    [path moveToPoint:CGPointMake(0, maxY - [self.values[0] doubleValue])];
     for (int i = 1; i < size; i++) {
-        double realX = i * self.step;
-        double realY = [self.values[i] doubleValue];
-        double scaledX = realX * width/size/self.step;
-        double scaledY = height/2 - realY * height/2/maxY;
-       [path addLineToPoint:CGPointMake(scaledX, scaledY)];
+        double x = i * self.step;
+        double y = maxY - [self.values[i] doubleValue];
+        [path addLineToPoint:CGPointMake(x, y)];
     }
     
+    [path applyTransform:CGAffineTransformScale(CGAffineTransformIdentity, width/size/self.step, height/2/maxY)];
+    [path applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, kLeftPadding, kTopPadding)];
     [path stroke];
+}
+
+#pragma mark - Calculating Helpers
+
+- (double)maxY {
+    double maxY = 0;
+    for (NSNumber *value in self.values) {
+        double tmp = [value doubleValue] < 0 ? -[value doubleValue] : [value doubleValue];
+        maxY = MAX(maxY, tmp);
+    }
+    return maxY;
+}
+
+- (double)chartWidth {
+    return self.bounds.size.width - kLeftPadding;
+}
+
+- (double)chartHeight {
+    return self.bounds.size.height - kTopPadding - kBottomPadding;
 }
 
 @end

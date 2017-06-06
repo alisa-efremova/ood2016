@@ -64,6 +64,10 @@ static NSUInteger kPointsCount = 100;
     }
 }
 
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [self.chartView setNeedsDisplay];
+}
+
 #pragma mark - Table view data source methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
