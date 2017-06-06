@@ -61,7 +61,7 @@
 
 #pragma mark - Drawing Helpers
 
-static double kLeftPadding = 30.0;
+static double kLeftPadding = 5.0;
 static double kTopPadding = 10.0;
 static double kBottomPadding = 10.0;
 
@@ -72,62 +72,78 @@ static double kMinHLegendSpacing = 20.0;
 static double kMinVLegendSpacing = 20.0;
 
 - (void)drawAxes {
+    if ([self.values count] > 0) {
+        [self drawVerticalAxes];
+        [self drawHorizonalAxes];
+    }
+}
+
+- (void)drawHorizonalAxes {
     double width = [self chartWidth];
     double height = [self chartHeight];
+    double leftPadding = [self leftPadding];
     
+    // main and secondary OXs
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    path.lineWidth = kHAxisWidth;
     [[UIColor lightGrayColor] setStroke];
-    UIBezierPath *pathAxisY = [UIBezierPath bezierPath];
-    pathAxisY.lineWidth = kVAxisWidth;
-    [pathAxisY moveToPoint:CGPointMake(0, 0)];
-    [pathAxisY addLineToPoint:CGPointMake(0, height)];
-    [pathAxisY applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, kLeftPadding, kTopPadding)];
-    [pathAxisY stroke];
     
-    UIBezierPath *pathAxisX = [UIBezierPath bezierPath];
-    pathAxisX.lineWidth = kHAxisWidth;
-    if ([self.values count] == 0) {
-        // draw only main OX
-        [pathAxisX moveToPoint:CGPointMake(0, height/2)];
-        [pathAxisX addLineToPoint:CGPointMake(width, height/2)];
-    } else {
-        // draw main and secondary OXs
-        double YLegendStep = [self YLegendStep];
-        NSInteger maxY = [self maxIntegerY];
-        double stepY = height/maxY/2 * YLegendStep;
-        for (int i = 0; i <= maxY * 2 / YLegendStep; i++) {
-            [pathAxisX moveToPoint:CGPointMake(0, i * stepY)];
-            [pathAxisX addLineToPoint:CGPointMake(width, i * stepY)];
-        }
-        [pathAxisX applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, kLeftPadding, kTopPadding)];
-        [pathAxisX stroke];
-        
-        // y legend
-        NSString *maxString = [NSString stringWithFormat:@"-%ld", maxY];
-        CGSize stringSize = [maxString sizeWithAttributes:self.legendFontAttributes];
-        double currentY = maxY;
-        double x = kLeftPadding - stringSize.width - 10;
-        for (int i = 0; i <= maxY * 2 / YLegendStep; i++) {
-            double y = i * stepY - stringSize.height/2 + kTopPadding;
-            NSString *string = [NSString stringWithFormat:@"%.0f", currentY];
-            currentY -= YLegendStep;
-            [string drawInRect:CGRectMake(x, y, stringSize.width + 5, stringSize.height) withAttributes:self.legendFontAttributes];
-        }
-        
-        // x legend
-        double XLegendStep = [self XLegendStep];
-        NSInteger maxX = [self maxIntegerX];
-        double stepX = width/maxX * XLegendStep;
-        double y = stepY * maxY/2 + kTopPadding + 5;
-        
-        NSString *maxXString = [NSString stringWithFormat:@"%ld", maxX];
-        CGSize stringXSize = [maxXString sizeWithAttributes:self.legendFontAttributes];
-        double currentX = 0;
-        for (int i = 0; i <= maxX / XLegendStep; i++) {
-            double x =  i * stepX - stringSize.width/2 + kLeftPadding;
-            NSString *string = [NSString stringWithFormat:@"%.0f", currentX];
-            currentX += XLegendStep;
-            [string drawInRect:CGRectMake(x, y, stringXSize.width + 5, stringXSize.height) withAttributes:self.legendFontAttributes];
-        }
+    double YLegendStep = [self YLegendStep];
+    NSInteger maxY = [self maxIntegerY];
+    double stepY = height/maxY/2 * YLegendStep;
+    for (int i = 0; i <= maxY * 2 / YLegendStep; i++) {
+        [path moveToPoint:CGPointMake(0, i * stepY)];
+        [path addLineToPoint:CGPointMake(width, i * stepY)];
+    }
+    [path applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, leftPadding, kTopPadding)];
+    [path stroke];
+
+    // legend
+    double XLegendStep = [self XLegendStep];
+    NSInteger maxX = [self maxIntegerX];
+    double stepX = width/maxX * XLegendStep;
+    double y = stepY * maxY / YLegendStep + kTopPadding + 5;
+    
+    NSString *maxString = [NSString stringWithFormat:@"%ld", maxX];
+    CGSize stringSize = [maxString sizeWithAttributes:self.legendFontAttributes];
+    double currentX = 0;
+    for (int i = 0; i <= maxX / XLegendStep; i++) {
+        double x =  i * stepX - stringSize.width/2 + leftPadding;
+        NSString *string = [NSString stringWithFormat:@"%.0f", currentX];
+        currentX += XLegendStep;
+        [string drawInRect:CGRectMake(x, y, stringSize.width + 5, stringSize.height) withAttributes:self.legendFontAttributes];
+    }
+
+}
+
+- (void)drawVerticalAxes {
+    double height = [self chartHeight];
+    double leftPadding = [self leftPadding];
+    
+    // axis OY
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    path.lineWidth = kVAxisWidth;
+    [[UIColor lightGrayColor] setStroke];
+    
+    [path moveToPoint:CGPointMake(0, 0)];
+    [path addLineToPoint:CGPointMake(0, height)];
+    [path applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, leftPadding, kTopPadding)];
+    [path stroke];
+    
+    // legend
+    double YLegendStep = [self YLegendStep];
+    NSInteger maxY = [self maxIntegerY];
+    double stepY = height/maxY/2 * YLegendStep;
+    
+    NSString *maxString = [NSString stringWithFormat:@"-%ld", maxY];
+    CGSize stringSize = [maxString sizeWithAttributes:self.legendFontAttributes];
+    double currentY = maxY;
+    double x = leftPadding - stringSize.width - 10;
+    for (int i = 0; i <= maxY * 2 / YLegendStep; i++) {
+        double y = i * stepY - stringSize.height/2 + kTopPadding;
+        NSString *string = [NSString stringWithFormat:@"%.0f", currentY];
+        currentY -= YLegendStep;
+        [string drawInRect:CGRectMake(x, y, stringSize.width + 5, stringSize.height) withAttributes:self.legendFontAttributes];
     }
 }
 
@@ -152,28 +168,32 @@ static double kMinVLegendSpacing = 20.0;
         [path addLineToPoint:CGPointMake(x, y)];
     }
     [path applyTransform:CGAffineTransformScale(CGAffineTransformIdentity, width/size/self.step, height/2/maxY)];
-    [path applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, kLeftPadding, kTopPadding)];
+    [path applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, [self leftPadding], kTopPadding)];
     [path stroke];
 }
 
 #pragma mark - Calculating Helpers
 
+- (double)chartWidth {
+    return self.bounds.size.width - [self leftPadding];
+}
+
+- (double)chartHeight {
+    return self.bounds.size.height - kTopPadding - kBottomPadding;
+}
+
+- (double)maxX {
+    double maxX = ([self.values count] - 1) * self.step;
+    return maxX > 0.0 ? maxX : 1.0;
+}
+
 - (double)maxY {
-    double maxY = 0;
+    double maxY = 0.0;
     for (NSNumber *value in self.values) {
         double tmp = [value doubleValue] < 0 ? -[value doubleValue] : [value doubleValue];
         maxY = MAX(maxY, tmp);
     }
-    return maxY;
-}
-
-- (double)maxX {
-    return ([self.values count] - 1) * self.step;
-}
-
-- (NSInteger)maxIntegerY {
-    double YLegendStep = [self YLegendStep];
-    return (NSInteger)ceil([self maxY]/YLegendStep) * YLegendStep;
+    return maxY > 0.0 ? maxY : 1.0;
 }
 
 - (NSInteger)maxIntegerX {
@@ -181,12 +201,15 @@ static double kMinVLegendSpacing = 20.0;
     return (NSInteger)ceil([self maxX]/XLegendStep) * XLegendStep;
 }
 
-- (double)chartWidth {
-    return self.bounds.size.width - kLeftPadding;
+- (NSInteger)maxIntegerY {
+    double YLegendStep = [self YLegendStep];
+    return (NSInteger)ceil([self maxY]/YLegendStep) * YLegendStep;
 }
 
-- (double)chartHeight {
-    return self.bounds.size.height - kTopPadding - kBottomPadding;
+- (double)XLegendStep {
+    double legendWidth = [[NSString stringWithFormat:@"%.2f", [self maxX]] sizeWithAttributes:self.legendFontAttributes].width + kMinHLegendSpacing;
+    double maxLegendCount = [self chartWidth]/legendWidth + 1;
+    return ceil([self maxX]/maxLegendCount);
 }
 
 - (double)YLegendStep {
@@ -195,10 +218,9 @@ static double kMinVLegendSpacing = 20.0;
     return ceil([self maxY]/maxPositiveLegendCount);
 }
 
-- (double)XLegendStep {
-    double legendWidth = [[NSString stringWithFormat:@"%.2f", [self maxX]] sizeWithAttributes:self.legendFontAttributes].width + kMinHLegendSpacing;
-    double maxLegendCount = [self chartWidth]/legendWidth + 1;
-    return ceil([self maxX]/maxLegendCount);
+- (double)leftPadding {
+    NSString *maxYLegend = [NSString stringWithFormat:@"-%ld", [self maxIntegerY]];
+    return [maxYLegend sizeWithAttributes:self.legendFontAttributes].width + kLeftPadding;
 }
 
 #pragma mark - Lazy initialization
