@@ -8,6 +8,10 @@
 
 #import "CDChartView.h"
 
+@interface CDChartView ()
+@property (nonatomic, copy) NSDictionary * legendFontAttributes;
+@end
+
 @implementation CDChartView
 
 #pragma mark - Initialization
@@ -60,8 +64,12 @@
 static double kLeftPadding = 30.0;
 static double kTopPadding = 10.0;
 static double kBottomPadding = 10.0;
+
 static double kHAxisWidth = 0.5;
 static double kVAxisWidth = 0.5;
+
+static double kMinHLegendSpacing = 20.0;
+static double kMinVLegendSpacing = 20.0;
 
 - (void)drawAxes {
     double width = [self chartWidth];
@@ -83,34 +91,26 @@ static double kVAxisWidth = 0.5;
         [pathAxisX addLineToPoint:CGPointMake(width, height/2)];
     } else {
         // draw main and secondary OXs
-        double maxY = ceil([self maxY]);
-        double stepY = height/maxY/2;
-        for (int i = 0; i <= maxY * 2; i++) {
+        double YLegendStep = [self YLegendStep];
+        NSInteger maxY = [self maxIntegerY];
+        double stepY = height/maxY/2 * YLegendStep;
+        for (int i = 0; i <= maxY * 2 / YLegendStep; i++) {
             [pathAxisX moveToPoint:CGPointMake(0, i * stepY)];
             [pathAxisX addLineToPoint:CGPointMake(width, i * stepY)];
         }
         [pathAxisX applyTransform:CGAffineTransformTranslate(CGAffineTransformIdentity, kLeftPadding, kTopPadding)];
         [pathAxisX stroke];
         
-        
-        UIFont *font = [UIFont systemFontOfSize:10.0];
-        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-        [style setAlignment:NSTextAlignmentRight];
-        NSDictionary *attributes = @{
-                                     NSFontAttributeName: font,
-                                     NSParagraphStyleAttributeName:style,
-                                     };
-        
-        NSString *maxString = [NSString stringWithFormat:@"-%.0f", maxY];
-        CGSize stringSize = [maxString sizeWithAttributes:attributes];
+        NSString *maxString = [NSString stringWithFormat:@"-%ld", maxY];
+        CGSize stringSize = [maxString sizeWithAttributes:self.legendFontAttributes];
         
         double currentY = maxY;
-        for (int i = 0; i <= maxY * 2; i++) {
+        for (int i = 0; i <= maxY * 2 / YLegendStep; i++) {
             double x = kLeftPadding - stringSize.width - 10;
-            double y = i * height/maxY/2 - stringSize.height/2 + kTopPadding;
+            double y = i * stepY - stringSize.height/2 + kTopPadding;
             NSString *string = [NSString stringWithFormat:@"%.0f", currentY];
-            currentY -= 1;
-            [string drawInRect:CGRectMake(x, y, stringSize.width + 5, stringSize.height) withAttributes:attributes];
+            currentY -= YLegendStep;
+            [string drawInRect:CGRectMake(x, y, stringSize.width + 5, stringSize.height) withAttributes:self.legendFontAttributes];
         }
     }
 }
@@ -123,7 +123,7 @@ static double kVAxisWidth = 0.5;
     double width = [self chartWidth];
     double height = [self chartHeight];
     NSUInteger size = [self.values count];
-    double maxY = ceil([self maxY]);
+    NSInteger maxY = [self maxIntegerY];
     
     [[UIColor blueColor] setStroke];
     UIBezierPath *path = [UIBezierPath bezierPath];
@@ -152,12 +152,43 @@ static double kVAxisWidth = 0.5;
     return maxY;
 }
 
+- (NSInteger)maxIntegerY {
+    double YLegendStep = [self YLegendStep];
+    return (NSInteger)ceil([self maxY]/YLegendStep) * YLegendStep;
+}
+
 - (double)chartWidth {
     return self.bounds.size.width - kLeftPadding;
 }
 
 - (double)chartHeight {
     return self.bounds.size.height - kTopPadding - kBottomPadding;
+}
+
+- (double)YLegendStep {
+    double height = [self chartHeight];
+    double maxY = ceil([self maxY]);
+    
+    double legendHeight = [@"1" sizeWithAttributes:self.legendFontAttributes].height + kMinVLegendSpacing;
+    double maxPositiveLegendCount = (height/legendHeight + 1)/2;
+    double step = ceil(maxY/maxPositiveLegendCount);
+    
+    return step;
+}
+
+#pragma mark - Lazy initialization
+
+- (NSDictionary *)legendFontAttributes {
+    if (!_legendFontAttributes) {
+        UIFont *font = [UIFont systemFontOfSize:10.0];
+        NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+        [style setAlignment:NSTextAlignmentRight];
+        _legendFontAttributes = @{
+                                  NSFontAttributeName: font,
+                                  NSParagraphStyleAttributeName:style,
+                                  };
+    }
+    return _legendFontAttributes;
 }
 
 @end
