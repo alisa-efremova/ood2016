@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1421" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CDChartTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ETI-EF-Drv" userLabel="Left Label">
+                        <rect key="frame" x="8" y="8" width="152" height="27"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fd1-ZD-Mo7" userLabel="Right Label">
+                        <rect key="frame" x="160" y="8" width="152" height="27.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Fd1-ZD-Mo7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="1WV-Ea-wPT"/>
+                    <constraint firstItem="ETI-EF-Drv" firstAttribute="width" secondItem="Fd1-ZD-Mo7" secondAttribute="width" id="9Bl-sH-XtL"/>
+                    <constraint firstItem="ETI-EF-Drv" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="DR0-rD-gUG"/>
+                    <constraint firstItem="ETI-EF-Drv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Hik-kZ-B32"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Fd1-ZD-Mo7" secondAttribute="trailing" id="OPn-qW-jiV"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Fd1-ZD-Mo7" secondAttribute="bottom" id="PdR-vH-JV4"/>
+                    <constraint firstItem="ETI-EF-Drv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="XTs-JW-Xou"/>
+                    <constraint firstItem="Fd1-ZD-Mo7" firstAttribute="leading" secondItem="ETI-EF-Drv" secondAttribute="trailing" id="Z6j-9R-75E"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="leftLabel" destination="ETI-EF-Drv" id="FTe-AS-woA"/>
+                <outlet property="rightLabel" destination="Fd1-ZD-Mo7" id="3EO-MX-HUf"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

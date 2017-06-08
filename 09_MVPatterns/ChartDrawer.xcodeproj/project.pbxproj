@@ -17,6 +17,9 @@
 		F468054F1EE05C43002BF1B4 /* CDHarmonicFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = F468054E1EE05C43002BF1B4 /* CDHarmonicFunction.m */; };
 		F46805521EE068BC002BF1B4 /* HarmonicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F46805511EE068BC002BF1B4 /* HarmonicViewController.m */; };
 		F4C754511EE5884500BB6DF1 /* CDChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C754501EE5884500BB6DF1 /* CDChartView.m */; };
+		F4C7545A1EE9465F00BB6DF1 /* CDChartTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C754591EE9465F00BB6DF1 /* CDChartTableView.m */; };
+		F4C7545E1EE9486E00BB6DF1 /* CDChartTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C7545C1EE9486E00BB6DF1 /* CDChartTableViewCell.m */; };
+		F4C7545F1EE9486E00BB6DF1 /* CDChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4C7545D1EE9486E00BB6DF1 /* CDChartTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,11 @@
 		F46805511EE068BC002BF1B4 /* HarmonicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HarmonicViewController.m; sourceTree = "<group>"; };
 		F4C7544F1EE5884500BB6DF1 /* CDChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDChartView.h; sourceTree = "<group>"; };
 		F4C754501EE5884500BB6DF1 /* CDChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDChartView.m; sourceTree = "<group>"; };
+		F4C754581EE9465F00BB6DF1 /* CDChartTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDChartTableView.h; path = ../CDChartTableView.h; sourceTree = "<group>"; };
+		F4C754591EE9465F00BB6DF1 /* CDChartTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDChartTableView.m; path = ../CDChartTableView.m; sourceTree = "<group>"; };
+		F4C7545B1EE9486E00BB6DF1 /* CDChartTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDChartTableViewCell.h; path = ../CDChartTableViewCell.h; sourceTree = "<group>"; };
+		F4C7545C1EE9486E00BB6DF1 /* CDChartTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDChartTableViewCell.m; path = ../CDChartTableViewCell.m; sourceTree = "<group>"; };
+		F4C7545D1EE9486E00BB6DF1 /* CDChartTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CDChartTableViewCell.xib; path = ../CDChartTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +154,11 @@
 			children = (
 				F4C7544F1EE5884500BB6DF1 /* CDChartView.h */,
 				F4C754501EE5884500BB6DF1 /* CDChartView.m */,
+				F4C7545B1EE9486E00BB6DF1 /* CDChartTableViewCell.h */,
+				F4C7545C1EE9486E00BB6DF1 /* CDChartTableViewCell.m */,
+				F4C7545D1EE9486E00BB6DF1 /* CDChartTableViewCell.xib */,
+				F4C754581EE9465F00BB6DF1 /* CDChartTableView.h */,
+				F4C754591EE9465F00BB6DF1 /* CDChartTableView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -234,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F46805381EE05BF9002BF1B4 /* LaunchScreen.storyboard in Resources */,
+				F4C7545F1EE9486E00BB6DF1 /* CDChartTableViewCell.xib in Resources */,
 				F46805351EE05BF9002BF1B4 /* Assets.xcassets in Resources */,
 				F46805331EE05BF9002BF1B4 /* Main.storyboard in Resources */,
 			);
@@ -256,7 +270,9 @@
 				F46805301EE05BF9002BF1B4 /* ViewController.m in Sources */,
 				F46805521EE068BC002BF1B4 /* HarmonicViewController.m in Sources */,
 				F4C754511EE5884500BB6DF1 /* CDChartView.m in Sources */,
+				F4C7545A1EE9465F00BB6DF1 /* CDChartTableView.m in Sources */,
 				F468054F1EE05C43002BF1B4 /* CDHarmonicFunction.m in Sources */,
+				F4C7545E1EE9486E00BB6DF1 /* CDChartTableViewCell.m in Sources */,
 				F468052D1EE05BF9002BF1B4 /* AppDelegate.m in Sources */,
 				F468052A1EE05BF9002BF1B4 /* main.m in Sources */,
 			);

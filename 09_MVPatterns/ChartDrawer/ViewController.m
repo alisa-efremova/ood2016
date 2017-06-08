@@ -10,11 +10,13 @@
 #import "CDHarmonicFunction.h"
 #import "HarmonicViewController.h"
 #import "CDChartView.h"
+#import "CDChartTableView.h"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSMutableArray<CDHarmonicFunction *> *functions;
 @property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) IBOutlet CDChartView *chartView;
+@property (nonatomic) IBOutlet CDChartTableView *chartTableView;
 @end
 
 static NSString *const kCellReuseId = @"Cell";
@@ -33,6 +35,7 @@ static NSUInteger kPointsCount = 100;
     self.functions = [NSMutableArray arrayWithObject:[[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:4.38 frequency:2.25 phase:1.5]];
     
     self.chartView.step = kStep;
+    self.chartTableView.step = kStep;
     [self recalculateChartData];
 }
 
@@ -100,6 +103,18 @@ static NSUInteger kPointsCount = 100;
     }
 }
 
+#pragma mark - Actions
+
+- (IBAction)changeChartView:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        self.chartView.hidden = NO;
+        self.chartTableView.hidden = YES;
+    } else {
+        self.chartView.hidden = YES;
+        self.chartTableView.hidden = NO;
+    }
+}
+
 #pragma mark - Helpers
 
 - (void)recalculateChartData {
@@ -112,6 +127,7 @@ static NSUInteger kPointsCount = 100;
         values[i] = [NSNumber numberWithDouble:sum];
     }
     self.chartView.values = values;
+    self.chartTableView.values = values;
 }
 
 @end
