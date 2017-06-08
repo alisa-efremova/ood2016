@@ -14,7 +14,7 @@
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) NSMutableArray<CDHarmonicFunction *> *functions;
-@property (nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) IBOutlet UITableView *functionsTableView;
 @property (nonatomic) IBOutlet CDChartView *chartView;
 @property (nonatomic) IBOutlet CDChartTableView *chartTableView;
 @end
@@ -30,10 +30,14 @@ static NSUInteger kPointsCount = 100;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseId];
+    [self.functionsTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellReuseId];
     
-    self.functions = [NSMutableArray arrayWithObject:[[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:4.38 frequency:2.25 phase:1.5]];
-    
+    self.functions = [@[
+                        [[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:3.0 frequency:-3.0 phase:0.3],
+                        [[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeSin amplitude:4.38 frequency:2.25 phase:1.5],
+                        [[CDHarmonicFunction alloc] initWithFunctionType:CDFunctionTypeCos amplitude:1.0 frequency:1.0 phase:5],
+                        ] mutableCopy];
+
     self.chartView.step = kStep;
     self.chartTableView.step = kStep;
     [self recalculateChartData];
@@ -46,12 +50,12 @@ static NSUInteger kPointsCount = 100;
         vc.completionBlock = ^(CDHarmonicFunction *function) {
             if (function) {
                 [self.functions addObject:function];
-                [self.tableView reloadData];
+                [self.functionsTableView reloadData];
                 [self recalculateChartData];
             }
         };
     } else if ([segue.identifier isEqualToString:kEditFunctionSequeId]) {
-        NSInteger selectedIndex = [self.tableView indexPathForSelectedRow].row;
+        NSInteger selectedIndex = [self.functionsTableView indexPathForSelectedRow].row;
         CDHarmonicFunction *edittingFunction = self.functions[selectedIndex];
         vc.function = edittingFunction;
         vc.completionBlock = ^(CDHarmonicFunction *function) {
@@ -60,7 +64,7 @@ static NSUInteger kPointsCount = 100;
                 edittingFunction.type = function.type;
                 edittingFunction.frequency = function.frequency;
                 edittingFunction.phase = function.phase;
-                [self.tableView reloadData];
+                [self.functionsTableView reloadData];
                 [self recalculateChartData];
             }
         };

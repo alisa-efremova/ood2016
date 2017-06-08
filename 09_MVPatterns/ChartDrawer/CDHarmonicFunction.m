@@ -36,7 +36,7 @@
     switch (self.type) {
         case CDFunctionTypeSin:
             return self.amplitude * sin(self.frequency * x + self.phase);
-        case CDFuncitonTypeCos:
+        case CDFunctionTypeCos:
             return self.amplitude * cos(self.frequency * x + self.phase);
         default:
             return 0.0;
@@ -53,7 +53,7 @@
     switch (functionType) {
         case CDFunctionTypeSin:
             return @"sin";
-        case CDFuncitonTypeCos:
+        case CDFunctionTypeCos:
             return @"cos";
         default:
             return nil;

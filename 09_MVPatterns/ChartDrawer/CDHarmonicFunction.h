@@ -10,7 +10,7 @@
 
 typedef NS_ENUM(NSUInteger, CDFunctionType) {
     CDFunctionTypeSin,
-    CDFuncitonTypeCos
+    CDFunctionTypeCos
 };
 
 @interface CDHarmonicFunction : NSObject

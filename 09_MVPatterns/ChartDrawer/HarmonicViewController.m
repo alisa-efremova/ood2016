@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (!self.function) {
-        self.function = [[CDHarmonicFunction alloc] init];
+        _function = [[CDHarmonicFunction alloc] init];
     }
     [self displayFunction];
 }

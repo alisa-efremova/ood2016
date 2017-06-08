@@ -44,40 +44,28 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N6g-iH-DHD" userLabel="Functions Table View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="246"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N6g-iH-DHD" userLabel="Functions Table View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="199"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="246" id="GcW-mD-nzy"/>
-                                </constraints>
+                                <color key="separatorColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=compact-widthClass=compact">
-                                    <mask key="constraints">
-                                        <exclude reference="GcW-mD-nzy"/>
-                                    </mask>
-                                </variation>
-                                <variation key="heightClass=compact-widthClass=regular">
-                                    <mask key="constraints">
-                                        <exclude reference="GcW-mD-nzy"/>
-                                    </mask>
-                                </variation>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="c9l-i5-upu"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="srL-53-0E0"/>
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqJ-3C-hf6" userLabel="Containter View">
-                                <rect key="frame" x="16" y="254" width="343" height="308"/>
+                                <rect key="frame" x="16" y="207" width="343" height="345"/>
                                 <subviews>
-                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="eSE-57-Nge" userLabel="Chart Table View" customClass="CDChartTableView">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="308"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eSE-57-Nge" userLabel="Chart Table View" customClass="CDChartTableView">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="345"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MTU-nn-d8M" userLabel="Chart View" customClass="CDChartView">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="250"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="200" id="61D-xZ-RuW"/>
+                                            <constraint firstAttribute="height" priority="750" constant="250" id="61D-xZ-RuW"/>
                                         </constraints>
                                         <variation key="heightClass=compact">
                                             <mask key="constraints">
@@ -91,25 +79,30 @@
                                     <constraint firstAttribute="trailing" secondItem="MTU-nn-d8M" secondAttribute="trailing" id="4rN-dV-4Bk"/>
                                     <constraint firstAttribute="bottom" secondItem="eSE-57-Nge" secondAttribute="bottom" id="9Rn-ST-Fgy"/>
                                     <constraint firstItem="eSE-57-Nge" firstAttribute="top" secondItem="VqJ-3C-hf6" secondAttribute="top" id="B2Y-CF-OiQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="MTU-nn-d8M" secondAttribute="bottom" id="U0e-1t-uzQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="MTU-nn-d8M" secondAttribute="bottom" id="N4G-1b-2lR"/>
                                     <constraint firstAttribute="trailing" secondItem="eSE-57-Nge" secondAttribute="trailing" id="Ud2-iE-aSi"/>
                                     <constraint firstItem="MTU-nn-d8M" firstAttribute="top" secondItem="VqJ-3C-hf6" secondAttribute="top" id="Udx-v8-QFo"/>
                                     <constraint firstItem="MTU-nn-d8M" firstAttribute="leading" secondItem="VqJ-3C-hf6" secondAttribute="leading" id="ejP-IU-It8"/>
                                     <constraint firstItem="eSE-57-Nge" firstAttribute="leading" secondItem="VqJ-3C-hf6" secondAttribute="leading" id="m5R-NM-hMG"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MTU-nn-d8M" secondAttribute="bottom" id="w1Y-Mm-cNe"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="U0e-1t-uzQ"/>
+                                        <exclude reference="N4G-1b-2lR"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=compact">
                                     <mask key="constraints">
-                                        <include reference="U0e-1t-uzQ"/>
+                                        <include reference="N4G-1b-2lR"/>
+                                        <exclude reference="w1Y-Mm-cNe"/>
                                     </mask>
                                 </variation>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Q2L-fr-gSc">
-                                <rect key="frame" x="16" y="567" width="343" height="29"/>
+                                <rect key="frame" x="16" y="560" width="343" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="5cZ-fR-Qfu"/>
+                                </constraints>
                                 <segments>
                                     <segment title="Chart"/>
                                     <segment title="Table"/>
@@ -124,12 +117,13 @@
                             <constraint firstItem="VqJ-3C-hf6" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="14U-t7-s68"/>
                             <constraint firstItem="VqJ-3C-hf6" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="3h2-zm-r9x"/>
                             <constraint firstItem="N6g-iH-DHD" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="7zt-l2-A3h"/>
+                            <constraint firstItem="Q2L-fr-gSc" firstAttribute="leading" secondItem="MTU-nn-d8M" secondAttribute="leading" id="95u-1g-vAf"/>
                             <constraint firstItem="Q2L-fr-gSc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="CUM-dS-5JQ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Q2L-fr-gSc" secondAttribute="trailing" id="Hpf-nr-HRO"/>
                             <constraint firstItem="N6g-iH-DHD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="IvC-j5-NQG"/>
-                            <constraint firstItem="Q2L-fr-gSc" firstAttribute="top" secondItem="VqJ-3C-hf6" secondAttribute="bottom" constant="5" id="IvE-qr-JfG"/>
+                            <constraint firstItem="Q2L-fr-gSc" firstAttribute="top" secondItem="VqJ-3C-hf6" secondAttribute="bottom" constant="8" id="IvE-qr-JfG"/>
                             <constraint firstItem="N6g-iH-DHD" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.4" id="Sbb-qV-E7G"/>
-                            <constraint firstItem="Q2L-fr-gSc" firstAttribute="leading" secondItem="N6g-iH-DHD" secondAttribute="trailing" constant="20" id="YRw-C5-cdq"/>
+                            <constraint firstItem="N6g-iH-DHD" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.33" id="TEp-bl-4Hq"/>
                             <constraint firstItem="VqJ-3C-hf6" firstAttribute="top" secondItem="N6g-iH-DHD" secondAttribute="bottom" constant="8" id="d9h-cc-xrC"/>
                             <constraint firstItem="VqJ-3C-hf6" firstAttribute="leading" secondItem="N6g-iH-DHD" secondAttribute="trailing" constant="20" id="i9k-jM-bKZ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="N6g-iH-DHD" secondAttribute="bottom" id="u9W-9P-9cv"/>
@@ -143,24 +137,23 @@
                                 <exclude reference="Sbb-qV-E7G"/>
                                 <exclude reference="14U-t7-s68"/>
                                 <exclude reference="i9k-jM-bKZ"/>
-                                <exclude reference="u9W-9P-9cv"/>
-                                <exclude reference="YRw-C5-cdq"/>
                                 <exclude reference="zKo-1d-U2u"/>
+                                <exclude reference="u9W-9P-9cv"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
                                 <include reference="Sbb-qV-E7G"/>
+                                <exclude reference="TEp-bl-4Hq"/>
                                 <exclude reference="zAA-Ay-cOl"/>
                                 <include reference="14U-t7-s68"/>
                                 <exclude reference="d9h-cc-xrC"/>
                                 <include reference="i9k-jM-bKZ"/>
                                 <exclude reference="wdj-co-stF"/>
-                                <include reference="u9W-9P-9cv"/>
                                 <exclude reference="CUM-dS-5JQ"/>
                                 <exclude reference="IvE-qr-JfG"/>
-                                <include reference="YRw-C5-cdq"/>
                                 <include reference="zKo-1d-U2u"/>
+                                <include reference="u9W-9P-9cv"/>
                             </mask>
                         </variation>
                     </view>
@@ -174,7 +167,7 @@
                     <connections>
                         <outlet property="chartTableView" destination="eSE-57-Nge" id="vgq-hu-qQr"/>
                         <outlet property="chartView" destination="MTU-nn-d8M" id="4w7-1o-4PV"/>
-                        <outlet property="tableView" destination="N6g-iH-DHD" id="jrg-LZ-MXS"/>
+                        <outlet property="functionsTableView" destination="N6g-iH-DHD" id="YFm-Q5-UfE"/>
                         <segue destination="nwP-6J-LX0" kind="presentation" identifier="EditFunctionSeque" id="2lo-lI-A3v"/>
                     </connections>
                 </viewController>

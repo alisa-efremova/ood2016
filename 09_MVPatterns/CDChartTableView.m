@@ -67,6 +67,8 @@ static double kRowHeight = 30.0;
     UIFont *font = [UIFont boldSystemFontOfSize:14];
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+    view.backgroundColor = [UIColor colorWithRed:206/255.0 green:250/255.0 blue:250/255.0 alpha:1.0];
+    
     UILabel *leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, topPadding, width/2, height)];
     leftLabel.font = font;
     leftLabel.text = @"X";
@@ -78,6 +80,10 @@ static double kRowHeight = 30.0;
     [view addSubview:rightLabel];
 
     return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return CGFLOAT_MIN;
 }
 
 @end

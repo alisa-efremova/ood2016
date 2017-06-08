@@ -16,28 +16,9 @@
 
 #pragma mark - Initialization
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        _step = 0.0;
-    }
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)coder {
-    self = [super initWithCoder:coder];
-    if (self) {
-        _step = 0.0;
-    }
-    return self;
-}
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _step = 0.0;
-    }
-    return self;
+- (void)awakeFromNib {
+    [super awakeFromNib];
+    _step = 0.0;
 }
 
 #pragma mark - Setters
